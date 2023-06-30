@@ -1,0 +1,117 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="anlihouse-A119"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container invoices">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <span data-i18n="anlihouse-A119"></span>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+
+                                <thead>
+                                <tr>
+                                    <th scope="col" data-i18n="anlihouse-A122"></th>
+                                    <th scope="col" data-i18n="anlihouse-A123"></th>
+                                    <th scope="col" data-i18n="anlihouse-A125"></th>
+                                    <th scope="col" data-i18n="anlihouse-A121"></th>
+                                    <th scope="col" data-i18n="anlihouse-A126"></th>
+                                    <th scope="col" data-i18n="anlihouse-A124"></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for invoices in payment_invoices %}
+                                    <tr>
+                                        <th scope="row"
+                                            {% if invoices.payment_type == "account" %}data-i18n="anlihouse-A120"{% endif %}></th>
+                                        <td class="invoices-month" data-month="{{ invoices.month }}">
+                                            <span>{{ invoices.month }}</span> <span data-i18n="hónap"></span>
+                                        </td>
+                                        <td>{{ invoices.payment_id }}</td>
+                                        <td>{{ invoices.funding_source }}</td>
+                                        <td>{{ invoices.total }} {{ invoices.currency }}</td>
+                                        <td data-time-llll="{{ invoices.created_at }}">{{ invoices.created_at }}</td>
+                                        <td class="text-center">
+                                            <a target="_blank" href="{{ invoices.billing_url }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-file-earmark-arrow-down-fill"
+                                                     viewBox="0 0 16 16">
+                                                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z"/>
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <nav>
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item {% if pagination_previous == 0 %}disabled{% endif %}">
+                                    <a class="page-link"
+                                       href="{{ url_for('invoices_module.invoices', page_number=pagination_previous) }}">
+                                        <span>&laquo;</span>
+                                    </a>
+                                </li>
+
+                                {% for number in pagination_list %}
+                                    <li class="page-item {% if page_number == number|int or number == "..." %}disabled{% endif %}">
+                                        <a class="page-link"
+                                           href="{{ url_for('invoices_module.invoices', page_number=number) }}">{{ number }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                <li class="page-item {% if pagination_next > pagination_last %}disabled{% endif %}">
+                                    <a class="page-link"
+                                       href="{{ url_for('invoices_module.invoices', page_number=pagination_next) }}">
+                                        <span>&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{# End Content #}

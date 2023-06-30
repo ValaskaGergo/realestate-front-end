@@ -1,0 +1,148 @@
+<div id="menu" class="closed">
+
+    <div class="container w-100 mw-100 pl-3 pr-3">
+        <div class="row">
+            <div class="col-12">
+
+                <div id="menu-close" class="user-select-none">
+                    <div class="text">
+                        <span data-i18n="close"></span>
+                        <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </span>
+                    </div>
+                </div>
+
+                <div id="header-logo" class="user-select-none pt-3 pb-3">
+                    <img class="img"
+                         src="{{ url_for("static", filename="images/layout/anli_breeders_logo.png") }}"
+                         alt="ANLI Breeders"/>
+                    <span class="text" data-i18n="anlihouse-anlibreeders"></span>
+                </div>
+
+                <div id="navigation">
+                    <ul>
+                        <li class="navigation-title">#<span data-i18n="anlihouse-A06"></span></li>
+                        <li><a class="hover" href="{{ url_for('signin_module.sign_in') }}"
+                               data-i18n="bejelentkezes"></a></li>
+                        <li><a class="hover" href="{{ url_for('signup_module.sign_up') }}"
+                               data-i18n="regisztracio"></a></li>
+                        <li class="closed">
+                            <a class="sub hover closed" href="#" data-func="sub" data-i18n="anlihouse-A05"></a>
+                            <ul id="lang">
+                                <li><a class="hover lang-item en" data-locale="en" href="#"
+                                       data-i18n="anlihouse-en"></a></li>
+                                <li><a class="hover lang-item de" data-locale="de" href="#"
+                                       data-i18n="anlihouse-de"></a></li>
+                                <li><a class="hover lang-item hu" data-locale="hu" href="#"
+                                       data-i18n="anlihouse-hu"></a></li>
+                                <li><a class="hover lang-item fr" data-locale="fr" href="#"
+                                       data-i18n="anlihouse-fr"></a></li>
+                                <li><a class="hover lang-item es" data-locale="es" href="#"
+                                       data-i18n="anlihouse-es"></a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="inactive lang" href="#" data-i18n="anlihouse-en"></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="closed">
+                            <a class="sub hover closed" href="#" data-func="sub"><span
+                                    data-i18n="anlihouse-A414"></span> <span class="getColorMode"
+                                                                             data-i18n="anlihouse-dark"></span></a>
+                            <ul id="color-mode">
+                                <li><a class="hover color-mode-item dark" data-color-mode="dark" href="#"
+                                       data-i18n="anlihouse-dark"></a></li>
+                                <li><a class="hover color-mode-item light" data-color-mode="light" href="#"
+                                       data-i18n="anlihouse-light"></a></li>
+                                <li><a class="hover color-mode-item color" data-color-mode="color" href="#"
+                                       data-i18n="anlihouse-color"></a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="inactive color-mode" href="#" data-i18n="anlihouse-dark"></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="navigation-title">#<span data-i18n="kategoriak"></span></li>
+                        <li><a class="hover search-jump" href="#" data-i18n="anlihouse-A291"></a></li>
+
+                        {% for category in category_subcategory_all['category_list_all'] %}
+                            <li class="closed">
+                                <a class="sub hover closed"
+                                   href="{{ url_for('index_module.category_list', category_name=category['name_en_slug'], category_id=category['id']) }}"
+                                   data-func="sub">
+                                    {% if category['lang'] == "hu" %}
+                                        {{ category['name_hu'] }}
+                                    {% elif category['lang'] == "en" %}
+                                        {{ category['name_en'] }}
+                                    {% elif category['lang'] == "de" %}
+                                        {{ category['name_de'] }}
+                                    {% elif category['lang'] == "fr" %}
+                                        {{ category['name_fr'] }}
+                                    {% elif category['lang'] == "es" %}
+                                        {{ category['name_es'] }}
+                                    {% endif %}
+                                </a>
+                                <ul>
+                                    <li><a class="hover"
+                                           href="{{ url_for('index_module.category_list', category_name=category['name_en_slug'], category_id=category['id']) }}"
+                                           data-i18n="anlihouse-A269"></a>
+                                    </li>
+                                    {% for subcategory in category_subcategory_all['subcategory_list_all'] %}
+                                        {% if category['id'] == subcategory['category_id'] %}
+                                            <li><a class="hover"
+                                                   href="{{ url_for('index_module.subcategory_list', category_name=category['name_en_slug'], category_id=category['id'], subcategory_name=subcategory['name_en_slug'], subcategory_id=subcategory['id']) }}">
+                                                {% if subcategory['lang'] == "hu" %}
+                                                    {{ subcategory['name_hu'] }}
+                                                {% elif subcategory['lang'] == "en" %}
+                                                    {{ subcategory['name_en'] }}
+                                                {% elif subcategory['lang'] == "de" %}
+                                                    {{ subcategory['name_de'] }}
+                                                {% elif subcategory['lang'] == "fr" %}
+                                                    {{ subcategory['name_fr'] }}
+                                                {% elif subcategory['lang'] == "es" %}
+                                                    {{ subcategory['name_es'] }}
+                                                {% endif %}
+                                            </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+
+                        <li class="navigation-title">#<span data-i18n="anlihouse-anlibreeders"></span></li>
+                        <li><a class="hover" href="{{ url_for('account_payment_module.pricing') }}"
+                               data-i18n="anlihouse-437"></a>
+                        </li>
+                        <li><a class="hover" href="{{ url_for('status_module.status') }}"
+                               data-i18n="anlihouse-427"></a></li>
+
+                        <li class="navigation-title">#<span data-i18n="contactus"></span></li>
+                        <li><a class="hover" href="" data-i18n="anlihouse-A09"></a></li>
+                        <li><a class="hover" href="" data-i18n="">Facebook</a></li>
+                        <li><a class="hover" href="" data-i18n="">Messenger</a></li>
+                        <li><a class="hover" href="" data-i18n="">Instagram</a></li>
+                        <li><a class="hover" href="" data-i18n="">Twitter</a></li>
+                        <li><a class="hover" href="" data-i18n="">LinkedIn</a></li>
+                        <li><a class="hover" href="" data-i18n="">YouTube</a></li>
+
+                        <li class="navigation-title">#<span data-i18n="ourdocuments"></span></li>
+                        <li><a class="hover" href="" data-i18n="impressum"></a></li>
+                        <li><a class="hover" href="" data-i18n="">Általános Szolgáltatási Feltételeink</a></li>
+                        <li><a class="hover" href="" data-i18n="">Adatvédelmi Nyilatkozatunk</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="version mt-5 text-right fs-12px" style="">{{ config_data['VERSION'] }}</div>
+    </div>
+
+</div>

@@ -1,0 +1,254 @@
+.btn {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: uppercase;
+  height: 45px;
+}
+
+.input-group-text {
+  svg {
+    &.bi-eye-fill {
+      width: 20px;
+      height: auto;
+    }
+
+    &.bi-plus-circle-fill {
+      width: 17px;
+      height: auto;
+    }
+
+    &.bi-trash {
+      // fill: @Red;
+    }
+  }
+
+  &.active {
+    svg {
+      fill: @DeadBlueEyes;
+    }
+  }
+
+  &.inactive {
+    svg {
+      fill: @DeepSkyBlue;
+    }
+  }
+
+  &.cursor-pointer {
+    &:hover {
+      svg {
+        fill: @DeadBlueEyes;
+
+        &.bi-trash {
+          // fill: @Red;
+        }
+      }
+    }
+  }
+}
+
+.steps {
+  font-family: 'Saira Condensed', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+
+  .step-success {
+    .step-content {
+      .step-circle {
+        background-color: #28a745 !important;
+        border-color: #28a745;
+        color: @White;
+      }
+    }
+  }
+}
+
+.fs-checkbox-radio {
+  width: 20px;
+  height: 20px;
+}
+
+.fs-checkbox-label {
+  vertical-align: sub;
+  display: inline;
+}
+
+.bootstrap-select {
+  .btn {
+    background: #ffffff;
+    border: 1px solid #ced4da;
+
+    padding: 0.375rem 0.75rem;
+    height: auto;
+    line-height: inherit;
+
+    .filter-option-inner-inner {
+      font-size: 1rem;
+      color: #212529;
+      font-weight: 400;
+    }
+
+    &.bs-placeholder {
+      .filter-option-inner-inner {
+        color: #6c757d;
+      }
+    }
+
+    &.disabled {
+      opacity: 1;
+    }
+  }
+}
+
+#uploadingAnimalBeUsedForRadioWrap {
+  .fs-checkbox {
+    margin-right: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .steps {
+    display: none;
+  }
+}
+
+.dropdown-menu {
+  &.billing-shipping-address {
+    &.action {
+      li {
+        cursor: pointer;
+
+        [data-btn="btn01"] {
+          &.active {
+            background-color: @DeepSkyBlue;
+          }
+
+          &:hover {
+            background-color: @DeadBlueEyes !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn02"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn03"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn04"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+      }
+    }
+  }
+
+  &.animal {
+    &.action {
+      li {
+        cursor: pointer;
+
+        [data-btn="btn01"] {
+          &.active {
+            background-color: @DeepSkyBlue;
+          }
+
+          &:hover {
+            background-color: @DeadBlueEyes !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn02_01"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn02_02"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn03_01"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn03_02"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+        [data-btn="btn04"] {
+          &.active {
+            background-color: @Red;
+          }
+
+          &:hover {
+            background-color: @RedDark !important;
+            color: @White;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.form-control:focus {
+  //color: #212529;
+  //background-color: #fff;
+  //border-color: #86b7fe;
+  //border-right-color: rgb(134, 183, 254);
+  //outline: 0;
+  box-shadow: none;
+}
+

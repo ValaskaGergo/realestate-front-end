@@ -1,0 +1,174 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="anlihouse-438"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+
+    <dic class="container d-block">
+        <div class="alert alert-danger payment-status-canceled d-none" role="alert">
+            Visszalépett, nem fizetett!
+        </div>
+    </dic>
+
+    <dic class="container d-block">
+        <div class="alert alert-success payment-status-succeeded d-none" role="alert">
+            Fizetett, adjunk neki infót ide ebbe az alertbe, és adjunk linket a számlák oldalra! <a
+                class="hover"
+                href="{{ url_for('invoices_module.invoices') }}"
+                data-i18n="anlihouse-A119"></a>
+        </div>
+    </dic>
+
+    <div class="container accountPayment">
+        <div id="barion-payment-id-status" data-barion-payment-id-status="{{ barion_payment_id_status }}"
+             data-barion-payment-id="{{ barion_payment_id }}"></div>
+        <div id="paypal-payment-id-status" data-paypal-payment-id-status="{{ paypal_payment_id_status }}"
+             data-paypal-payment-id="{{ paypal_payment_id }}"></div>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header" data-i18n="anlihouse-438"></div>
+                    <div class="card-body">
+
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                        <div class="text-center mt-5 mb-4 justify-content-center">
+                            <div id="accountPaymentMonthlySwitch" class="btn-group">
+                                <button type="button" class="btn btn-primary" data-type="monthly1">1 <span
+                                        data-i18n="hónap"></span></button>
+                                <button type="button" class="btn btn-primary active" data-type="monthly3">3 <span
+                                        data-i18n="hónap"></span></button>
+                                <button type="button" class="btn btn-primary" data-type="yearly1">1 <span
+                                        data-i18n="év"></span></button>
+                            </div>
+                        </div>
+
+                        <form id="account-payment-form" onsubmit="return false" novalidate="novalidate">
+                            {{ form.csrf_token }}
+
+                            {{ form.payment_data(type='hidden', id='accountPaymentDataInput', class='form-control') }}
+
+                            <div class="">
+
+                                {% include "authentication/include/account-payment-monthly1.jinja2" %}
+
+                                {% include "authentication/include/account-payment-monthly3.jinja2" %}
+
+                                {% include "authentication/include/account-payment-yearly1.jinja2" %}
+
+                            </div>
+
+                            <h4 class="mt-3">Fizetési platform kiválasztása</h4>
+
+                            <div id="accountPaymentRadio">
+                                <div style="line-height:20px;" class="radio-input mb-2">
+                                    <input class="accountPaymentBarion" type="radio" id="accountPaymentBarion"
+                                           name="radio"
+                                           checked>
+                                    <label class="d-inline" for="accountPaymentBarion"
+                                           data-i18n="anlihouse-A117"></label>
+                                </div>
+
+                                <div style="line-height:20px;" class="radio-input">
+                                    <input class="accountPaymentPayPal" type="radio" id="accountPaymentPayPal"
+                                           name="radio">
+                                    <label class="d-inline" for="accountPaymentPayPal"
+                                           data-i18n="anlihouse-A118"></label>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h4 class="mt-5">Gyakran ismételt kérdések</h4>
+
+                        <div class="accordion accordion-flush faq" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="true"
+                                            aria-controls="flush-collapseOne">
+                                        Lorem ipsum dolor sit amet? #1
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                                     aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body"><p>Lorem ipsum dolor sit amet, consectetur adipiscing
+                                        elit,
+                                        sed do eiusmod tempor incididunt ut labore <a href="">et dolore magna</a>
+                                        aliqua. Lorem
+                                        ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                            aria-controls="flush-collapseTwo">
+                                        Lorem ipsum dolor sit amet? #2
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                            aria-controls="flush-collapseThree">
+                                        Lorem ipsum dolor sit amet? #3
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{# End Content #}

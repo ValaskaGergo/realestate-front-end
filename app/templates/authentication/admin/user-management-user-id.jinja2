@@ -1,0 +1,1162 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb" data-inactive="{{ inactive_account }}" data-deleted="{{ deleted }}">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a></li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            {% if inactive_account == "False" and deleted == "False" %}
+                                <li class="breadcrumb-item"><a class="hover previous-click"
+                                                               href="{{ url_for('user_management_module.user_management') }}"
+                                                               data-i18n="anlihouse-A219"></a></li>
+                            {% elif inactive_account == "True" and deleted == "False" %}
+                                <li class="breadcrumb-item"><a class="hover previous-click"
+                                                               href="{{ url_for('user_management_module.user_management_inactive') }}"
+                                                               data-i18n="anlihouse-A220"></a></li>
+                            {% else %}
+                                <li class="breadcrumb-item"><a class="hover previous-click"
+                                                               href="{{ url_for('user_management_module.user_management_deleted') }}"
+                                                               data-i18n="anlihouse-A221"></a></li>
+                            {% endif %}
+                            <li class="breadcrumb-item active" aria-current="page">{{ first_name }} {{ last_name }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container billingAndShippingAddress">
+        <div class="row">
+            <div class="col-12">
+
+                <form id="billing-address-form" onsubmit="return false" novalidate="novalidate">
+                    <div class="card">
+                        <div class="card-header" data-i18n="anlihouse-A65"></div>
+                        <div class="card-body">
+
+                            {{ billing_form.csrf_token }}
+
+                            {{ billing_form.user_email(type='hidden', id='billingAddressUserEmail', class='form-control') }}
+                            {{ billing_form.billing_is_company(type='hidden', id='billingAddressIsCompany', class='form-control') }}
+                            {{ billing_form.billing_is_shipping_address(type='hidden', id='billingAddressIsShipping', class='form-control') }}
+                            {{ billing_form.billing_country(type='hidden', id='billingAddressCountry', class='form-control') }}
+                            {{ billing_form.billing_currency(type='hidden', id='billingAddressCurrency', class='form-control') }}
+
+                            {{ shipping_form.shipping_country(type='hidden', id='shippingAddressCountry', class='form-control') }}
+                            {{ shipping_form.shipping_currency(type='hidden', id='shippingAddressCurrency', class='form-control') }}
+
+                            <div class="alert alert-danger form-alert-danger mb-3 d-none" role="alert"
+                                 data-i18n="anlihouse-A21">
+                            </div>
+
+                            {# Start Billing Address Form Input #}
+                            <div id="billingAddress">
+
+                                {# Start Is Company Radio #}
+                                <div class="mb-3 d-inline-block">
+                                    <label class="form-label w-100">
+                                        <span data-i18n="i18n_registration_02"></span>
+                                        <span class="text-danger text-lowercase fs-12px"
+                                              data-i18n="anlihouse-A18"></span>
+                                    </label>
+
+                                    <div class="radio-input float-left">
+                                        <input class="billingAddressIsCompanyPerson" type="radio"
+                                               id="billingAddressIsCompanyPerson"
+                                               name="billingAddressIsCompany"
+                                               {% if is_company == "False" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsCompanyPerson"
+                                               data-i18n="i18n_registration_04"></label>
+                                    </div>
+
+                                    <div class="radio-input float-left ml-3">
+                                        <input class="billingAddressIsCompanyCompany" type="radio"
+                                               id="billingAddressIsCompanyCompany"
+                                               name="billingAddressIsCompany"
+                                               {% if is_company == "True" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsCompanyCompany"
+                                               data-i18n="i18n_registration_03"></label>
+                                    </div>
+
+                                    <small class="text-danger input-error billing-address-is-company-error d-none w-100 d-inline-block">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                </div>
+                                {# End Is Company Radio #}
+
+                                <h5 class="mb-3 mt-3" data-i18n="billingaddress"></h5>
+
+                                {# Start First Last Name #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="billingAddressFirstName" class="form-label">
+                                                <span data-i18n="firstname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ billing_form.billing_first_name(type='text', id='billingAddressFirstName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-first-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="billingAddressLastName" class="form-label">
+                                                <span data-i18n="lastname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ billing_form.billing_last_name(type='text', id='billingAddressLastName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-last-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End First Last Name #}
+
+                                {# Start Phone #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="billingAddressPhone" class="form-label">
+                                                <span data-i18n="phone"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text billing-phone-country-code d-none"></span>
+                                                {{ billing_form.billing_phone(type='text', id='billingAddressPhone', class='form-control') }}
+                                            </div>
+                                            <small class="text-danger input-error billing-address-phone-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Phone #}
+
+                                {# Start Email #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="billingAddressEmail" class="form-label">
+                                                <span data-i18n="email"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text billing-email-country-code d-none"></span>
+                                                {{ billing_form.billing_email(type='email', id='billingAddressEmail', class='form-control') }}
+                                            </div>
+                                            <small class="text-danger input-error billing-address-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Email #}
+
+                                {# Start Company Name Tax #}
+                                <div class="billingAddressCompanyShow {% if is_company == "False" %}d-none{% endif %}">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="mb-4">
+                                                <label for="billingAddressCompanyTax" class="form-label">
+                                                    <span data-i18n="i18n_registration_05"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+                                                <span class="input-group">
+                                                    <span class="input-group-text billing-tax-country-code d-none"></span>
+                                            {{ billing_form.billing_company_tax(type='text', id='billingAddressCompanyTax', class='form-control') }}
+                                        </span>
+                                                <small class="text-danger input-error billing-address-company-tax-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="mb-4">
+                                                <label for="billingAddressCompanyName" class="form-label">
+                                                    <span data-i18n="firmname"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+
+                                                <span class="input-group">
+                                            {{ billing_form.billing_company_name(type='text', id='billingAddressCompanyName', class='form-control') }}
+                                        </span>
+                                                <small class="text-danger input-error billing-address-company-name-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {# End Company Name Tax #}
+
+                                {# Start Country #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <div class="form-group">
+                                                <label for="billingAddressCompanyName" class="form-label w-100">
+                                                    <span data-i18n="country"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+
+                                                <select class="billingAddressCountrySelect form-control"
+                                                        title="Ex.: US - UNITED STATES">
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Americas'][0]['region'] }}</option>
+                                                    {% for country in countries['Americas'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Europe'][0]['region'] }}</option>
+                                                    {% for country in countries['Europe'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Asia'][0]['region'] }}</option>
+                                                    {% for country in countries['Asia'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Africa'][0]['region'] }}</option>
+                                                    {% for country in countries['Africa'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Oceania'][0]['region'] }}</option>
+                                                    {% for country in countries['Oceania'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Antarctic'][0]['region'] }}</option>
+                                                    {% for country in countries['Antarctic'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+
+                                                </select>
+
+                                                <small class="text-danger input-error billing-address-country-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Country #}
+
+
+                                {# Start Zip Place #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="billingAddressZipNumber" class="form-label">
+                                                <span data-i18n="zip"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ billing_form.billing_zip_number(type='text', id='billingAddressZipNumber', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-zip-number-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="billingAddressCompanyPlace" class="form-label">
+                                                <span data-i18n="i18n_registration_06"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ billing_form.billing_place(type='text', id='billingAddressPlace', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-place-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End Zip Place #}
+
+                                {# Start Street #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="billingAddressStreet" class="form-label">
+                                                <span data-i18n="anlihouse-A74"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            {{ billing_form.billing_street(type='text', id='billingAddressStreet', class='form-control') }}
+                                            <small class="text-danger input-error billing-address-street-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Street #}
+
+                                {# Start Is Shipping Address #}
+                                <div class="mb-4 d-inline-block">
+                                    <label class="form-label w-100">
+                                        <span data-i18n="i18n_registration_07"></span>
+                                        <span class="text-danger text-lowercase fs-12px"
+                                              data-i18n="anlihouse-A18"></span>
+                                    </label>
+
+                                    <div style="line-height:20px;" class="radio-input float-left">
+                                        <input class="billingAddressIsShippingAddressYes" type="radio"
+                                               id="billingAddressIsShippingAddressYes"
+                                               name="billingAddressIsShippingAddress"
+                                               {% if is_shipping_address == "True" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsShippingAddressYes"
+                                               data-i18n="igen"></label>
+                                    </div>
+
+                                    <div style="line-height:20px;" class="radio-input float-left ml-3">
+                                        <input class="billingAddressIsShippingAddressNo" type="radio"
+                                               id="billingAddressIsShippingAddressNo"
+                                               name="billingAddressIsShippingAddress"
+                                               {% if is_shipping_address == "False" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsShippingAddressNo"
+                                               data-i18n="nem"></label>
+                                    </div>
+
+                                    <small class="text-danger input-error billing-address-is-shipping-address-error d-none w-100 d-inline-block">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                </div>
+                                {# End Is Shipping Address #}
+
+                            </div>
+                            {# End Billing Address Form Input #}
+
+                            {# Start Shipping Address Form Input #}
+                            <div id="shippingAddress"
+                                 class="shippingAddress {% if is_shipping_address == "True" %}d-none{% endif %}">
+
+                                <h5 class="mb-3 mt-3" data-i18n="i18n_registration_08"></h5>
+
+                                {# Start First Last Name #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressFirstName" class="form-label">
+                                                <span data-i18n="firstname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_first_name(type='text', id='shippingAddressFirstName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-first-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressLastName" class="form-label">
+                                                <span data-i18n="lastname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_last_name(type='text', id='shippingAddressLastName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-last-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End First Last Name #}
+
+                                {# Start Phone #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressPhone" class="form-label">
+                                                <span data-i18n="phone"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text shipping-phone-country-code d-none"></span>
+                                                {{ shipping_form.shipping_phone(type='text', id='shippingAddressPhone', class='form-control') }}
+                                            </div>
+                                            <small class="text-danger input-error shipping-address-phone-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Phone #}
+
+                                {# Start Email #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressEmail" class="form-label">
+                                                <span data-i18n="email"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text shipping-email-country-code d-none"></span>
+                                                {{ shipping_form.shipping_email(type='email', id='shippingAddressEmail', class='form-control') }}
+                                            </div>
+                                            <small class="text-danger input-error shipping-address-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Email #}
+
+                                {# Start Company Name Tax #}
+                                <div class="shippingAddressCompanyShow {% if is_company == "False" %}d-none{% endif %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-4">
+                                                <label for="shippingAddressCompanyName" class="form-label">
+                                                    <span data-i18n="firmname"></span>
+                                                    <span class="text-muted text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A19"></span>
+                                                </label>
+
+                                                <span class="input-group">
+                                            {{ shipping_form.shipping_company_name(type='text', id='shippingAddressCompanyName', class='form-control') }}
+                                        </span>
+                                                <small class="text-danger input-error shipping-address-company-name-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {# End Company Name Tax #}
+
+                                {# Start Country #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <div class="form-group">
+                                                <label for="shippingAddressCompanyName" class="form-label w-100">
+                                                    <span data-i18n="country"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+
+                                                <select class="shippingAddressCountrySelect form-control"
+                                                        title="Ex.: US - UNITED STATES" disabled>
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Americas'][0]['region'] }}</option>
+                                                    {% for country in countries['Americas'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Europe'][0]['region'] }}</option>
+                                                    {% for country in countries['Europe'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Asia'][0]['region'] }}</option>
+                                                    {% for country in countries['Asia'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Africa'][0]['region'] }}</option>
+                                                    {% for country in countries['Africa'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Oceania'][0]['region'] }}</option>
+                                                    {% for country in countries['Oceania'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Antarctic'][0]['region'] }}</option>
+                                                    {% for country in countries['Antarctic'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+
+                                                </select>
+
+                                                <small class="text-danger input-error shipping-address-country-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Country #}
+
+
+                                {# Start Zip Place #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressZipNumber" class="form-label">
+                                                <span data-i18n="zip"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_zip_number(type='text', id='shippingAddressZipNumber', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-zip-number-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressCompanyPlace" class="form-label">
+                                                <span data-i18n="i18n_registration_06"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_place(type='text', id='shippingAddressPlace', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-place-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End Zip Place #}
+
+                                {# Start Street #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="shippingAddressStreet" class="form-label">
+                                                <span data-i18n="anlihouse-A74"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            {{ shipping_form.shipping_street(type='text', id='shippingAddressStreet', class='form-control') }}
+                                            <small class="text-danger input-error shipping-address-street-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Street #}
+
+                            </div>
+                            {# End Shipping Address Form Input #}
+
+                        </div>
+                        <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                        </div>
+                    </div>
+
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <span data-i18n="anlihouse-A65"></span>: <span class="billing-action-name"
+                                                                           data-i18n="mentes"></span>
+                        </div>
+                        <div class="card-body">
+
+                            {% if ubi_last_modification_user_id != None %}
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <div><span data-i18n="utolso_mod_user"></span>: <span><a
+                                                class="last_modification_user_name"
+                                                href="{{ url_for('user_management_module.user_management_user_id', user_id=ubi_last_modification_user_id) }}"
+                                                target="_blank">{{ ubi_last_modification_user_name }}</a></span>
+                                        </div>
+                                        <div><span data-i18n="utolso_mod_ideje"></span>: <span class="updated_at"
+                                                                                               data-time-llll="{{ updated_at }}">{{ updated_at }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if deleted != "True" %}
+                                <div class="button-right text-right mt-3">
+
+                                    <ul class="dropdown-menu billing-shipping-address action position-relative d-block">
+                                        <li><span class="dropdown-item active btn01" data-btn="btn01"
+                                                  data-i18n="mentes"></span></li>
+                                        {% if worker_user_email != billing_user_email %}
+                                            <li><span class="dropdown-item btn02" data-btn="btn02"
+                                                      data-i18n="torles"></span></li>
+                                            <li><span class="dropdown-item btn03" data-btn="btn03"
+                                                      data-i18n="anlihouse-A223"></span></li>
+                                        {% endif %}
+                                    </ul>
+
+                                    <button id="billing-address-form-button" type="submit"
+                                            class="btn-action btn btn-primary mt-3 btn01"
+                                            data-i18n="mentes" data-btn="btn01"></button>
+
+                                    {% if worker_user_email != billing_user_email %}
+                                        <button id="user-management-delete-user-form-button" type="submit"
+                                                class="btn-action btn btn-danger mt-3 btn02 d-none" data-btn="btn02">
+                                            <span data-i18n="torles"></span>
+                                            <span class="subcategory delete-lock icon delete active"
+                                                  style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                            <span class="subcategory delete-unlock icon delete inactive d-none"
+                                                  style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                        </button>
+
+                                        <button id="user-management-force-delete-user-form-button" type="submit"
+                                                class="btn-action btn btn-danger mt-3 btn03 d-none" data-btn="btn03">
+                                            <span data-i18n="anlihouse-A223"></span>
+                                            <span class="subcategory delete-lock icon delete active"
+                                                  style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                            <span class="subcategory delete-unlock icon delete inactive d-none"
+                                                  style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                        </button>
+                                    {% endif %}
+
+                                </div>
+                            {% else %}
+                                <div class="button-right text-right">
+                                    <ul class="dropdown-menu billing-shipping-address action position-relative d-block">
+                                        <li><span class="dropdown-item active btn01" data-btn="btn01"
+                                                  data-i18n="mentes"></span></li>
+                                        {% if worker_user_email != billing_user_email %}
+                                            <li><span class="dropdown-item btn04" data-btn="btn04"
+                                                      data-i18n="anlihouse-A222"></span></li>
+                                            <li><span class="dropdown-item btn03" data-btn="btn03"
+                                                      data-i18n="anlihouse-A223"></span></li>
+                                        {% endif %}
+                                    </ul>
+
+                                    <button id="billing-address-form-button" type="submit"
+                                            class="btn-action btn btn-primary mt-3 btn01"
+                                            data-i18n="mentes" data-btn="btn01"></button>
+
+                                    <button id="user-management-back-delete-user-form-button" type="submit"
+                                            class="btn-action btn btn-danger mt-3 btn04 d-none" data-btn="btn04">
+                                        <span data-i18n="anlihouse-A222"></span>
+                                        <span class="subcategory delete-lock icon delete active"
+                                              style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                        <span class="subcategory delete-unlock icon delete inactive d-none"
+                                              style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                    </button>
+
+                                    <button id="user-management-force-delete-user-form-button" type="submit"
+                                            class="btn-action btn btn-danger mt-3 btn03 d-none" data-btn="btn03">
+                                        <span data-i18n="anlihouse-A223"></span>
+                                        <span class="subcategory delete-lock icon delete active"
+                                              style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                        <span class="subcategory delete-unlock icon delete inactive d-none"
+                                              style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">ANLI Breeders</div>
+                    </div>
+                </form>
+
+                {% if user_id != is_user_login['user']['id'] %}
+                    <div class="card mt-5 userManagementPermission">
+                        <div class="card-header" data-i18n="jogosultsagszint"></div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-i18n="id"></th>
+                                        <th scope="col" data-i18n="anlihouse-A67"></th>
+                                        <th scope="col" data-i18n="anlihouse-A225"></th>
+                                        <th scope="col" data-i18n="kategoriaKezeles"></th>
+                                        <th scope="col" data-i18n="anlihouse-A235"></th>
+                                        <th scope="col"><span>{{ first_name }} {{ last_name }}</span> <span
+                                                data-i18n="anlihouse-A218"></span></th>
+                                        <th scope="col" data-i18n="utolso_mod_user"></th>
+                                        <th scope="col" data-i18n="utolso_mod_ideje"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr>
+                                        <th scope="row">#{{ user_id }}</th>
+                                        <td>
+                                            {% if is_admin_settings_management == "True" %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_admin_settings_management"
+                                                      data-status="{{ is_admin_settings_management }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                                </span>
+                                            {% else %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_admin_settings_management"
+                                                      data-status="{{ is_admin_settings_management }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if is_user_management == "True" %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_user_management"
+                                                      data-status="{{ is_user_management }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                                </span>
+                                            {% else %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_user_management"
+                                                      data-status="{{ is_user_management }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if is_category_management == "True" %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_category_management"
+                                                      data-status="{{ is_category_management }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                                </span>
+                                            {% else %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_category_management"
+                                                      data-status="{{ is_category_management }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if is_notifications == "True" %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_notifications"
+                                                      data-status="{{ is_notifications }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                                </span>
+                                            {% else %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="is_notifications"
+                                                      data-status="{{ is_notifications }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if inactive_account == "True" %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="inactive_account"
+                                                      data-status="{{ inactive_account }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                                </span>
+                                            {% else %}
+                                                <span class="{% if deleted == "True" %}pointer-events-none{% else %}icon-click{% endif %}"
+                                                      data-type="inactive_account"
+                                                      data-status="{{ inactive_account }}"
+                                                      data-user-id="{{ user_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if last_modification_user_name != None %}
+                                                <a class="last_modification_user_name"
+                                                   href="{{ url_for('user_management_module.user_management_user_id', user_id=last_modification_user_id) }}"
+                                                   target="_blank">{{ last_modification_user_name }}</a>
+                                            {% endif %}
+                                        </td>
+                                        <td class="updated_at" data-time-llll="{{ updated_at }}">{{ updated_at }}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if user_id != is_user_login['user']['id'] %}
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <span data-i18n="anlihouse-A215"></span>
+                            <a id="delegateUploadedAnimalIcon"
+                               class="card-header-icon cursor-pointer plus-icon inactive"
+                               href="{{ url_for('animal_module.uploading_animal') }}?id={{ user_id }}&email={{ user_email }}&name={{ first_name }} {{ last_name }}&user_ads_count={{ user_ads_count }}"
+                               data-user-email="{{ user_email }}"
+                               data-user-name="{{ first_name }} {{ last_name }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-i18n="megnev"></th>
+                                        <th scope="col" data-i18n="ar"></th>
+                                        <th scope="col">Eladásra került</th>
+                                        <th scope="col">Kiemelve</th>
+                                        <th scope="col">Felhasználók által látható</th>
+                                        <th scope="col" data-i18n="anlihouse-A232"></th>
+                                        <th scope="col" data-i18n="utolso_mod_user"></th>
+                                        <th scope="col" data-i18n="utolso_mod_ideje"></th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for animal in animals %}
+                                        <tr>
+                                            <th scope="row">{{ animal.animal.name }}</th>
+                                            <td><span
+                                                    data-number-format="{{ animal.animal.price }}">{{ animal.animal.price }}</span>
+                                                <span>EUR</span></td>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                                                </svg>
+                                            </td>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                                                </svg>
+                                            </td>
+                                            {% if animal.animal.visibility == "True" and animal.animal.worker_visibility == "True" %}
+                                                <td>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                         class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                                                    </svg>
+                                                </td>
+                                            {% else %}
+                                                <td>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                                                    </svg>
+                                                </td>
+                                            {% endif %}
+                                            <td data-time-llll="{{ animal.animal.created_at }}">{{ animal.animal.created_at }}</td>
+                                            <td>
+                                                {% if animal.animal.last_modification_user_name != None %}
+                                                    <a class="last_modification_user_name"
+                                                       href="{{ url_for('user_management_module.user_management_user_id', user_id=animal.animal.last_modification_user_id) }}"
+                                                       target="_blank">{{ animal.animal.last_modification_user_name }}</a>
+                                                {% endif %}
+                                            </td>
+                                            <td data-time-llll="{{ animal.animal.updated_at }}">{{ animal.animal.updated_at }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ url_for('animal_module.edit_of_uploaded_animal', animal_id=animal.animal.id) }}?id={{ user_id }}&email={{ user_email }}&name={{ first_name }} {{ last_name }}"
+                                                   target="_blank"
+                                                   class="icon-click edit-animal add-previous-url-cookie">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-pencil-fill"
+                                                         viewBox="0 0 16 16">
+                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ url_for('full_page_module.full_page', category_name=animal['category']['name_en_slug'], subcategory_name=animal['subcategory']['name_en_slug'], page_url=animal['animal']['page_url'], page_id=animal['animal']['id']) }}"
+                                                   target="_blank"
+                                                   class="icon-click view-animal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if user_id != is_user_login['user']['id'] %}
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <span data-i18n="anlihouse-A119"></span>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-i18n="anlihouse-A122"></th>
+                                        <th scope="col" data-i18n="anlihouse-A123"></th>
+                                        <th scope="col" data-i18n="anlihouse-A125"></th>
+                                        <th scope="col" data-i18n="anlihouse-A121"></th>
+                                        <th scope="col" data-i18n="anlihouse-A126"></th>
+                                        <th scope="col" data-i18n="anlihouse-A124"></th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for invoices in payment_invoices %}
+                                        <tr>
+                                            <th scope="row"
+                                                {% if invoices.payment_type == "account" %}data-i18n="anlihouse-A120"{% endif %}></th>
+                                            <td class="invoices-month" data-month="{{ invoices.month }}">
+                                                <span>{{ invoices.month }}</span> <span data-i18n="hónap"></span>
+                                            </td>
+                                            <td>{{ invoices.payment_id }}</td>
+                                            <td>{{ invoices.funding_source }}</td>
+                                            <td>{{ invoices.total }} {{ invoices.currency }}</td>
+                                            <td data-time-llll="{{ invoices.created_at }}">{{ invoices.created_at }}</td>
+                                            <td class="text-center">
+                                                <a target="_blank" href="{{ invoices.billing_url }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-file-earmark-arrow-down-fill"
+                                                         viewBox="0 0 16 16">
+                                                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z"/>
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{# End Content #}

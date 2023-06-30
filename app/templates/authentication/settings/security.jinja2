@@ -1,0 +1,334 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="anlihouse-A88"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container security">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card securityEmail">
+                    <div class="card-header" data-i18n="email"></div>
+                    <div class="card-body">
+
+                        <form id="security-email-form" onsubmit="return false" novalidate="novalidate">
+                            {{ password_form.csrf_token }}
+
+                            <div id="securityEmail">
+
+                                {# Start Email #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="securityCurrentEmail" class="form-label">
+                                                <span data-i18n="anlihouse-A93"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                        {{ email_form.current_email(type='email', id='securityCurrentEmail', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error security-current-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="securityEmail" class="form-label">
+                                                <span data-i18n="anlihouse-A94"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                        {{ email_form.email(type='email', id='securityEmail', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error security-user-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                            <small class="text-danger input-error security-check-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                            <small class="text-danger input-error security-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                            <div id="securityEmailHelp" class="form-text"
+                                                 data-i18n="{% if is_user_login['user_secondary_email']['email'] == None %}anlihouse-A97{% else %}anlihouse-A98{% endif %}"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Email #}
+
+                                {# Start Secret Key #}
+                                <div class="row {% if is_user_login['user_secondary_email']['email'] == None %}d-none{% endif %}">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="securityEmailSecretKey" class="form-label">
+                                                <span data-i18n="anlihouse-A95"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                        {{ email_form.secret_key(type='text', id='securityEmailSecretKey', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error security-email-secret-key-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Secret Key #}
+
+                            </div>
+
+                            <div class="button-right text-right">
+                                <button id="security-email-form-button" type="submit" class="btn btn-primary"
+                                        data-i18n="ment_es_tovabb"></button>
+                            </div>
+
+                            <div class="alert alert-danger form-alert-danger mb-0 mt-3 d-none" role="alert"
+                                 data-i18n="anlihouse-A21">
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+                <div class="card mt-5 securityPassword">
+                    <div class="card-header" data-i18n="anlihouse-A24"></div>
+                    <div class="card-body">
+
+                        <form id="security-password-form" onsubmit="return false" novalidate="novalidate">
+                            {{ password_form.csrf_token }}
+
+                            <div id="securityPassword">
+
+                                {# Start Current Password #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            <label for="securityCurrentPassword" class="form-label">
+                                                <span data-i18n="regiJelszo"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                        {{ password_form.current_password(type='password', id='securityCurrentPassword', class='form-control') }}
+                                            <span class="input-group-text cursor-pointer current-password eye-icon inactive">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"><path
+                                                        d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path
+                                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                                            </span>
+                                        </span>
+                                            <small class="text-danger input-error security-current-password-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Current Password #}
+
+                                {# Start New Password #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-4">
+                                            <label for="securityPassword" class="form-label">
+                                                <span data-i18n="ujJelszo"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                        {{ password_form.password(type='password', id='securityPassword', class='form-control') }}
+                                        <span class="input-group-text cursor-pointer password plus-icon inactive">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>
+                                        </span>
+                                            <span class="input-group-text cursor-pointer password eye-icon inactive">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"><path
+                                                        d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path
+                                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                                            </span>
+                                        </span>
+                                            <small class="text-danger input-error security-password-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                            <div id="securityPasswordHelp" class="form-text"
+                                                 data-i18n="anlihouse-A26"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="securityPasswordConfirm" class="form-label">
+                                                <span data-i18n="ujJelszoMegerosites"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            {{ password_form.password_confirm(type='password', id='securityPasswordConfirm', class='form-control') }}
+                                            <small class="text-danger input-error security-password-confirm-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                            <div id="securityConfirmPasswordHelp" class="form-text"
+                                                 data-i18n="anlihouse-A27"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End New Password #}
+
+                            </div>
+
+                            <div class="button-right text-right">
+                                <button id="security-password-form-button" type="submit" class="btn btn-primary"
+                                        data-i18n="mentes"></button>
+                            </div>
+
+                            <div class="alert alert-danger form-alert-danger mb-0 mt-3 d-none" role="alert"
+                                 data-i18n="anlihouse-A21">
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+                <div class="card mt-5 securityHistory">
+                    <div class="card-header" data-i18n="anlihouse-A108"></div>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col" data-i18n="anlihouse-A109"></th>
+                                    <th scope="col" data-i18n="country"></th>
+                                    <th scope="col" data-i18n="anlihouse-A110"></th>
+                                    <th scope="col" data-i18n="anlihouse-A111"></th>
+                                    <th scope="col" data-i18n="anlihouse-A112"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for history in user_history %}
+                                    <tr>
+                                        <td scope="row">{{ history.ip }}</td>
+                                        <td>{{ history.country_code }} - {{ history.country_name }}</td>
+                                        <td>{{ history.os_name }} {{ history.platform_type|capitalize }} | {{ history.browser_name }} {{ history.browser_version }}</td>
+                                        <td data-time-llll="{{ history.updated_at }}">{{ history.updated_at }}</td>
+                                        <td>
+                                            {% if history.current == True %}
+                                                <span style="font-size:12px;" class="badge bg-success"
+                                                      data-i18n="anlihouse-A113"></span>
+                                                <a class="hover signout"
+                                                   href="{{ url_for('signin_module._sign_out') }}">
+                                                    <span class="badge bg-primary" data-i18n="kijelentkezes"></span>
+                                                </a>
+                                            {% else %}
+                                                <span style="font-size:12px;" class="badge bg-secondary"
+                                                      data-i18n="anlihouse-A114"></span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+                <div class="card mt-5 deleteUser">
+                    <div class="card-header" style="background:#dc3545;" data-i18n="anlihouse-A145"></div>
+                    <div class="card-body">
+
+                        <h5 class="card-title" data-i18n="anlihouse-A146"></h5>
+
+                        <p class="card-text" data-i18n="anlihouse-A147"></p>
+
+                        <form id="security-delete-user-form" onsubmit="return false" novalidate="novalidate">
+                            {{ delete_user_form.csrf_token }}
+
+                            <div class="mb-3">
+                                <label for="signUpEmail" class="form-label">
+                                    <span data-i18n="regiJelszo"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                {{ delete_user_form.password(type='password', id='securityDeleteUserPassword', class='form-control') }}
+                                <small class="text-danger input-error security-delete-user-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+
+                            <div class="button-right text-right">
+                                <button id="security-delete-user-button" type="submit" class="btn btn-danger">
+                                    <span data-i18n="torles"></span>
+                                    <span class="delete-lock icon delete active"
+                                          style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                    <span class="delete-unlock icon delete inactive d-none"
+                                          style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                </button>
+                            </div>
+
+                            <div class="alert alert-danger form-alert-danger mb-0 mt-3 d-none" role="alert"
+                                 data-i18n="anlihouse-A21">
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{# End Content #}

@@ -1,0 +1,1335 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="kategoriaKezeles"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                {# Start Category #}
+                <div class="card CategoryWrap">
+                    <div class="card-header">
+                        <span data-i18n="kategoriak"></span>
+                        <span id="addCategoryIcon" class="card-header-icon cursor-pointer plus-icon inactive"
+                              data-toggle="modal"
+                              data-target="#addCategory">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                            </svg>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table-category">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col" data-i18n="id"></th>
+                                    <th scope="col" data-i18n="kategoria"></th>
+                                    <th scope="col" data-i18n="kep"></th>
+                                    <th scope="col" data-i18n="lathato"></th>
+                                    <th scope="col" data-i18n="utolso_mod_user"></th>
+                                    <th scope="col" data-i18n="utolso_mod_ideje"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for category in category_data %}
+                                    {% if lang == "hu" %}
+                                        {% set name = category.name_hu %}
+                                    {% elif lang == "en" %}
+                                        {% set name = category.name_en %}
+                                    {% elif lang == "de" %}
+                                        {% set name = category.name_de %}
+                                    {% elif lang == "fr" %}
+                                        {% set name = category.name_fr %}
+                                    {% elif lang == "es" %}
+                                        {% set name = category.name_es %}
+                                    {% endif %}
+                                    <tr data-category-id="{{ category.category_id }}">
+                                        <th scope="row">#{{ category.category_id }}</th>
+                                        <td>{{ name }}</td>
+                                        <td>
+                                            {% if category.img != None %}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                            {% else %}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if category.visibility == "True" %}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                            {% else %}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('user_management_module.user_management_user_id', user_id=category.category_user_id) }}"
+                                               target="_blank">{{ category.category_user_name }}</a>
+                                        </td>
+                                        <td data-time-llll="{{ category.updated_at }}">{{ category.updated_at }}</td>
+                                        <td class="text-center">
+                                            <span class="icon-click edit-category" data-id="{{ category.category_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                            </svg>
+                                            </span>
+                                        </td>
+
+                                        {% if category.subcategory_count == 0 %}
+                                            <td class="text-center">
+                                            <span class="category-toggle-x" data-id="{{ category.category_id }}"
+                                                  style="cursor:default">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                            </span>
+                                            </td>
+                                        {% elif category.subcategory_count != 0 and category.category_id == toggle_id %}
+                                            <td class="text-center">
+                                            <span class="category-toggle-on" data-id="{{ category.category_id }}"
+                                                  data-subcategory-run-id="{{ category.category_id }}"
+                                                  style="cursor:default">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     class="bi bi-toggle-on" viewBox="0 0 16 16">
+                                                    <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                                                </svg>
+                                            </span>
+                                            </td>
+                                        {% else %}
+                                            <td class="text-center">
+                                            <span class="icon-click category-toggle-off"
+                                                  data-id="{{ category.category_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                                                    <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
+                                                </svg>
+                                            </span>
+                                            </td>
+                                        {% endif %}
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+                {# End Category #}
+
+                {# Start Sub-category #}
+                <div id="SubCategoryWrap" class="card SubCategoryWrap mt-5">
+                    <div class="card-header">
+                        <span data-i18n="alkategoriak"></span>
+                        {% if category_data != [] %}
+                            <span id="addSubCategoryIcon" class="card-header-icon cursor-pointer plus-icon inactive"
+                                  data-toggle="modal"
+                                  data-target="#addSettings">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                            </svg>
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table-subcategory">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col" data-i18n="id"></th>
+                                    <th scope="col" data-i18n="alkategoria"></th>
+                                    <th scope="col" data-i18n="kep"></th>
+                                    <th scope="col" data-i18n="lathato"></th>
+                                    <th scope="col" data-i18n="utolso_mod_user"></th>
+                                    <th scope="col" data-i18n="utolso_mod_ideje"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody class="tbody-subcategory">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+                {# End Sub-Category #}
+
+            </div>
+        </div>
+    </div>
+
+    {# Start Category Modal #}
+    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-i18n="uj-kategoria"></span>
+
+                    <div class="modal-close cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                            <path fill-rule="evenodd"
+                                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <form id="add-category-form" onsubmit="return false" novalidate="novalidate">
+                        {{ add_category_form.csrf_token }}
+
+                        {{ add_category_form.category_id(type='hidden', id='categoryId', class='form-control') }}
+                        {{ add_category_form.visibility(type='hidden', id='categoryVisibility', class='form-control', value="True") }}
+                        {{ add_category_form.img_data(type='hidden', id='categoryImgData', class='form-control') }}
+                        {{ add_category_form.img_data_old(type='hidden', id='categoryImgDataOld', class='form-control') }}
+                        {{ add_category_form.is_edit_img(type='hidden', id='categoryIsEditImg', class='form-control') }}
+                        {{ add_category_form.is_new_img(type='hidden', id='categoryIsNewImg', class='form-control') }}
+                        {{ add_category_form.is_rm_img(type='hidden', id='categoryIsRmImg', class='form-control') }}
+
+                        <div class="alert alert-danger form-alert-danger mb-3 d-none" role="alert"
+                             data-i18n="anlihouse-A21">
+                        </div>
+
+                        {# Start visibility checkbox #}
+                        <div class="visibility mb-3">
+                            <input class="category-visibility-checkbox" type="checkbox" id="CategoryCheckboxVisibility"
+                                   name="checkbox" checked="checked">
+                            <label for="CategoryCheckboxVisibility" class="d-content" data-i18n="lathato"
+                                   style="display:contents;"></label>
+                        </div>
+                        {# End visibility checkbox #}
+
+                        <fieldset>
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="kategoria"></legend>
+
+                            {# Start add_category_form.name_hu #}
+                            <div class="mb-4">
+                                <label for="categoryNameHU" class="form-label">
+                                    <span data-i18n="anlihouse-HU"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_hu(type='text', id='categoryNameHU', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-hu translate-icon inactive"
+                                      data-translate="HU">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-name-hu-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.name_hu #}
+
+                            {# Start add_category_form.name_en #}
+                            <div class="mb-4">
+                                <label for="categoryNameEN" class="form-label">
+                                    <span data-i18n="anlihouse-EN"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_en(type='text', id='categoryNameEN', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-en translate-icon inactive"
+                                      data-translate="EN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-name-en-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.name_en #}
+
+                            {# Start add_category_form.name_de #}
+                            <div class="mb-4">
+                                <label for="categoryNameDE" class="form-label">
+                                    <span data-i18n="anlihouse-DE"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_de(type='text', id='categoryNameDE', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-de translate-icon inactive"
+                                      data-translate="DE">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-name-de-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.name_de #}
+
+                            {# Start add_category_form.name_fr #}
+                            <div class="mb-4">
+                                <label for="categoryNameFR" class="form-label">
+                                    <span data-i18n="anlihouse-FR"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_fr(type='text', id='categoryNameFR', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-fr translate-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-name-fr-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.name_fr #}
+
+                            {# Start add_category_form.name_es #}
+                            <div class="mb-3">
+                                <label for="categoryNameES" class="form-label">
+                                    <span data-i18n="anlihouse-ES"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_es(type='text', id='categoryNameES', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-es translate-icon inactive"
+                                      data-translate="ES">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-name-es-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.name_fr #}
+                        </fieldset>
+
+                        <fieldset class="border-top-0">
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="anlihouse-A152"></legend>
+
+                            {# Start add_category_form.be_used_for_hu #}
+                            <div class="mb-4">
+                                <label for="categoryBeUsedForHU" class="form-label">
+                                    <span data-i18n="anlihouse-HU"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.be_used_for_hu(type='textarea', id='categoryBeUsedForHU', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-hu translate-be-used-for-icon inactive"
+                                      data-translate="HU">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-be-used-for-hu-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.be_used_for_hu #}
+
+                            {# Start add_category_form.be_used_for_en #}
+                            <div class="mb-4">
+                                <label for="categoryBeUsedForEN" class="form-label">
+                                    <span data-i18n="anlihouse-EN"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.be_used_for_en(type='textarea', id='categoryBeUsedForEN', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-en translate-be-used-for-icon inactive"
+                                      data-translate="EN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-be-used-for-en-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.be_used_for_en #}
+
+                            {# Start add_category_form.be_used_for_de #}
+                            <div class="mb-4">
+                                <label for="categoryBeUsedForDE" class="form-label">
+                                    <span data-i18n="anlihouse-DE"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.be_used_for_de(type='textarea', id='categoryBeUsedForDE', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-de translate-be-used-for-icon inactive"
+                                      data-translate="DE">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-be-used-for-de-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.be_used_for_de #}
+
+                            {# Start add_category_form.be_used_for_fr #}
+                            <div class="mb-4">
+                                <label for="categoryBeUsedForFR" class="form-label">
+                                    <span data-i18n="anlihouse-FR"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.be_used_for_fr(type='textarea', id='categoryBeUsedForFR', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-fr translate-be-used-for-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-be-used-for-fr-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.be_used_for_fr #}
+
+                            {# Start add_category_form.be_used_for_es #}
+                            <div class="mb-3">
+                                <label for="categoryBeUsedForES" class="form-label">
+                                    <span data-i18n="anlihouse-ES"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.be_used_for_es(type='textarea', id='categoryBeUsedForES', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-es translate-be-used-for-icon inactive"
+                                      data-translate="ES">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-be-used-for-es-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.be_used_for_es #}
+                        </fieldset>
+
+                        <fieldset class="border-top-0">
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="nemek"></legend>
+
+                            {# Start add_category_form.gender_hu #}
+                            <div class="mb-4">
+                                <label for="categoryGenderHU" class="form-label">
+                                    <span data-i18n="anlihouse-HU"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.gender_hu(type='textarea', id='categoryGenderHU', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-hu translate-gender-icon inactive"
+                                      data-translate="HU">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-gender-hu-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.gender_hu #}
+
+                            {# Start add_category_form.gender_en #}
+                            <div class="mb-4">
+                                <label for="categoryGenderEN" class="form-label">
+                                    <span data-i18n="anlihouse-EN"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.gender_en(type='textarea', id='categoryGenderEN', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-en translate-gender-icon inactive"
+                                      data-translate="EN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-gender-en-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.gender_en #}
+
+                            {# Start add_category_form.gender_de #}
+                            <div class="mb-4">
+                                <label for="categoryGenderDE" class="form-label">
+                                    <span data-i18n="anlihouse-DE"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.gender_de(type='textarea', id='categoryGenderDE', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-de translate-gender-icon inactive"
+                                      data-translate="DE">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-gender-de-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.gender_de #}
+
+                            {# Start add_category_form.gender_fr #}
+                            <div class="mb-4">
+                                <label for="categoryGenderFR" class="form-label">
+                                    <span data-i18n="anlihouse-FR"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.gender_fr(type='textarea', id='categoryGenderFR', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-fr translate-gender-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-gender-fr-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.gender_fr #}
+
+                            {# Start add_category_form.gender_es #}
+                            <div class="mb-3">
+                                <label for="categoryGenderES" class="form-label">
+                                    <span data-i18n="anlihouse-ES"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.gender_es(type='textarea', id='categoryGenderES', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-es translate-gender-icon inactive"
+                                      data-translate="ES">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-gender-es-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.gender_es #}
+                        </fieldset>
+
+                        <fieldset class="border-top-0">
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="szinek"></legend>
+
+                            {# Start add_category_form.color_hu #}
+                            <div class="mb-4">
+                                <label for="categoryColorHU" class="form-label">
+                                    <span data-i18n="anlihouse-HU"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.color_hu(type='textarea', id='categoryColorHU', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-hu translate-color-icon inactive"
+                                      data-translate="HU">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-color-hu-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.color_hu #}
+
+                            {# Start add_category_form.color_en #}
+                            <div class="mb-4">
+                                <label for="categoryColorEN" class="form-label">
+                                    <span data-i18n="anlihouse-EN"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.color_en(type='textarea', id='categoryColorEN', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-en translate-color-icon inactive"
+                                      data-translate="EN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-color-en-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.color_en #}
+
+                            {# Start add_category_form.color_de #}
+                            <div class="mb-4">
+                                <label for="categoryColorDE" class="form-label">
+                                    <span data-i18n="anlihouse-DE"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.color_de(type='textarea', id='categoryColorDE', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-de translate-color-icon inactive"
+                                      data-translate="DE">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-color-de-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.color_de #}
+
+                            {# Start add_category_form.color_fr #}
+                            <div class="mb-4">
+                                <label for="categoryColorFR" class="form-label">
+                                    <span data-i18n="anlihouse-FR"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.color_fr(type='textarea', id='categoryColorFR', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-fr translate-color-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-color-fr-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.color_fr #}
+
+                            {# Start add_category_form.color_es #}
+                            <div class="mb-3">
+                                <label for="categoryColorES" class="form-label">
+                                    <span data-i18n="anlihouse-ES"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.color_es(type='textarea', id='categoryColorES', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-es translate-color-icon inactive"
+                                      data-translate="ES">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-category-color-es-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.color_es #}
+                        </fieldset>
+
+                        <fieldset class="border-top-0 uploadingCategoryImgShow">
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="anlihouse-A195"></legend>
+
+                            {# Start add_category_form.img #}
+                            <div class="mb-3">
+                                <label for="categoryImg" class="form-label">
+                                    <span data-i18n="kep"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+
+                                <span class="input-group">
+                                {{ add_category_form.img(type='text', id='categoryImg', class='form-control', autocomplete="off") }}
+                                <span class="input-group-text cursor-pointer category crop-back-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#0d6efd"
+                                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer category crop-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#0d6efd"
+                                         class="bi bi-crop" viewBox="0 0 16 16">
+                                        <path d="M3.5.5A.5.5 0 0 1 4 1v13h13a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2H3.5a.5.5 0 0 1-.5-.5V4H1a.5.5 0 0 1 0-1h2V1a.5.5 0 0 1 .5-.5zm2.5 3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4H6.5a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer category trash-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer category img-icon inactive">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-image" viewBox="0 0 16 16">
+                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer category trash-back-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#0d6efd"
+                                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </span>
+
+                            </span>
+                                <small class="text-danger input-error add-category-img-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_category_form.img #}
+
+                            {# Start add_category_form.img progress preview #}
+                            <div class="mb-3">
+
+                                <div class="category progress d-none position-relative overflow-visible">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width:0;"
+                                         aria-valuenow="0"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        <span class="file-percent d-content">0%</span> <span
+                                            class="file-size d-content"></span>
+                                    </div>
+
+                                    <div class="img-cancel progress-rm cursor-pointer position-absolute"
+                                         style="top:15px;right:0;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                             fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="category category-edit-img-preview d-none">
+                                    <img id="category-edit-img-preview" class="img-fluid" src="" alt="">
+                                </div>
+
+                                <div class="category cropper-img d-none">
+                                    <img id="category-new-img-cropper" class="img-fluid" src="" alt="">
+                                </div>
+
+                                <div class="category cropper-img-edit d-none">
+                                    <img id="category-new-img-cropper-edit" class="img-fluid" src="" alt="">
+                                </div>
+
+                            </div>
+                            {# End add_category_form.img progress preview #}
+                        </fieldset>
+
+                        <div class="button-right text-right mt-3">
+                            <button id="delete-category-form-button" type="submit" class="btn btn-danger d-none">
+                                <span data-i18n="torles"></span>
+                                <span class="category delete-lock icon delete active"
+                                      style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                <span class="category delete-unlock icon delete inactive d-none"
+                                      style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <button id="add-category-form-button" type="submit" class="btn btn-primary"
+                                    data-i18n="mentes"></button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer text-end" data-i18n="anlihouse-anlibreeders">
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End Category Modal #}
+
+    {# Start Sub-category Modal #}
+    <div class="modal fade" id="addSubCategory" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-i18n="uj-alkategoria"></span>
+
+                    <div class="modal-close cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                            <path fill-rule="evenodd"
+                                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <form id="add-subcategory-form" onsubmit="return false" novalidate="novalidate">
+                        {{ add_subcategory_form.csrf_token }}
+
+                        {{ add_subcategory_form.subcategory_id(type='hidden', id='subCategoryId', class='form-control') }}
+                        {{ add_subcategory_form.category_id_select(type='hidden', id='CategoryIdSelect', class='form-control') }}
+                        {{ add_subcategory_form.visibility(type='hidden', id='subCategoryVisibility', class='form-control', value="True") }}
+                        {{ add_subcategory_form.img_data(type='hidden', id='subCategoryImgData', class='form-control') }}
+                        {{ add_subcategory_form.img_data_old(type='hidden', id='subCategoryImgDataOld', class='form-control') }}
+                        {{ add_subcategory_form.is_edit_img(type='hidden', id='subCategoryIsEditImg', class='form-control') }}
+                        {{ add_subcategory_form.is_new_img(type='hidden', id='subCategoryIsNewImg', class='form-control') }}
+                        {{ add_subcategory_form.is_rm_img(type='hidden', id='subCategoryIsRmImg', class='form-control') }}
+
+                        <div class="alert alert-danger form-alert-danger mb-3 d-none" role="alert"
+                             data-i18n="anlihouse-A21">
+                        </div>
+
+                        {# Start visibility checkbox #}
+                        <div class="visibility mb-3">
+                            <input class="subcategory-visibility-checkbox" type="checkbox"
+                                   id="SubCategoryCheckboxVisibility"
+                                   name="checkbox" checked="checked">
+                            <label for="SubCategoryCheckboxVisibility" class="d-content" data-i18n="lathato"
+                                   style="display:contents;"></label>
+                        </div>
+                        {# End visibility checkbox #}
+
+                        {# Start Category Select #}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <div class="form-group">
+                                        <label for="categorySelectName" class="form-label w-100">
+                                            <span data-i18n="kategoria"></span>
+                                            <span class="text-danger text-lowercase fs-12px"
+                                                  data-i18n="anlihouse-A18"></span>
+                                        </label>
+
+                                        <select class="subCategorySelect form-control" title="&nbsp;&nbsp;">
+                                        </select>
+
+                                        <small class="text-danger input-error add-subcategory-select-error d-none">
+                                            <span data-i18n=""></span>
+                                        </small>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# End Category Select #}
+
+                        <fieldset>
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="alkategoria"></legend>
+
+                            {# Start add_subcategory_form.name_hu #}
+                            <div class="mb-3">
+                                <label for="subCategoryNameHU" class="form-label">
+                                    <span data-i18n="anlihouse-HU"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_subcategory_form.name_hu(type='text', id='subCategoryNameHU', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-hu translate-icon inactive"
+                                      data-translate="HU">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-name-hu-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.name_hu #}
+
+                            {# Start add_subcategory_form.name_en #}
+                            <div class="mb-4">
+                                <label for="subCategoryNameEN" class="form-label">
+                                    <span data-i18n="anlihouse-EN"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_en(type='text', id='subCategoryNameEN', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-en translate-icon inactive"
+                                      data-translate="EN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-name-en-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.name_en #}
+
+                            {# Start add_subcategory_form.name_de #}
+                            <div class="mb-4">
+                                <label for="subCategoryNameDE" class="form-label">
+                                    <span data-i18n="anlihouse-DE"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_de(type='text', id='subCategoryNameDE', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-de translate-icon inactive"
+                                      data-translate="DE">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-name-de-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.name_de #}
+
+                            {# Start add_subcategory_form.name_fr #}
+                            <div class="mb-4">
+                                <label for="subCategoryNameFR" class="form-label">
+                                    <span data-i18n="anlihouse-FR"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_fr(type='text', id='subCategoryNameFR', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-fr translate-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-name-fr-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.name_fr #}
+
+                            {# Start add_subcategory_form.name_es #}
+                            <div class="mb-4">
+                                <label for="subCategoryNameES" class="form-label">
+                                    <span data-i18n="anlihouse-ES"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_category_form.name_es(type='text', id='subCategoryNameES', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-es translate-icon inactive"
+                                      data-translate="ES">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-name-es-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.name_es #}
+
+                            {# Start add_subcategory_form.description_hu #}
+                            <div class="mb-4">
+                                <label for="subCategoryDescriptionHU" class="form-label">
+                                    <span data-i18n="1.leiras"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_subcategory_form.description_hu(type='text', id='subCategoryDescriptionHU', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-hu translate-description-icon inactive"
+                                      data-translate="HU">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-description-hu-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.description_hu #}
+
+                            {# Start add_subcategory_form.description_en #}
+                            <div class="mb-4">
+                                <label for="subCategoryDescriptionEN" class="form-label">
+                                    <span data-i18n="2.leiras"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_subcategory_form.description_en(type='text', id='subCategoryDescriptionEN', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-en translate-description-icon inactive"
+                                      data-translate="EN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-description-en-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.description_en #}
+
+                            {# Start add_subcategory_form.description_de #}
+                            <div class="mb-4">
+                                <label for="subCategoryDescriptionDE" class="form-label">
+                                    <span data-i18n="3.leiras"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_subcategory_form.description_de(type='text', id='subCategoryDescriptionDE', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-de translate-description-icon inactive"
+                                      data-translate="DE">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-description-de-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.description_de #}
+
+                            {# Start add_subcategory_form.description_fr #}
+                            <div class="mb-4">
+                                <label for="subCategoryDescriptionFR" class="form-label">
+                                    <span data-i18n="4.leiras"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_subcategory_form.description_fr(type='text', id='subCategoryDescriptionFR', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-fr translate-description-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-description-fr-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.description_fr #}
+
+                            {# Start add_subcategory_form.description_es #}
+                            <div class="mb-4">
+                                <label for="subCategoryDescriptionES" class="form-label">
+                                    <span data-i18n="5.leiras"></span>
+                                    <span class="text-danger text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A18"></span>
+                                </label>
+                                <span class="input-group">
+                                {{ add_subcategory_form.description_es(type='text', id='subCategoryDescriptionES', class='form-control') }}
+                                <span class="input-group-text cursor-pointer translate-es translate-description-icon inactive"
+                                      data-translate="FR">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-translate" viewBox="0 0 16 16">
+                                        <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                                    </svg>
+                                </span>
+                            </span>
+                                <small class="text-danger input-error add-subcategory-description-es-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.description_es #}
+                        </fieldset>
+
+                        <fieldset class="border-top-0 uploadingSubcategoryImgShow">
+                            <legend class="w-auto" style="font-size:1.2rem;font-weight:500;"
+                                    data-i18n="anlihouse-A195"></legend>
+
+                            {# Start add_subcategory_form.img #}
+                            <div class="mb-3">
+                                <label for="subCategoryImg" class="form-label">
+                                    <span data-i18n="kep"></span>
+                                    <span class="text-secondary text-lowercase fs-12px"
+                                          data-i18n="anlihouse-A19"></span>
+                                </label>
+
+                                <span class="input-group">
+                                {{ add_subcategory_form.img(type='text', id='subCategoryImg', class='form-control', autocomplete="off") }}
+                                <span class="input-group-text cursor-pointer subcategory crop-back-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#0d6efd"
+                                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer subcategory crop-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#0d6efd"
+                                         class="bi bi-crop" viewBox="0 0 16 16">
+                                        <path d="M3.5.5A.5.5 0 0 1 4 1v13h13a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2H3.5a.5.5 0 0 1-.5-.5V4H1a.5.5 0 0 1 0-1h2V1a.5.5 0 0 1 .5-.5zm2.5 3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4H6.5a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer subcategory trash-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer subcategory img-icon inactive">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                         class="bi bi-image" viewBox="0 0 16 16">
+                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="input-group-text cursor-pointer subcategory trash-back-icon d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#0d6efd"
+                                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </span>
+
+                            </span>
+                                <small class="text-danger input-error add-subcategory-img-error d-none">
+                                    <span data-i18n=""></span>
+                                </small>
+                            </div>
+                            {# End add_subcategory_form.img #}
+
+                            {# Start add_subcategory_form.img progress preview #}
+                            <div class="mb-3">
+
+                                <div class="subcategory progress d-none position-relative overflow-visible">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width:0;"
+                                         aria-valuenow="0"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        <span class="file-percent d-content">0%</span> <span
+                                            class="file-size d-content"></span>
+                                    </div>
+
+                                    <div class="img-cancel progress-rm cursor-pointer position-absolute"
+                                         style="top:15px;right:0;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                             fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="subcategory subcategory-edit-img-preview d-none">
+                                    <img id="subcategory-edit-img-preview" class="img-fluid" src="" alt="">
+                                </div>
+
+                                <div class="subcategory cropper-img d-none">
+                                    <img id="subcategory-new-img-cropper" class="img-fluid" src="" alt="">
+                                </div>
+
+                                <div class="subcategory cropper-img-edit d-none">
+                                    <img id="subcategory-new-img-cropper-edit" class="img-fluid" src="" alt="">
+                                </div>
+
+                            </div>
+                            {# End add_subcategory_form.img progress preview #}
+                        </fieldset>
+
+                        <div class="button-right text-right mt-3">
+                            <button id="delete-subcategory-form-button" type="submit" class="btn btn-danger d-none">
+                                <span data-i18n="torles"></span>
+                                <span class="subcategory delete-lock icon delete active"
+                                      style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-lock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                <span class="subcategory delete-unlock icon delete inactive d-none"
+                                      style="position:relative;margin: 0 0.5rem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-unlock-fill" viewBox="0 0 16 16"
+                                         style="position:absolute;top:50%;transform:translateY(-50%);"><path
+                                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <button id="add-subcategory-form-button" type="submit" class="btn btn-primary"
+                                    data-i18n="mentes"></button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer text-end" data-i18n="anlihouse-anlibreeders">
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End Sub-category Modal #}
+
+{% endblock %}
+{# End Content #}

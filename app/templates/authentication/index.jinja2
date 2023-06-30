@@ -1,0 +1,623 @@
+{% extends "layout.jinja2" %}
+
+{% block title %}Foo Bar Baz{% endblock %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a></li>
+                            {% if (only_one_category_id == None or only_one_category_id == "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item active" aria-current="page"
+                                    data-i18n="anlihouse-anlibreeders"></li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ only_one_category_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id != None or only_one_subcategory_id != "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item"><a class="hover"
+                                                               href="{{ url_for('index_module.category_list', category_name=only_one_category_name_slug, category_id=only_one_category_id) }}">{{ only_one_category_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active"
+                                    aria-current="page">{{ only_one_subcategory_name }}</li>
+                            {% elif (only_one_category_id == None or only_one_category_id == "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name != None or seller_user_name != "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item active seller_user_name" aria-current="page"
+                                    data-seller_user_name="{{ seller_user_name }}">{{ seller_user_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name != None or seller_user_name != "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item seller_user_name"
+                                    data-seller_user_name="{{ seller_user_name }}"><a class="hover"
+                                                                                      href="{{ url_for('index_module.user_animal_list', user_id=seller_user_id, user_name=seller_user_name_slug) }}">{{ seller_user_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ only_one_category_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id != None or only_one_subcategory_id != "None") and (seller_user_name != None or seller_user_name != "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item seller_user_name"
+                                    data-seller_user_name="{{ seller_user_name }}"><a class="hover"
+                                                                                      href="{{ url_for('index_module.user_animal_list', user_id=seller_user_id, user_name=seller_user_name_slug) }}">{{ seller_user_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a class="hover"
+                                                               href="{{ url_for('index_module.category_list', category_name=only_one_category_name_slug, category_id=only_one_category_id) }}">{{ only_one_category_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active"
+                                    aria-current="page">{{ only_one_subcategory_name }}</li>
+                            {% elif (only_one_category_id == None or only_one_category_id == "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist != None or wishlist != "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item active wishlist" aria-current="page"
+                                    data-i18n="anlihouse-A377"></li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist != None or wishlist != "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item wishlist"><a class="hover"
+                                                                        href="{{ url_for('index_module.user_animal_wishlist') }}"
+                                                                        data-i18n="anlihouse-A377"></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ only_one_category_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id != None or only_one_subcategory_id != "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist != None or wishlist != "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item wishlist"><a class="hover"
+                                                                        href="{{ url_for('index_module.user_animal_wishlist') }}"
+                                                                        data-i18n="anlihouse-A377"></a></li>
+                                <li class="breadcrumb-item"><a class="hover"
+                                                               href="{{ url_for('index_module.category_list', category_name=only_one_category_name_slug, category_id=only_one_category_id) }}">{{ only_one_category_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active"
+                                    aria-current="page">{{ only_one_subcategory_name }}</li>
+                            {% else %}
+                            {% endif %}
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+
+    <div id="list" class="container">
+
+        <div id="list-top">
+            <div id="filter-info-wrap">
+                <ul>
+                    {% if animals == [] %}
+                        <li class="elem active"><span data-i18n="anlihouse-A292"></span>:</li>
+                        <li class="elem active" data-i18n="anlihouse-A379"></li>
+                    {% else %}
+                        <li class="elem active"><span data-i18n="anlihouse-A292"></span>:</li>
+                        <li class="elem active filter-info-type" data-i18n="anlihouse-A293"></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            {# Start List View #}
+            <div id="filter-dropdown-wrap" class="{% if animals == [] %}pointer-events-none opacity05{% endif %}">
+                <div class="dropdown">
+                    <span class="btn btn-secondary dropdown-toggle shadow" role="button" id="dropdownSnapView"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                             class="bi bi-list-ol" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/><path
+                                d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z"/>
+                        </svg>
+                        <span data-i18n="anlihouse-A380"></span>
+                    </span>
+
+                    <ul id="dropdownSnapViews" class="dropdown-menu shadow" aria-labelledby="dropdownSnapView">
+                        <li><span class="dropdown-item filter-dropdown active_" data-type="snap"
+                                  data-i18n="anlihouse-A382"></span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown inactive_" data-type="list"
+                                  data-i18n="anlihouse-A381"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {# End List View #}
+
+            {# Start Order #}
+            <div id="filter-dropdown-wrap" class="{% if animals == [] %}pointer-events-none opacity05{% endif %}"
+                 style="margin-right:15px;">
+                <div class="dropdown">
+                    <span class="btn btn-secondary dropdown-toggle shadow" role="button" id="dropdownFilterLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                             class="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        <span data-i18n="anlihouse-A292"></span>
+                    </span>
+
+                    <ul id="dropdownFilterLinks" class="dropdown-menu shadow" aria-labelledby="dropdownFilterLink">
+                        <li><span class="dropdown-item filter-dropdown" data-type="price-asc"
+                                  data-i18n="anlihouse-A293"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="price-desc"
+                                  data-i18n="anlihouse-A294"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="age-asc"
+                                  data-i18n="anlihouse-A295"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="age-desc"
+                                  data-i18n="anlihouse-A296"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="height-asc"
+                                  data-i18n="anlihouse-A297"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="height-desc"
+                                  data-i18n="anlihouse-A298"></span></li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="rating-asc"
+                                  data-i18n="anlihouse-A299"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="rating-desc"
+                                  data-i18n="anlihouse-A300"></span></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="search-jump"
+                                  data-i18n="anlihouse-A291"></span></li>
+                    </ul>
+                </div>
+            </div>
+            {# End Order #}
+        </div>
+
+        <div class="row list-ajax-wrap">
+
+            {% for animal in animals %}
+                <div class="box col-xxl-6 col-xl-6 col-lg-6 col-md-12 index-list">
+                    <div class="box-wrap">
+                        <div class="box-img shadow" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                            <img class="img-fluid img-wrap"
+                                 src="{{ url_for("static", filename="images/dummy/dummy.png") }}">
+
+                            {% set img_count = 0 %}
+
+                            {% if animal['video']['video_01'] != None %}
+                                {% set video_01_folder = animal['video']['video_01']|replace(".mp4", "") %}
+                                {% set video_01_origin = "/home/anlihouse/Workspace/AnliHouse/anlibreeders-front-end/app/static/videos/animal/" + video_01_folder + "/origin/" + animal['video']['video_01'] %}
+                            {% endif %}
+
+                            {% if animal['photo']['img_01'] != None %}
+                                {% set img_count = img_count + 1 %}
+                                {% set img_01_folder = animal['photo']['img_01']|replace(".jpg", "") %}
+                                {% set img_01 = url_for("static", filename="images/animal/" + img_01_folder + "/cropped/" + animal['photo']['img_01']) %}
+
+                                <a href="{{ img_01 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                   class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                    <img class="shadow img-fluid img-first" src="{{ img_01 }}">
+                                </a>
+                            {% endif %}
+
+                            {% if animal['photo']['img_02'] != None %}
+                                {% set img_count = img_count + 1 %}
+                                {% set img_02_folder = animal['photo']['img_02']|replace(".jpg", "") %}
+                                {% set img_02 = url_for("static", filename="images/animal/" + img_02_folder + "/cropped/" + animal['photo']['img_02']) %}
+
+                                <a href="{{ img_02 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                   class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                    <img class="shadow img-fluid img-last" src="{{ img_02 }}">
+                                </a>
+                            {% endif %}
+
+                            {# <img class="img-fluid img-wrap img-mask" src="{{ url_for("static", filename="images/dummy/fff.dummy.png") }}"> #}
+
+                            <div style="display:none">
+                                {% if animal['photo']['img_03'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_03_folder = animal['photo']['img_03']|replace(".jpg", "") %}
+                                    {% set img_03 = url_for("static", filename="images/animal/" + img_03_folder + "/cropped/" + animal['photo']['img_03']) %}
+
+                                    <a href="{{ img_03 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_03 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_04'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_04_folder = animal['photo']['img_04']|replace(".jpg", "") %}
+                                    {% set img_04 = url_for("static", filename="images/animal/" + img_04_folder + "/cropped/" + animal['photo']['img_04']) %}
+
+                                    <a href="{{ img_04 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_04 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_05'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_05_folder = animal['photo']['img_05']|replace(".jpg", "") %}
+                                    {% set img_05 = url_for("static", filename="images/animal/" + img_05_folder + "/cropped/" + animal['photo']['img_05']) %}
+
+                                    <a href="{{ img_05 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_05 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_06'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_06_folder = animal['photo']['img_06']|replace(".jpg", "") %}
+                                    {% set img_06 = url_for("static", filename="images/animal/" + img_06_folder + "/cropped/" + animal['photo']['img_06']) %}
+
+                                    <a href="{{ img_06 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_06 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_07'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_07_folder = animal['photo']['img_07']|replace(".jpg", "") %}
+                                    {% set img_07 = url_for("static", filename="images/animal/" + img_07_folder + "/cropped/" + animal['photo']['img_07']) %}
+
+                                    <a href="{{ img_07 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_07 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_08'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_08_folder = animal['photo']['img_08']|replace(".jpg", "") %}
+                                    {% set img_08 = url_for("static", filename="images/animal/" + img_08_folder + "/cropped/" + animal['photo']['img_08']) %}
+
+                                    <a href="{{ img_08 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_08 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_09'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_09_folder = animal['photo']['img_09']|replace(".jpg", "") %}
+                                    {% set img_09 = url_for("static", filename="images/animal/" + img_09_folder + "/cropped/" + animal['photo']['img_09']) %}
+
+                                    <a href="{{ img_09 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_09 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['photo']['img_10'] != None %}
+                                    {% set img_count = img_count + 1 %}
+                                    {% set img_10_folder = animal['photo']['img_10']|replace(".jpg", "") %}
+                                    {% set img_10 = url_for("static", filename="images/animal/" + img_10_folder + "/cropped/" + animal['photo']['img_10']) %}
+
+                                    <a href="{{ img_10 }}" data-fancybox="{{ animal['animal']['id'] }}"
+                                       class="shadow img-fluid" data-box-img-animal_id="{{ animal['animal']['id'] }}">
+                                        <img class="shadow img-fluid" src="{{ img_10 }}">
+                                    </a>
+                                {% endif %}
+                            </div>
+
+                            {% if animal['rating']['rating'] == 0 %}
+                                <div class="box-rating" data-rating="{{ animal['rating']['rating'] }}">
+
+                                    <div class="rating one">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill=""
+                                             class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="rating two">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill=""
+                                             class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="rating three">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill=""
+                                             class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="rating four">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill=""
+                                             class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="rating five">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill=""
+                                             class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                        </svg>
+                                    </div>
+
+                                    {# <div class="count">{{ animal['rating']['rating'] }}</div> #}
+                                </div>
+                            {% else %}
+                                <div class="box-rating" data-rating="{{ animal['rating']['rating'] }}">
+                                    <div class="rating one"></div>
+                                    <div class="rating two"></div>
+                                    <div class="rating three"></div>
+                                    <div class="rating four"></div>
+                                    <div class="rating five"></div>
+                                    <div class="count"></div>
+                                </div>
+                            {% endif %}
+
+                            <div class="box-eye">
+                                <div class="eye">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                                         class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                    </svg>
+                                </div>
+
+                                <div class="count">2.6k</div>
+                            </div>
+
+                            <a href="{{ url_for('full_page_module.full_page', category_name=animal['category']['name_en_slug'], subcategory_name=animal['subcategory']['name_en_slug'], page_url=animal['animal']['page_url'], page_id=animal['animal']['id']) }}"
+                               target="_blank" class="full-data-sheet-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                     class="bi bi-reply-fill" viewBox="0 0 16 16">
+                                    <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                                </svg>
+                            </a>
+
+                            <div class="box-time">
+                                <div class="count">1 nap, 2 óra, 33 per, 24 másodperc múlva vége</div>
+                            </div>
+
+                        </div>
+
+                        <div class="box-data">
+                            <span class="shadow badge name">{{ animal['animal']['name'] }}</span>
+
+                            <span class="plus">
+                                {% if price_show == True %}
+                                    <span class="shadow badge default price-currency">
+                                        <span class="price">{{ animal['animal']['price'] }}</span> <span
+                                            class="currency">EUR</span>
+                                        {% if animal['animal']['price_exchange_currency'] != "EUR" %}
+                                            <span class="price"
+                                                  style="opacity:0.5;">{{ animal['animal']['price_exchange'] }}</span>
+                                            <span
+                                                    class="currency"
+                                                    style="opacity:0.5;">{{ animal['animal']['price_exchange_currency'] }}</span>
+                                        {% endif %}
+                                    </span>
+                                {% else %}
+                                    {# <span class="shadow badge default price-currency"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">EUR</span></span> #}
+                                    <span class="shadow badge default price-currency"><span
+                                            class="price">{{ animal['animal']['price'] }}</span> <span class="currency">EUR</span></span>
+                                {% endif %}
+                                <span class="shadow badge plus-icon"><svg width="16" height="16" viewBox="0 0 752 752"
+                                                                          xmlns="http://www.w3.org/2000/svg"><defs><clipPath
+                                        class="p"><path d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                        clip-path="url(.p)"><path
+                                        d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                        fill-rule="evenodd"/></g></svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group inactive">
+
+                                {% if lang == "hu" %}
+                                    {% set category_name = animal['category']['name_hu'] %}
+                                    {% set subcategory_name = animal['subcategory']['name_hu'] %}
+                                    {% set color_name = animal['animal']['color_hu'] %}
+                                    {% set gender_name = animal['animal']['gender_hu'] %}
+                                    {% set be_used_for = animal['animal']['be_used_for_hu'] %}
+                                {% elif lang == "en" %}
+                                    {% set category_name = animal['category']['name_en'] %}
+                                    {% set subcategory_name = animal['subcategory']['name_en'] %}
+                                    {% set color_name = animal['animal']['color_en'] %}
+                                    {% set gender_name = animal['animal']['gender_en'] %}
+                                    {% set be_used_for = animal['animal']['be_used_for_en'] %}
+                                {% elif lang == "de" %}
+                                    {% set category_name = animal['category']['name_de'] %}
+                                    {% set subcategory_name = animal['subcategory']['name_de'] %}
+                                    {% set color_name = animal['animal']['color_de'] %}
+                                    {% set gender_name = animal['animal']['gender_de'] %}
+                                    {% set be_used_for = animal['animal']['be_used_for_de'] %}
+                                {% elif lang == "fr" %}
+                                    {% set category_name = animal['category']['name_fr'] %}
+                                    {% set subcategory_name = animal['subcategory']['name_fr'] %}
+                                    {% set color_name = animal['animal']['color_fr'] %}
+                                    {% set gender_name = animal['animal']['gender_fr'] %}
+                                    {% set be_used_for = animal['animal']['be_used_for_fr'] %}
+                                {% elif lang == "es" %}
+                                    {% set category_name = animal['category']['name_es'] %}
+                                    {% set subcategory_name = animal['subcategory']['name_es'] %}
+                                    {% set color_name = animal['animal']['color_es'] %}
+                                    {% set gender_name = animal['animal']['gender_es'] %}
+                                    {% set be_used_for = animal['animal']['be_used_for_es'] %}
+                                {% endif %}
+
+                                <span class="shadow badge name"><span
+                                        data-i18n="anlihouse-A278"></span> <span>{{ animal['animal']['mother'] }}</span></span>
+                                <span class="shadow badge name"><span
+                                        data-i18n="anlihouse-A279"></span> <span>{{ animal['animal']['father'] }}</span></span>
+                                {% if price_show == True %}
+                                    <span class="shadow badge default price-currency">
+                                        <span class="price">{{ animal['animal']['price'] }}</span> <span
+                                            class="currency">EUR</span>
+                                        {% if animal['animal']['price_exchange_currency'] != "EUR" %}
+                                            <span class="price"
+                                                  style="opacity:0.5;">{{ animal['animal']['price_exchange'] }}</span>
+                                            <span class="currency"
+                                                  style="opacity:0.5;">{{ animal['animal']['price_exchange_currency'] }}</span>
+                                        {% endif %}
+                                    </span>
+                                {% else %}
+                                    {# <span class="shadow badge default price-currency"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">EUR</span></span> #}
+                                    <span class="shadow badge default price-currency"><span
+                                            class="price">{{ animal['animal']['price'] }}</span> <span class="currency">EUR</span></span>
+                                {% endif %}
+                                <span class="shadow badge default">{{ category_name }}</span>
+                                <span class="shadow badge default">{{ subcategory_name }}</span>
+                                <span class="shadow badge default">
+                                    {% if animal['animal']['years'] != 0 %}
+                                        <span>{{ animal['animal']['years'] }}</span>
+                                        <span data-i18n="anlihouse-A280"></span>,
+                                    {% endif %}
+                                    {% if animal['animal']['months'] != 0 %}
+                                        <span>{{ animal['animal']['months'] }}</span> <span
+                                            data-i18n="anlihouse-A281"></span>,
+                                    {% endif %}
+                                    {% if animal['animal']['days'] != 0 %}
+                                        <span>{{ animal['animal']['days'] }}</span>
+                                        <span data-i18n="anlihouse-A282"></span>
+                                    {% endif %}
+                                </span>
+                                <span class="shadow badge default">{{ color_name }}</span>
+                                <span class="shadow badge default">{{ gender_name }}</span>
+                                <span class="shadow badge default"><span>{{ animal['animal']['height'] }}</span> <span
+                                        data-i18n="anlihouse-A283"></span></span>
+                                <span class="shadow badge default">{{ be_used_for }}</span>
+
+                                <span class="country-origin-residence-elem">
+                                {% for i in countries['data'] %}
+                                    {% if i['country_code'] == animal['animal']['country_origin'] %}
+                                        <span class="shadow badge default country-origin-elem d-none">{{ i['country'] }}</span>
+                                    {% endif %}
+                                    {% if i['country_code'] == animal['animal']['country_residence'] %}
+                                        <span class="shadow badge default country-residence-elem d-none">{{ i['country'] }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                                    <span class="shadow badge default country-origin-residence"></span>
+                                </span>
+
+                                {% if os.path.exists(video_01_origin) %}
+                                    <span class="shadow badge default"><span>1</span> <span
+                                            data-i18n="anlihouse-A285"></span></span>
+                                {% endif %}
+                                <span class="shadow badge default"><span>{{ img_count }}</span> <span
+                                        data-i18n="anlihouse-A284"></span></span>
+
+                                {% if animal['pdf']['medical_paper'] != None %}
+                                    <span class="shadow badge default" data-i18n="anlihouse-A286"></span>
+                                {% endif %}
+
+                                {% if animal['pdf']['breed_registry'] != None %}
+                                    <span class="shadow badge default" data-i18n="anlihouse-A287"></span>
+                                {% endif %}
+
+                                {% if animal['pdf']['x_ray'] != None %}
+                                    <span class="shadow badge default" data-i18n="anlihouse-A288"></span>
+                                {% endif %}
+
+                                {% if animal['animal']['url_01'] != "" %}
+                                    <span class="shadow badge default" data-i18n="anlihouse-A289"></span>
+                                {% endif %}
+
+                                {% if animal['animal']['url_02'] != "" %}
+                                    <span class="shadow badge default" data-i18n="anlihouse-A290"></span>
+                                {% endif %}
+
+                                <span class="shadow badge minus-icon"><svg width="16" height="716" viewBox="0 0 752 752"
+                                                                           xmlns="http://www.w3.org/2000/svg"><path
+                                        d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/></svg></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div id="list-ajax-pagination" class="{% if animals == [] %}d-none{% endif %}">
+            <span class="btn btn-primary shadow">
+                <span data-i18n="anlihouse-A303"></span>
+                <div class="spinner-grow inactive" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </span>
+        </div>
+
+        {% if filter_data == None %}
+            <nav id="list-pagination" data-page_number="{{ page_number }}" data-pagination_last="{{ pagination_last }}"
+                 class="{% if animals == [] %}pointer-events-none opacity05{% endif %}">
+                <ul class="pagination justify-content-end shadow">
+                    <li class="page-item previous {% if pagination_previous == 0 %}disabled{% endif %}"
+                        data-pagination_previous="{{ pagination_previous }}">
+                        <a class="page-link"
+                           href="{{ url_for('index_module.index', page_number=pagination_previous) }}">
+                            <span>&laquo;</span>
+                        </a>
+                    </li>
+
+                    {% for number in pagination_list %}
+                        <li class="page-item number {% if page_number == number|int or number == "..." %}disabled{% endif %}"
+                            data-number="{{ number }}">
+                            <a class="page-link"
+                               href="{{ url_for('index_module.index', page_number=number) }}">{{ number }}</a>
+                        </li>
+                    {% endfor %}
+
+                    <li class="page-item next {% if pagination_next > pagination_last %}disabled{% endif %}"
+                        data-pagination_next="{{ pagination_next }}" data-pagination_last="{{ pagination_last }}">
+                        <a class="page-link"
+                           href="{{ url_for('index_module.index', page_number=pagination_next) }}">
+                            <span>&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        {% else %}
+            <nav id="list-pagination" data-page_number="{{ page_number }}" data-pagination_last="{{ pagination_last }}"
+                 class="{% if animals == [] %}pointer-events-none opacity05{% endif %}">
+                <ul class="pagination justify-content-end shadow">
+                    <li class="page-item previous {% if pagination_previous == 0 %}disabled{% endif %}"
+                        data-pagination_previous="{{ pagination_previous }}">
+                        <a class="page-link"
+                           href="{{ url_for('index_module.index', page_number=pagination_previous, filter_data=filter_data) }}">
+                            <span>&laquo;</span>
+                        </a>
+                    </li>
+
+                    {% for number in pagination_list %}
+                        <li class="page-item number {% if page_number == number|int or number == "..." %}disabled{% endif %}"
+                            data-number="{{ number }}">
+                            <a class="page-link"
+                               href="{{ url_for('index_module.index', page_number=number, filter_data=filter_data) }}">{{ number }}</a>
+                        </li>
+                    {% endfor %}
+
+                    <li class="page-item next {% if pagination_next > pagination_last %}disabled{% endif %}"
+                        data-pagination_next="{{ pagination_next }}" data-pagination_last="{{ pagination_last }}">
+                        <a class="page-link"
+                           href="{{ url_for('index_module.index', page_number=pagination_next, filter_data=filter_data) }}">
+                            <span>&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+{# End Content #}

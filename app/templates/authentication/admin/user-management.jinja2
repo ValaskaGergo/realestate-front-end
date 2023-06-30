@@ -1,0 +1,234 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="anlihouse-A219"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container userManagement">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <span data-i18n="anlihouse-A219"></span>
+                        <span id="addUserIcon" class="card-header-icon cursor-pointer password plus-icon inactive"
+                              data-toggle="modal"
+                              data-target="#addUser">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                            </svg>
+                        </span>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col" data-i18n="id"></th>
+                                    <th scope="col" data-i18n="user_id"></th>
+                                    <th scope="col" data-i18n="email"></th>
+                                    <th scope="col" data-i18n="anlihouse-A87"></th>
+                                    <th scope="col" data-i18n="anlihouse-A231"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for user in users_data %}
+                                    {% if user.user.deleted != "True" and user.user_permission.inactive_account != "True" %}
+                                        <tr class="{% if user.user_permission.is_worker == "True" %}table-success{% endif %}">
+                                            <th scope="row">#{{ user.user.id }}</th>
+                                            <td>{{ user.user_profile.username }}</td>
+                                            <td>{{ user.user.email }}</td>
+                                            <td>{{ user.user_billing_information.first_name }} {{ user.user_billing_information.last_name }}</td>
+                                            <td class="created_at" data-time-llll="{{ user.user.created_at }}">{{ user.user.created_at }}</td>
+                                            <td class="text-center">
+
+                                                <a class="add-previous-url-cookie"
+                                                   href="{{ url_for('user_management_module.user_management_user_id', user_id=user.user.id) }}" target="_blank">
+                                                <span class="icon-click" data-id="{{ user.user.id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                            </svg>
+                                            </span>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <nav>
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item {% if pagination_previous == 0 %}disabled{% endif %}">
+                                    <a class="page-link"
+                                       href="{{ url_for('user_management_module.user_management', page_number=pagination_previous) }}">
+                                        <span>&laquo;</span>
+                                    </a>
+                                </li>
+
+                                {% for number in pagination_list %}
+                                    <li class="page-item {% if page_number == number|int or number == "..." %}disabled{% endif %}">
+                                        <a class="page-link"
+                                           href="{{ url_for('user_management_module.user_management', page_number=number) }}">{{ number }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                <li class="page-item {% if pagination_next > pagination_last %}disabled{% endif %}">
+                                    <a class="page-link"
+                                       href="{{ url_for('user_management_module.user_management', page_number=pagination_next) }}">
+                                        <span>&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-i18n="anlihouse-A217"></span>
+
+                    <div class="modal-close cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                            <path fill-rule="evenodd"
+                                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form id="add-user-form" onsubmit="return false" novalidate="novalidate">
+                        {{ add_user_form.csrf_token }}
+
+                        <div class="mb-4">
+                            <label for="addUserEmail" class="form-label">
+                                <span data-i18n="email"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+                            {{ add_user_form.email(type='email', id='addUserEmail', class='form-control') }}
+                            <small class="text-danger input-error add-user-email-error d-none">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="addUserName" class="form-label">
+                                <span data-i18n="user_id"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+                            {{ add_user_form.name(type='text', id='addUserName', class='form-control', autocomplete='off') }}
+                            <small class="text-danger input-error add-user-name-error d-none">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                <div class="mb-4">
+                                    <label for="addUserPassword" class="form-label">
+                                        <span data-i18n="anlihouse-A24"></span>
+                                        <span class="text-danger text-lowercase fs-12px"
+                                              data-i18n="anlihouse-A18"></span>
+                                    </label>
+                                    <span class="input-group">
+                                        {{ add_user_form.password(type='password', id='addUserPassword', class='form-control') }}
+                                        <span class="input-group-text cursor-pointer password plus-icon inactive">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>
+                                        </span>
+                                            <span class="input-group-text cursor-pointer password eye-icon inactive">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"><path
+                                                        d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path
+                                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                                            </span>
+                                        </span>
+                                    <small class="text-danger input-error add-user-password-error d-none">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                    <div id="addUserPasswordHelp" class="form-text"
+                                         data-i18n="anlihouse-A26"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                <div class="mb-4">
+                                    <label for="addUserPasswordConfirm" class="form-label">
+                                        <span data-i18n="anlihouse-A25"></span>
+                                        <span class="text-danger text-lowercase fs-12px"
+                                              data-i18n="anlihouse-A18"></span>
+                                    </label>
+                                    {{ add_user_form.password_confirm(type='password', id='addUserPasswordConfirm', class='form-control') }}
+                                    <small class="text-danger input-error add-user-password-confirm-error d-none">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                    <div id="addUserPasswordHelp" class="form-text"
+                                         data-i18n="anlihouse-A27"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-right text-right">
+                            <button id="add-user-form-button" type="submit" class="btn btn-primary"
+                                    data-i18n="mentes"></button>
+                        </div>
+
+                        <div class="alert alert-danger form-alert-danger mb-0 mt-3 d-none" role="alert"
+                             data-i18n="anlihouse-A21">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer text-end" data-i18n="anlihouse-anlibreeders">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{# End Content #}

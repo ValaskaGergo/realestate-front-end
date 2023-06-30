@@ -1,0 +1,683 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="anlihouse-A65"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container billingAndShippingAddress">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header" data-i18n="anlihouse-A65"></div>
+                    <div class="card-body">
+
+                        <form id="billing-address-form" onsubmit="return false" novalidate="novalidate">
+                            {{ billing_form.csrf_token }}
+
+                            {{ billing_form.user_email(type='hidden', id='billingAddressUserEmail', class='form-control') }}
+                            {{ billing_form.billing_is_company(type='hidden', id='billingAddressIsCompany', class='form-control') }}
+                            {{ billing_form.billing_is_shipping_address(type='hidden', id='billingAddressIsShipping', class='form-control') }}
+                            {{ billing_form.billing_country(type='hidden', id='billingAddressCountry', class='form-control') }}
+                            {{ billing_form.billing_currency(type='hidden', id='billingAddressCurrency', class='form-control') }}
+
+                            {{ shipping_form.shipping_country(type='hidden', id='shippingAddressCountry', class='form-control') }}
+                            {{ shipping_form.shipping_currency(type='hidden', id='shippingAddressCurrency', class='form-control') }}
+
+                            <div class="alert alert-danger form-alert-danger mb-3 d-none" role="alert"
+                                 data-i18n="anlihouse-A21">
+                            </div>
+
+                            {# Start Billing Address Form Input #}
+                            <div id="billingAddress">
+
+                                {# Start Is Company Radio #}
+                                <div class="mb-3 d-inline-block">
+                                    <label class="form-label w-100">
+                                        <span data-i18n="i18n_registration_02"></span>
+                                        <span class="text-danger text-lowercase fs-12px"
+                                              data-i18n="anlihouse-A18"></span>
+                                    </label>
+
+                                    <div class="radio-input float-left">
+                                        <input class="billingAddressIsCompanyPerson" type="radio"
+                                               id="billingAddressIsCompanyPerson"
+                                               name="billingAddressIsCompany"
+                                               {% if is_user_login['user_billing_information']['is_company'] == "False" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsCompanyPerson"
+                                               data-i18n="i18n_registration_04"></label>
+                                    </div>
+
+                                    <div class="radio-input float-left ml-3">
+                                        <input class="billingAddressIsCompanyCompany" type="radio"
+                                               id="billingAddressIsCompanyCompany"
+                                               name="billingAddressIsCompany"
+                                               {% if is_user_login['user_billing_information']['is_company'] == "True" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsCompanyCompany"
+                                               data-i18n="i18n_registration_03"></label>
+                                    </div>
+
+                                    <small class="text-danger input-error billing-address-is-company-error d-none w-100 d-inline-block">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                </div>
+                                {# End Is Company Radio #}
+
+                                <h5 class="mb-3 mt-3" data-i18n="billingaddress"></h5>
+
+                                {# Start First Last Name #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="billingAddressFirstName" class="form-label">
+                                                <span data-i18n="firstname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ billing_form.billing_first_name(type='text', id='billingAddressFirstName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-first-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="billingAddressLastName" class="form-label">
+                                                <span data-i18n="lastname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ billing_form.billing_last_name(type='text', id='billingAddressLastName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-last-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End First Last Name #}
+
+                                {# Start Phone #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="billingAddressPhone" class="form-label">
+                                                <span data-i18n="phone"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text billing-phone-country-code d-none"></span>
+                                                {{ billing_form.billing_phone(type='text', id='billingAddressPhone', class='form-control') }}
+                                            </div>
+                                            <small class="text-danger input-error billing-address-phone-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Phone #}
+
+                                {# Start Email #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="billingAddressEmail" class="form-label">
+                                                <span data-i18n="email"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text billing-email-country-code d-none"></span>
+                                                {{ billing_form.billing_email(type='email', id='billingAddressEmail', class='form-control', style='border-radius:0.375rem !important;') }}
+                                            </div>
+                                            <small class="text-danger input-error billing-address-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Email #}
+
+                                {# Start Company Name Tax #}
+                                <div class="billingAddressCompanyShow {% if is_user_login['user_billing_information']['is_company'] == "False" %}d-none{% endif %}">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="mb-3">
+                                                <label for="billingAddressCompanyTax" class="form-label">
+                                                    <span data-i18n="i18n_registration_05"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+                                                <span class="input-group">
+                                                    <span class="input-group-text billing-tax-country-code d-none"></span>
+                                            {{ billing_form.billing_company_tax(type='text', id='billingAddressCompanyTax', class='form-control', style='border-radius:0.375rem !important;') }}
+                                        </span>
+                                                <small class="text-danger input-error billing-address-company-tax-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="mb-3">
+                                                <label for="billingAddressCompanyName" class="form-label">
+                                                    <span data-i18n="firmname"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+
+                                                <span class="input-group">
+                                            {{ billing_form.billing_company_name(type='text', id='billingAddressCompanyName', class='form-control') }}
+                                        </span>
+                                                <small class="text-danger input-error billing-address-company-name-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {# End Company Name Tax #}
+
+                                {# Start Country #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <div class="form-group">
+                                                <label for="billingAddressCompanyName" class="form-label w-100">
+                                                    <span data-i18n="country"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+
+                                                <select class="billingAddressCountrySelect form-control"
+                                                        title="Ex.: US - UNITED STATES">
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Americas'][0]['region'] }}</option>
+                                                    {% for country in countries['Americas'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Europe'][0]['region'] }}</option>
+                                                    {% for country in countries['Europe'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Asia'][0]['region'] }}</option>
+                                                    {% for country in countries['Asia'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Africa'][0]['region'] }}</option>
+                                                    {% for country in countries['Africa'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Oceania'][0]['region'] }}</option>
+                                                    {% for country in countries['Oceania'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Antarctic'][0]['region'] }}</option>
+                                                    {% for country in countries['Antarctic'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+
+                                                </select>
+
+                                                <small class="text-danger input-error billing-address-country-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Country #}
+
+
+                                {# Start Zip Place #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="billingAddressZipNumber" class="form-label">
+                                                <span data-i18n="zip"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ billing_form.billing_zip_number(type='text', id='billingAddressZipNumber', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-zip-number-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="billingAddressCompanyPlace" class="form-label">
+                                                <span data-i18n="i18n_registration_06"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ billing_form.billing_place(type='text', id='billingAddressPlace', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error billing-address-place-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End Zip Place #}
+
+                                {# Start Street #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="billingAddressStreet" class="form-label">
+                                                <span data-i18n="anlihouse-A74"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            {{ billing_form.billing_street(type='text', id='billingAddressStreet', class='form-control') }}
+                                            <small class="text-danger input-error billing-address-street-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Street #}
+
+                                {# Start Is Shipping Address #}
+                                <div class="mb-3 d-inline-block">
+                                    <label class="form-label w-100">
+                                        <span data-i18n="i18n_registration_07"></span>
+                                        <span class="text-danger text-lowercase fs-12px"
+                                              data-i18n="anlihouse-A18"></span>
+                                    </label>
+
+                                    <div style="line-height:20px;" class="radio-input float-left">
+                                        <input class="billingAddressIsShippingAddressYes" type="radio"
+                                               id="billingAddressIsShippingAddressYes"
+                                               name="billingAddressIsShippingAddress"
+                                               {% if is_user_login['user_billing_information']['is_shipping_address'] == "True" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsShippingAddressYes"
+                                               data-i18n="igen"></label>
+                                    </div>
+
+                                    <div style="line-height:20px;" class="radio-input float-left ml-3">
+                                        <input class="billingAddressIsShippingAddressNo" type="radio"
+                                               id="billingAddressIsShippingAddressNo"
+                                               name="billingAddressIsShippingAddress"
+                                               {% if is_user_login['user_billing_information']['is_shipping_address'] == "False" %}checked="checked"{% endif %}>
+                                        <label class="d-content" for="billingAddressIsShippingAddressNo"
+                                               data-i18n="nem"></label>
+                                    </div>
+
+                                    <small class="text-danger input-error billing-address-is-shipping-address-error d-none w-100 d-inline-block">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                </div>
+                                {# End Is Shipping Address #}
+
+                            </div>
+                            {# End Billing Address Form Input #}
+
+                            {# Start Shipping Address Form Input #}
+                            <div id="shippingAddress"
+                                 class="shippingAddress {% if is_user_login['user_billing_information']['is_shipping_address'] == "True" %}d-none{% endif %}">
+
+                                <h5 class="mb-3 mt-3" data-i18n="i18n_registration_08"></h5>
+
+                                {# Start First Last Name #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressFirstName" class="form-label">
+                                                <span data-i18n="firstname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_first_name(type='text', id='shippingAddressFirstName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-first-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressLastName" class="form-label">
+                                                <span data-i18n="lastname"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_last_name(type='text', id='shippingAddressLastName', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-last-name-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End First Last Name #}
+
+                                {# Start Phone #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressPhone" class="form-label">
+                                                <span data-i18n="phone"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text shipping-phone-country-code d-none"></span>
+                                                {{ shipping_form.shipping_phone(type='text', id='shippingAddressPhone', class='form-control', style='border-radius:0.375rem !important;') }}
+                                            </div>
+                                            <small class="text-danger input-error shipping-address-phone-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Phone #}
+
+                                {# Start Email #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressEmail" class="form-label">
+                                                <span data-i18n="email"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text shipping-email-country-code d-none"></span>
+                                                {{ shipping_form.shipping_email(type='email', id='shippingAddressEmail', class='form-control', style='border-radius:0.375rem !important;') }}
+                                            </div>
+                                            <small class="text-danger input-error shipping-address-email-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Email #}
+
+                                {# Start Company Name Tax #}
+                                <div class="shippingAddressCompanyShow {% if is_user_login['user_billing_information']['is_company'] == "False" %}d-none{% endif %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label for="shippingAddressCompanyName" class="form-label">
+                                                    <span data-i18n="firmname"></span>
+                                                    <span class="text-muted text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A19"></span>
+                                                </label>
+
+                                                <span class="input-group">
+                                            {{ shipping_form.shipping_company_name(type='text', id='shippingAddressCompanyName', class='form-control') }}
+                                        </span>
+                                                <small class="text-danger input-error shipping-address-company-name-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {# End Company Name Tax #}
+
+                                {# Start Country #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <div class="form-group">
+                                                <label for="shippingAddressCompanyName" class="form-label w-100">
+                                                    <span data-i18n="country"></span>
+                                                    <span class="text-danger text-lowercase fs-12px"
+                                                          data-i18n="anlihouse-A18"></span>
+                                                </label>
+
+                                                <select class="shippingAddressCountrySelect form-control"
+                                                        title="Ex.: US - UNITED STATES" disabled>
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Americas'][0]['region'] }}</option>
+                                                    {% for country in countries['Americas'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Europe'][0]['region'] }}</option>
+                                                    {% for country in countries['Europe'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Asia'][0]['region'] }}</option>
+                                                    {% for country in countries['Asia'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Africa'][0]['region'] }}</option>
+                                                    {% for country in countries['Africa'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Oceania'][0]['region'] }}</option>
+                                                    {% for country in countries['Oceania'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+                                                    <option data-divider="true"></option>
+
+                                                    <option disabled
+                                                            style="color:#4c6180;">{{ countries['Antarctic'][0]['region'] }}</option>
+                                                    {% for country in countries['Antarctic'] %}
+                                                        <option value="{{ country['country_code'] }}"
+                                                                data-tokens="{{ country['country_native'] }}"
+                                                                data-id="{{ country['id'] }}"
+                                                                data-country-code="{{ country['country_code'] }}"
+                                                                data-currency="{{ country['currency_symbol'] }}">{{ country['country_code'] }}
+                                                            - {{ country['country'] }}</option>
+                                                    {% endfor %}
+
+                                                </select>
+
+                                                <small class="text-danger input-error shipping-address-country-error d-none">
+                                                    <span data-i18n=""></span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Country #}
+
+
+                                {# Start Zip Place #}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressZipNumber" class="form-label">
+                                                <span data-i18n="zip"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_zip_number(type='text', id='shippingAddressZipNumber', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-zip-number-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressCompanyPlace" class="form-label">
+                                                <span data-i18n="i18n_registration_06"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            <span class="input-group">
+                                            {{ shipping_form.shipping_place(type='text', id='shippingAddressPlace', class='form-control') }}
+                                        </span>
+                                            <small class="text-danger input-error shipping-address-place-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {# End Zip Place #}
+
+                                {# Start Street #}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="shippingAddressStreet" class="form-label">
+                                                <span data-i18n="anlihouse-A74"></span>
+                                                <span class="text-danger text-lowercase fs-12px"
+                                                      data-i18n="anlihouse-A18"></span>
+                                            </label>
+                                            {{ shipping_form.shipping_street(type='text', id='shippingAddressStreet', class='form-control') }}
+                                            <small class="text-danger input-error shipping-address-street-error d-none">
+                                                <span data-i18n=""></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# End Street #}
+
+                            </div>
+                            {# End Shipping Address Form Input #}
+
+                            {# Start Submit #}
+                            <div class="button-right text-right">
+                                <button id="billing-address-form-button" type="submit" class="btn btn-primary"
+                                        data-i18n="mentes"></button>
+                            </div>
+                            {# End Submit #}
+
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{# End Content #}

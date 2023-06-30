@@ -1,0 +1,650 @@
+#talk {
+  #talk-wrap {
+    position: relative;
+
+    .send-talk-guide {
+      width: 100%;
+      text-align: right;
+      margin-bottom: -6px;
+
+      .svg {
+        scg {
+          fill: @White;
+        }
+      }
+
+      .text {
+        color: @White;
+        font-size: 14px;
+        margin-left: 0.3rem;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      #talkRule {
+        .modal-body {
+          font-family: 'Roboto', sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+          text-align: left;
+        }
+
+        .modal-footer {
+        }
+      }
+    }
+
+    #talkings {
+      &.talkings-ajax {
+      }
+
+      .talk-box {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 2.3rem;
+        margin-bottom: 2.3rem;
+
+        &:last-of-type {
+          // border-bottom: none;
+        }
+
+        .talk {
+
+          .before {
+            width: 56px;
+            height: 75px;
+            float: left;
+            position: relative;
+            left: -17px;
+
+            .up,
+            .down,
+            .counter {
+              width: 100%;
+              text-align: center;
+            }
+
+            .up {
+              svg {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                cursor: pointer;
+              }
+            }
+
+            .down {
+              svg {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                cursor: pointer;
+              }
+            }
+
+            .counter {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            svg {
+              fill: @White;
+            }
+          }
+
+          .after {
+            display: table;
+
+            .talk-by {
+              font-size: 12px;
+              font-weight: 600;
+
+              .who {
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .time {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .edit {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+
+              .reply {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .report {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .report2 {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+
+              .history {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .translation {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+            }
+
+            .talking-input-group {
+              width: 100%;
+              height: auto;
+
+              &.active {
+                display: inline-block;
+              }
+
+              &.inactive {
+                display: none;
+              }
+
+              .talking-answer-input-group {
+                position: relative;
+                display: inline-flex;
+                padding-right: 1.25rem;
+
+                textarea {
+                  background: transparent;
+                  // min-height: 40px;
+                  border-right: none;
+                  color: @White;
+                  border-color: @White;
+
+                  &:focus ~ .talking-answer-emoji-btn,
+                  &:focus ~ .talking-answer-input-btn {
+                    // border-color: #86b7fe;
+                  }
+
+                  &::placeholder {
+                    color: @White;
+                    opacity: 1;
+                  }
+
+                  &::-ms-input-placeholder {
+                    color: @White;
+                  }
+                }
+
+                .talking-answer-emoji-btn {
+                  width: 40px;
+                  height: auto;
+                  border: 1px solid @White;
+                  border-left: none;
+                  cursor: pointer;
+                  position: relative;
+                  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                  border-top-right-radius: 0.25rem;
+                  border-bottom-right-radius: 0.25rem;
+
+                  svg {
+                    fill: @White;
+                    width: 23px;
+                    height: 23px;
+                    position: absolute;
+                    left: 50%;
+                    bottom: 7px;
+                    transform: translateX(-50%);
+                  }
+
+                  &:hover {
+                    svg {
+                      fill: @White;
+                    }
+                  }
+                }
+
+                .talking-answer-input-btn {
+                  width: 40px;
+                  height: auto;
+                  border: 1px solid @White;
+                  border-left: none;
+                  border-left: none;
+                  cursor: pointer;
+                  position: relative;
+                  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                  border-top-right-radius: 0.25rem;
+                  border-bottom-right-radius: 0.25rem;
+
+                  svg {
+                    fill: @White;
+                    width: 23px;
+                    height: 23px;
+                    position: absolute;
+                    left: 50%;
+                    bottom: 7px;
+                    transform: translateX(-50%);
+                  }
+
+                  &:hover {
+                    svg {
+                      fill: @White;
+                    }
+                  }
+                }
+              }
+
+              .talking-answer-counter {
+                display: table;
+
+                .count {
+                  font-size: 13px;
+                }
+              }
+            }
+
+            .text {
+            }
+          }
+        }
+
+        .talk-answer-wrap {
+          .talk-answer {
+            margin-left: calc(1.5rem + 39px);
+            padding-left: 1rem;
+            margin-top: 2.3rem;
+            margin-bottom: 2.3rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+
+            .talk-answer-by {
+              font-size: 12px;
+
+              .for {
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .who {
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .time {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .edit {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+
+              .reply {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .report {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .report2 {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+
+              .history {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:after {
+                  background: @White;
+                  border: 1px solid @White;
+                  border-radius: 50%;
+                  content: "";
+                  display: inline-block;
+                  margin: 0 7px 2px 7px;
+                  height: 4px;
+                  width: 4px;
+                }
+              }
+
+              .translation {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+            }
+
+            .talking-answer-input-group {
+              width: 100%;
+              height: auto;
+
+              &.active {
+                display: inline-block;
+              }
+
+              &.inactive {
+                display: none;
+              }
+
+              .talking-answer-answer-input-group {
+                position: relative;
+                display: inline-flex;
+                padding-right: 1.25rem;
+
+                textarea {
+                  background: transparent;
+                  // min-height: 40px;
+                  border-right: none;
+                  color: @White;
+                  border-color: @White;
+
+                  &:focus ~ .talking-answer-answer-input-btn,
+                  &:focus ~ .talking-answer-answer-emoji-btn {
+                    // border-color: #86b7fe;
+                  }
+
+                  &::placeholder {
+                    color: @White;
+                    opacity: 1;
+                  }
+
+                  &::-ms-input-placeholder {
+                    color: @White;
+                  }
+                }
+
+                .talking-answer-answer-emoji-btn {
+                  width: 40px;
+                  height: auto;
+                  border: 1px solid @White;
+                  border-left: none;
+                  cursor: pointer;
+                  position: relative;
+                  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                  border-top-right-radius: 0.25rem;
+                  border-bottom-right-radius: 0.25rem;
+
+                  svg {
+                    fill: @White;
+                    width: 23px;
+                    height: 23px;
+                    position: absolute;
+                    left: 50%;
+                    bottom: 7px;
+                    transform: translateX(-50%);
+                  }
+
+                  &:hover {
+                    svg {
+                      fill: @White;
+                    }
+                  }
+                }
+
+                .talking-answer-answer-input-btn {
+                  width: 40px;
+                  height: auto;
+                  border: 1px solid @White;
+                  border-left: none;
+                  border-left: none;
+                  cursor: pointer;
+                  position: relative;
+                  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                  border-top-right-radius: 0.25rem;
+                  border-bottom-right-radius: 0.25rem;
+
+                  svg {
+                    fill: @White;
+                    width: 23px;
+                    height: 23px;
+                    position: absolute;
+                    left: 50%;
+                    bottom: 7px;
+                    transform: translateX(-50%);
+                  }
+
+                  &:hover {
+                    svg {
+                      fill: @White;
+                    }
+                  }
+                }
+              }
+
+              .talking-answer-answer-counter {
+                display: table;
+
+                .count {
+                  font-size: 13px;
+                }
+              }
+            }
+
+            .text {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+
+    .talking-button-wrap {
+      margin-bottom: 1.2rem;
+
+      .talking-input-group {
+        position: relative;
+        display: inline-flex;
+        margin-left: 1.5rem;
+        padding-right: 1.25rem;
+
+        textarea {
+          background: transparent;
+          // min-height: 40px;
+          border-right: none;
+          color: @White;
+          border-color: @White;
+
+          &:focus ~ .talking-emoji-btn {
+            border-color: #86b7fe;
+          }
+
+          &:focus ~ .talking-img-btn {
+            border-color: #86b7fe;
+          }
+
+          &::placeholder {
+            color: @White;
+            opacity: 1;
+          }
+
+          &::-ms-input-placeholder {
+            color: @White;
+          }
+        }
+
+        .talking-emoji-btn {
+          width: 40px;
+          height: auto;
+          border: 1px solid @White;
+          border-left: none;
+          cursor: pointer;
+          position: relative;
+          transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          border-top-right-radius: 0.25rem;
+          border-bottom-right-radius: 0.25rem;
+
+          svg {
+            fill: @White;
+            width: 23px;
+            height: 23px;
+            position: absolute;
+            left: 50%;
+            bottom: 7px;
+            transform: translateX(-50%);
+          }
+
+          &:hover {
+            svg {
+              fill: @White;
+            }
+          }
+        }
+
+        .talking-input-btn {
+          width: 40px;
+          height: auto;
+          border: 1px solid @White;
+          border-left: none;
+          border-left: none;
+          cursor: pointer;
+          position: relative;
+          transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          border-top-right-radius: 0.25rem;
+          border-bottom-right-radius: 0.25rem;
+
+          svg {
+            fill: @White;
+            width: 23px;
+            height: 23px;
+            position: absolute;
+            left: 50%;
+            bottom: 7px;
+            transform: translateX(-50%);
+          }
+
+          &:hover {
+            svg {
+              fill: @White;
+            }
+          }
+        }
+      }
+
+      .talking-input-group {
+        margin-left: 0;
+        padding-right: 0;
+      }
+
+    }
+
+    .talking-counter {
+      font-size: 13px;
+    }
+
+    .input-error {
+      font-size: 13px;
+    }
+  }
+}

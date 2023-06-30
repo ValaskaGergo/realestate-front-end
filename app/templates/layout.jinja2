@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>ANLI Breeders{% block title %}{% endblock %}</title>
+    {% block og %}{% endblock %}
+    {% include "include/head.jinja2" %}
+</head>
+
+<body class="bg1 {{ color_mode['color'] }}">
+
+{% block social_scripts %}{% endblock %}
+
+<div id="post-loader" class="inactive">
+    <div class="loader-wrap open">
+        <span class="loader"></span>
+    </div>
+    <div class="post-loader-percent video mt-3 d-none"><span data-i18n="anlihouse-A200"></span> <span
+            class="percent"></span></div>
+</div>
+
+<div id="body-color"></div>
+
+<div id="wrapper">
+    {# Start Alerts Top #}
+    {% if is_user_login and is_user_login['user_permission']['is_worker'] == "False" and is_user_login['user_billing_information']['completed'] == "False" %}
+        <div class="alert alert-top alert-danger alert-billing-danger" role="alert">
+            Jöjjön ez az alert, ha nem töltötte még ki a billing információt: <a class="hover"
+                                                                                 href="{{ url_for('billing_and_shipping_address_module.billing_and_shipping_address') }}"
+                                                                                 data-i18n="anlihouse-A65"></a>
+        </div>
+    {% endif %}
+
+    {% if is_user_login and is_user_login['user_permission']['is_worker'] == "False" and is_user_login['user_billing_information']['completed'] == "True" and is_user_login['user_permission']['subscribed'] == "False" %}
+        <div class="alert alert-top alert-danger alert-payment-danger" role="alert">
+            Jöjjön ez az alert, ha még nem fizetett havi díjat: <a class="hover"
+                                                                   href="{{ url_for('account_payment_module.account_payment') }}"
+                                                                   data-i18n="regdij_fizetes"></a>
+        </div>
+    {% endif %}
+
+    {% block alerts_top %}
+    {% endblock %}
+    {# End Alerts Top #}
+
+    {# Start Header #}
+    {% if is_user_login %}
+        {% include "authentication/header.jinja2" %}
+    {% else %}
+        {% include "anonymous/header.jinja2" %}
+    {% endif %}
+    {# End Header #}
+
+    {# Start Breadcrumb #}
+    {% block breadcrumb %}
+    {% endblock %}
+    {# End Breadcrumb #}
+
+    {# Start Content #}
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {# End Content #}
+</div>
+
+{# Start Footer #}
+{% if is_user_login %}
+    {% include "authentication/footer.jinja2" %}
+{% else %}
+    {% include "anonymous/footer.jinja2" %}
+{% endif %}
+{# End Footer #}
+
+{# Start ScrollPercentage #}
+{% include "include/scrollPercentage.jinja2" %}
+{# End ScrollPercentage #}
+
+{# Start Menu Section #}
+{% if is_user_login %}
+    {% include "authentication/menu.jinja2" %}
+{% else %}
+    {% include "anonymous/menu.jinja2" %}
+{% endif %}
+{# End Menu Section #}
+
+<div id="menu-window-color"></div>
+
+<noscript>
+    <img height="1" width="1" style="display:none" alt="Barion Pixel"
+         src="https://pixel.barion.com/a.gif?ba_pixel_id='BPT-Exfw7hzWQ8-93'&ev=contentView&noscript=1">
+</noscript>
+
+{% assets "js" %}
+    <script type="text/javascript" src="{{ config_data['SITE_URL'] }}{{ ASSET_URL }}"></script>
+{% endassets %}
+</body>

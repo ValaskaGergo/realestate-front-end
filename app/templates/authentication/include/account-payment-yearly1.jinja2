@@ -1,0 +1,179 @@
+<div id="yearly1-card" class="row d-none">
+    <div class="col col-sm-12 col-md-12 col-lg-4">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3 payment-header1">
+                <h4 class="my-0 fw-normal"><span data-i18n="anlihouse-A407"></span></h4>
+            </div>
+            <div class="card-body text-left">
+
+                <span data-i18n="anlihouse-A410"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>{{ start_ad_limit_value }} <span data-i18n="anlihouse-441"></span></span>
+                </h3>
+
+                <span data-i18n="anlihouse-A412"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>{{ start_chat_limit_value|int * 12 }} <span data-i18n="anlihouse-441"></span></span>
+                </h3>
+
+                <span data-i18n="anlihouse-A411"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>1 <span data-i18n="év"></span></span>
+                </h3>
+
+                <span data-i18n="fizetendo"></span>
+
+                <h3 class="card-title pricing-card-title">
+                    <span data-i18n="netto"></span> <span>{{ start_1_year_eur_net }} EUR</span>
+                    <small class="text-muted fw-light {% if country_vat == "0" %}d-none{% endif %}">
+                        + <span>{{ country_vat }}</span>% <span data-i18n="afa"></span>
+                    </small>
+                </h3>
+
+                <h3 class="card-title pricing-card-title {% if country_vat == "0" %}d-none{% endif %}">
+                    <span data-i18n="brutto"></span> <span>{{ start_1_year_eur_gross }} EUR</span>
+                    <small class="text-muted fw-light">
+                    </small>
+                </h3>
+
+                <h6 class="card-title pricing-card-title {% if currency == "EUR" %}d-none{% endif %}">
+                    <span data-i18n="netto"></span>
+                    <span>{{ start_1_year_currency_net }} {{ currency }}</span>
+                    <small class="text-muted fw-light {% if country_vat == "0" %}d-none{% endif %}">
+                        + <span>{{ country_vat }}</span>% <span data-i18n="afa"></span>
+                    </small>
+                </h6>
+
+                <h6 class="card-title pricing-card-title {% if currency == "EUR" %}d-none{% endif %} {% if country_vat == "0" %}d-none{% endif %}">
+                    <span data-i18n="brutto"></span>
+                    <span>{{ start_1_year_currency_gross }} {{ currency }}</span>
+                    <small class="text-muted fw-light">
+                    </small>
+                </h6>
+
+                <button type="button"
+                        class="w-100 btn btn-lg btn-primary mt-3 account-payment-form-button"
+                        data-i18n="fizetes" data-admin-settings-id="7"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-sm-12 col-md-12 col-lg-4">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3 payment-header2">
+                <h4 class="my-0 fw-normal"><span data-i18n="anlihouse-A408"></span></h4>
+            </div>
+            <div class="card-body text-left">
+
+                <span data-i18n="anlihouse-A410"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>{{ basic_ad_limit_value }} <span data-i18n="anlihouse-441"></span></span>
+                </h3>
+
+                <span data-i18n="anlihouse-A412"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>{{ basic_chat_limit_value|int * 12 }} <span data-i18n="anlihouse-441"></span></span>
+                </h3>
+
+                <span data-i18n="anlihouse-A411"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>1 <span data-i18n="év"></span></span>
+                </h3>
+
+                <span data-i18n="fizetendo"></span>
+
+                <h3 class="card-title pricing-card-title">
+                    <span data-i18n="netto"></span> <span>{{ basic_1_year_eur_net }} EUR</span>
+                    <small class="text-muted fw-light {% if country_vat == "0" %}d-none{% endif %}">
+                        + <span>{{ country_vat }}</span>% <span data-i18n="afa"></span>
+                    </small>
+                </h3>
+
+                <h3 class="card-title pricing-card-title {% if country_vat == "0" %}d-none{% endif %}">
+                    <span data-i18n="brutto"></span> <span>{{ basic_1_year_eur_gross }} EUR</span>
+                    <small class="text-muted fw-light">
+                    </small>
+                </h3>
+
+                <h6 class="card-title pricing-card-title {% if currency == "EUR" %}d-none{% endif %}">
+                    <span data-i18n="netto"></span>
+                    <span>{{ basic_1_year_currency_net }} {{ currency }}</span>
+                    <small class="text-muted fw-light {% if country_vat == "0" %}d-none{% endif %}">
+                        + <span>{{ country_vat }}</span>% <span data-i18n="afa"></span>
+                    </small>
+                </h6>
+
+                <h6 class="card-title pricing-card-title {% if currency == "EUR" %}d-none{% endif %} {% if country_vat == "0" %}d-none{% endif %}">
+                    <span data-i18n="brutto"></span>
+                    <span>{{ basic_1_year_currency_gross }} {{ currency }}</span>
+                    <small class="text-muted fw-light">
+                    </small>
+                </h6>
+
+                <button type="button"
+                        class="w-100 btn btn-lg btn-primary mt-3 account-payment-form-button"
+                        data-i18n="fizetes" data-admin-settings-id="8"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-sm-12 col-md-12 col-lg-4">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 payment-header3">
+                <h4 class="my-0 fw-normal"><span data-i18n="anlihouse-A409"></span></h4>
+            </div>
+            <div class="card-body text-left">
+
+                <span data-i18n="anlihouse-A410"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span data-i18n="anlihouse-A413"></span>
+                </h3>
+
+                <span data-i18n="anlihouse-A412"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span data-i18n="anlihouse-A413"></span>
+                </h3>
+
+                <span data-i18n="anlihouse-A411"></span>
+                <h3 class="card-title pricing-card-title mb-3">
+                    <span>1 <span data-i18n="év"></span></span>
+                </h3>
+
+                <span data-i18n="fizetendo"></span>
+
+                <h3 class="card-title pricing-card-title">
+                    <span data-i18n="netto"></span> <span>{{ premium_1_year_eur_net }} EUR</span>
+                    <small class="text-muted fw-light {% if country_vat == "0" %}d-none{% endif %}">
+                        + <span>{{ country_vat }}</span>% <span data-i18n="afa"></span>
+                    </small>
+                </h3>
+
+                <h3 class="card-title pricing-card-title {% if country_vat == "0" %}d-none{% endif %}">
+                    <span data-i18n="brutto"></span>
+                    <span>{{ premium_1_year_eur_gross }} EUR</span>
+                    <small class="text-muted fw-light">
+                    </small>
+                </h3>
+
+                <h6 class="card-title pricing-card-title {% if currency == "EUR" %}d-none{% endif %}">
+                    <span data-i18n="netto"></span>
+                    <span>{{ premium_1_year_currency_net }} {{ currency }}</span>
+                    <small class="text-muted fw-light {% if country_vat == "0" %}d-none{% endif %}">
+                        + <span>{{ country_vat }}</span>% <span data-i18n="afa"></span>
+                    </small>
+                </h6>
+
+                <h6 class="card-title pricing-card-title {% if currency == "EUR" %}d-none{% endif %} {% if country_vat == "0" %}d-none{% endif %}">
+                    <span data-i18n="brutto"></span>
+                    <span>{{ premium_1_year_currency_gross }} {{ currency }}</span>
+                    <small class="text-muted fw-light">
+                    </small>
+                </h6>
+
+                <button type="button"
+                        class="w-100 btn btn-lg btn-primary mt-3 account-payment-form-button"
+                        data-i18n="fizetes" data-admin-settings-id="9"></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+#header {
+  background: @HeaderGradient;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+
+  #hamburger {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 999;
+
+    .hamburger-line {
+      background-color: @White;
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &.line01 {
+        width: 26px;
+        margin-top: -10px;
+      }
+
+      &.line02 {
+        width: 35px;
+        margin-top: -3px;
+      }
+
+      &.line03 {
+        width: 26px;
+        margin-top: -10px;
+        transform: rotate(-45deg);
+        left: 12px;
+      }
+
+      &.line04 {
+        width: 26px;
+        margin-top: -10px;
+        transform: rotate(45deg);
+        left: 12px;
+      }
+    }
+
+    &.closed {
+      .hamburger-line {
+        &.line01 {
+          display: block;
+        }
+
+        &.line02 {
+          display: block;
+        }
+
+        &.line03 {
+          display: none;
+        }
+
+        &.line04 {
+          display: none;
+        }
+      }
+    }
+
+    &.open {
+      .hamburger-line {
+        &.line01 {
+          display: none;
+        }
+
+        &.line02 {
+          display: none;
+        }
+
+        &.line03 {
+          display: block;
+        }
+
+        &.line04 {
+          display: block;
+        }
+      }
+    }
+
+    .hamburger-text {
+      font-family: 'Saira Condensed', sans-serif;
+      font-size: 16px;
+      color: @White;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 8px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+#header-logo {
+  display: inline-block;
+  position: relative;
+
+  img.img {
+    width: 110px;
+    height: auto;
+  }
+
+  span.text {
+    font-family: 'Saira Condensed', sans-serif;
+    color: @White;
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    width: 250px;
+    padding-left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #header-logo {
+    img.img {
+      width: 90px;
+    }
+
+    span.text {
+      font-size: 20px;
+    }
+  }
+}

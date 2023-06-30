@@ -1,0 +1,540 @@
+{% extends "layout.jinja2" %}
+
+{% block title %}{% endblock %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb" class="snapping">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="float-left" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a></li>
+                            {% if (only_one_category_id == None or only_one_category_id == "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item active" aria-current="page"
+                                    data-i18n="anlihouse-anlibreeders"></li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ only_one_category_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id != None or only_one_subcategory_id != "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item"><a class="hover"
+                                                               href="{{ url_for('index_module.category_list', category_name=only_one_category_name_slug, category_id=only_one_category_id) }}">{{ only_one_category_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active"
+                                    aria-current="page">{{ only_one_subcategory_name }}</li>
+                            {% elif (only_one_category_id == None or only_one_category_id == "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name != None or seller_user_name != "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item active seller_user_name" aria-current="page"
+                                    data-seller_user_name="{{ seller_user_name }}">{{ seller_user_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name != None or seller_user_name != "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item seller_user_name"
+                                    data-seller_user_name="{{ seller_user_name }}"><a class="hover"
+                                                                                      href="{{ url_for('index_module.user_animal_list', user_id=seller_user_id, user_name=seller_user_name_slug) }}">{{ seller_user_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ only_one_category_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id != None or only_one_subcategory_id != "None") and (seller_user_name != None or seller_user_name != "None") and (wishlist == None or wishlist == "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item seller_user_name"
+                                    data-seller_user_name="{{ seller_user_name }}"><a class="hover"
+                                                                                      href="{{ url_for('index_module.user_animal_list', user_id=seller_user_id, user_name=seller_user_name_slug) }}">{{ seller_user_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a class="hover"
+                                                               href="{{ url_for('index_module.category_list', category_name=only_one_category_name_slug, category_id=only_one_category_id) }}">{{ only_one_category_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active"
+                                    aria-current="page">{{ only_one_subcategory_name }}</li>
+                            {% elif (only_one_category_id == None or only_one_category_id == "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist != None or wishlist != "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item active wishlist" aria-current="page"
+                                    data-i18n="anlihouse-A377"></li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id == None or only_one_subcategory_id == "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist != None or wishlist != "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item wishlist"><a class="hover"
+                                                                        href="{{ url_for('index_module.user_animal_wishlist') }}"
+                                                                        data-i18n="anlihouse-A377"></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ only_one_category_name }}</li>
+                            {% elif (only_one_category_id != None or only_one_category_id != "None") and (only_one_subcategory_id != None or only_one_subcategory_id != "None") and (seller_user_name == None or seller_user_name == "None") and (wishlist != None or wishlist != "None") %}
+                                <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                               data-i18n="anlihouse-anlibreeders"></a></li>
+                                <li class="breadcrumb-item wishlist"><a class="hover"
+                                                                        href="{{ url_for('index_module.user_animal_wishlist') }}"
+                                                                        data-i18n="anlihouse-A377"></a></li>
+                                <li class="breadcrumb-item"><a class="hover"
+                                                               href="{{ url_for('index_module.category_list', category_name=only_one_category_name_slug, category_id=only_one_category_id) }}">{{ only_one_category_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item active"
+                                    aria-current="page">{{ only_one_subcategory_name }}</li>
+                            {% else %}
+                            {% endif %}
+                        </ol>
+                    </nav>
+
+                    <div id="light-dark-change" class="dropdown float-right">
+
+                        <div id="dark" class="d-block">
+                            <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div id="dark-show">
+                                <span data-i18n="anlihouse-A414"></span>
+                                <span class="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-moon-stars-fill"
+                                                             viewBox="0 0 16 16"><path
+                                        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                <span data-i18n="anlihouse-dark"></span>
+                            </div>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li class="click-light-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-light"></span>
+                                    </span>
+                                </li>
+                                <li class="click-color-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-palette-fill" viewBox="0 0 16 16"><path
+                                                d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></span>
+                                        <span data-i18n="anlihouse-color"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="disabled">
+                                    <span class="dropdown-item disabled">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-moon-stars-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                        <span data-i18n="anlihouse-dark"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="light" class="d-none">
+                            <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div id="light-show">
+                                <span data-i18n="anlihouse-A414"></span>
+                                <span class="light-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                              fill="currentColor" class="bi bi-sun-fill"
+                                                              viewBox="0 0 16 16"><path
+                                        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                <span data-i18n="anlihouse-light"></span>
+                            </div>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li class="click-dark-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-moon-stars-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                        <span data-i18n="anlihouse-dark"></span>
+                                    </span>
+                                </li>
+                                <li class="click-color-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-palette-fill" viewBox="0 0 16 16"><path
+                                                d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></span>
+                                        <span data-i18n="anlihouse-color"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="disabled">
+                                    <span class="dropdown-item disabled">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-light"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="color" class="d-none">
+                            <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div id="color-show">
+                                <span data-i18n="anlihouse-A414"></span>
+                                <span class="color-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                              fill="currentColor" class="bi bi-palette-fill"
+                                                              viewBox="0 0 16 16"><path
+                                        d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></span>
+                                <span data-i18n="anlihouse-color"></span>
+                            </div>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li class="click-dark-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-moon-stars-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                        <span data-i18n="anlihouse-dark"></span>
+                                    </span>
+                                </li>
+                                <li class="click-light-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-light"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="disabled">
+                                    <span class="dropdown-item disabled">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-color"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+
+    <div id="list" class="container">
+
+        <div id="list-top">
+            <div id="filter-info-wrap">
+                <ul>
+                    {% if animals == [] %}
+                        <li class="elem active"><span data-i18n="anlihouse-A292"></span>:</li>
+                        <li class="elem active" data-i18n="anlihouse-A379"></li>
+                    {% else %}
+                        <li class="elem active"><span data-i18n="anlihouse-A292"></span>:</li>
+                        <li class="elem active filter-info-type" data-i18n="anlihouse-A293"></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            {# Start List View #}
+            <div id="filter-dropdown-wrap" class="{% if animals == [] %}pointer-events-none opacity05{% endif %}">
+                <div class="dropdown">
+                    <span class="btn btn-secondary dropdown-toggle shadow" role="button" id="dropdownSnapView"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                             class="bi bi-list-ol" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/><path
+                                d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z"/>
+                        </svg>
+                        <span data-i18n="anlihouse-A380"></span>
+                    </span>
+
+                    <ul id="dropdownSnapViews" class="dropdown-menu shadow" aria-labelledby="dropdownSnapView">
+                        <li><span class="dropdown-item filter-dropdown active_" data-type="list"
+                                  data-i18n="anlihouse-A381"></span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown inactive_" data-type="snap"
+                                  data-i18n="anlihouse-A382"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {# End List View #}
+
+            {# Start Order #}
+            <div id="filter-dropdown-wrap" class="{% if animals == [] %}pointer-events-none opacity05{% endif %}"
+                 style="margin-right:15px;">
+                <div class="dropdown">
+                    <span class="btn btn-secondary dropdown-toggle shadow" role="button" id="dropdownFilterLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                             class="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        <span data-i18n="anlihouse-A292"></span>
+                    </span>
+
+                    <ul id="dropdownFilterLinks" class="dropdown-menu shadow" aria-labelledby="dropdownFilterLink">
+                        <li><span class="dropdown-item filter-dropdown" data-type="price-asc"
+                                  data-i18n="anlihouse-A293"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="price-desc"
+                                  data-i18n="anlihouse-A294"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="age-asc"
+                                  data-i18n="anlihouse-A295"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="age-desc"
+                                  data-i18n="anlihouse-A296"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="height-asc"
+                                  data-i18n="anlihouse-A297"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="height-desc"
+                                  data-i18n="anlihouse-A298"></span></li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="rating-asc"
+                                  data-i18n="anlihouse-A299"></span>
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="rating-desc"
+                                  data-i18n="anlihouse-A300"></span></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><span class="dropdown-item filter-dropdown" data-type="search-jump"
+                                  data-i18n="anlihouse-A291"></span></li>
+                    </ul>
+                </div>
+            </div>
+            {# End Order #}
+        </div>
+
+        <div id="snap-wrap">
+            <div class="row infinite-container">
+
+                {% for animal in animals %}
+                    <div id="snap-{{ animal['animal']['id'] }}" class="box col-12 infinite-item snap-list"
+                         data-section-name="{{ animal['animal']['id'] }}">
+
+                        {% set cover_img = "/static/videos/animal/" + animal['video']['video_01_folder'] + "/cropped/video-cover.png" %}
+                        {% set cover_video = "/static/videos/animal/" + animal['video']['video_01_folder'] + "/cropped/" + animal['video']['video_01_folder'] + ".mp4" %}
+
+                        {#
+                        <a href="{{ url_for('full_page_module.full_page', category_name=animal['category']['name_en_slug'], subcategory_name=animal['subcategory']['name_en_slug'], page_url=animal['animal']['page_url'], page_id=animal['animal']['id']) }}"
+                           target="_blank" class="cover-wrap">
+                            <img class="cover" src={{ config_data['SITE_URL'] }}{{ cover_img }}>
+                        </a>
+                        #}
+
+                        <div class="cover-wrap"
+                             style="background-image: url('{{ config_data['SITE_URL'] }}{{ cover_img }}')">
+                            <video id="cover-{{ animal['animal']['id'] }}" class="cover" width="100%" height="100%"
+                                   preload="none" muted loop
+                                   poster="{{ config_data['SITE_URL'] }}{{ cover_img }}">
+                                <source src="{{ config_data['SITE_URL'] }}{{ cover_video }}#t=05" type="video/mp4">
+                            </video>
+
+                            <div id="progress-{{ animal['animal']['id'] }}" class="video-progress opacity0">
+
+                                <div class="progress buffer" role="progressbar" aria-label="" aria-valuenow="0"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+
+                                <div class="progress time" role="progressbar" aria-label="" aria-valuenow="0"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="loader-wrap closed">
+                                <div class="loader"></div>
+                            </div>
+
+                            <a class="data-link" target="_blank"
+                               href="{{ url_for('full_page_module.full_page', category_name=animal['category']['name_en_slug'], subcategory_name=animal['subcategory']['name_en_slug'], page_url=animal['animal']['page_url'], page_id=animal['animal']['id']) }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                     class="bi bi-reply-fill" viewBox="0 0 16 16">
+                                    <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                                </svg>
+                            </a>
+
+                        </div>
+
+                        <div class="action-wrap">
+
+                            <div class="action-one">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                         class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                                    </svg>
+                                </div>
+                                <div class="data">
+                                    <a target="_blank"
+                                       href="{{ url_for('index_module.user_animal_list', user_id=animal['snap']['snap_seller_id'], user_name=animal['snap']['snap_seller_last_name_slug']) }}">{{ animal['snap']['snap_seller_last_name'] }}</a>
+                                </div>
+                            </div>
+
+                            <div class="action-two">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                         class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                                    </svg>
+                                </div>
+                                <div class="data">{{ animal['rating']['rating'] }}</div>
+                            </div>
+
+                            <div class="action-three">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                         class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+                                    </svg>
+                                </div>
+                                <div class="data">{{ animal['questions']['questions_count'] }}</div>
+                            </div>
+
+                            <div class="action-four">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                         class="bi bi-cup-hot-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6H.5ZM13 12.5a2.01 2.01 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5Z"/>
+                                        <path d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z"/>
+                                    </svg>
+                                </div>
+                                <div class="data">{{ animal['talking']['talking_count'] }}</div>
+                            </div>
+
+                            <div class="action-five">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                         class="bi bi-currency-exchange" viewBox="0 0 16 16">
+                                        <path d="M0 5a5.002 5.002 0 0 0 4.027 4.905 6.46 6.46 0 0 1 .544-2.073C3.695 7.536 3.132 6.864 3 5.91h-.5v-.426h.466V5.05c0-.046 0-.093.004-.135H2.5v-.427h.511C3.236 3.24 4.213 2.5 5.681 2.5c.316 0 .59.031.819.085v.733a3.46 3.46 0 0 0-.815-.082c-.919 0-1.538.466-1.734 1.252h1.917v.427h-1.98c-.003.046-.003.097-.003.147v.422h1.983v.427H3.93c.118.602.468 1.03 1.005 1.229a6.5 6.5 0 0 1 4.97-3.113A5.002 5.002 0 0 0 0 5zm16 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0zm-7.75 1.322c.069.835.746 1.485 1.964 1.562V14h.54v-.62c1.259-.086 1.996-.74 1.996-1.69 0-.865-.563-1.31-1.57-1.54l-.426-.1V8.374c.54.06.884.347.966.745h.948c-.07-.804-.779-1.433-1.914-1.502V7h-.54v.629c-1.076.103-1.808.732-1.808 1.622 0 .787.544 1.288 1.45 1.493l.358.085v1.78c-.554-.08-.92-.376-1.003-.787H8.25zm1.96-1.895c-.532-.12-.82-.364-.82-.732 0-.41.311-.719.824-.809v1.54h-.005zm.622 1.044c.645.145.943.38.943.796 0 .474-.37.8-1.02.86v-1.674l.077.018z"/>
+                                    </svg>
+                                </div>
+
+                                <div class="data">
+                                    {# <span class="eur"><span class="price" data-animal_price="12345" style="filter:blur(3px)">12 345</span> <span class="currency">EUR</span></span> #}
+                                    {# <span class="eur-to-currency"><span class="price" data-animal_price_exchange="12345" style="filter:blur(3px)">12 345</span> <span class="currency">USD</span></span> #}
+                                    <span class="eur"><span class="price"
+                                                            data-animal_price="{{ animal['animal']['price'] }}"
+                                                            style="">{{ animal['animal']['price'] }}</span> <span
+                                            class="currency">EUR</span></span>
+                                </div>
+                            </div>
+
+                            <div class="action-six">
+                                <div class="icon link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                         class="bi bi-reply-fill" viewBox="0 0 16 16">
+                                        <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                                    </svg>
+                                </div>
+                                <div class="data">
+                                    <a href="{{ url_for('full_page_module.full_page', category_name=animal['category']['name_en_slug'], subcategory_name=animal['subcategory']['name_en_slug'], page_url=animal['animal']['page_url'], page_id=animal['animal']['id']) }}"
+                                       target="_blank" data-i18n="anlihouse-A305"></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div id="video-control-wrap" class="d-none">
+
+                <div id="skip-backward">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                             class="bi bi-skip-backward-fill" viewBox="0 0 16 16">
+                            <path d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V8.753l6.267 3.636c.54.313 1.233-.066 1.233-.697v-2.94l6.267 3.636c.54.314 1.233-.065 1.233-.696V4.308c0-.63-.693-1.01-1.233-.696L8.5 7.248v-2.94c0-.63-.692-1.01-1.233-.696L1 7.248V4a.5.5 0 0 0-.5-.5z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="rewind">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                             class="bi bi-rewind-fill" viewBox="0 0 16 16">
+                            <path d="M8.404 7.304a.802.802 0 0 0 0 1.392l6.363 3.692c.52.302 1.233-.043 1.233-.696V4.308c0-.653-.713-.998-1.233-.696L8.404 7.304Z"/>
+                            <path d="M.404 7.304a.802.802 0 0 0 0 1.392l6.363 3.692c.52.302 1.233-.043 1.233-.696V4.308c0-.653-.713-.998-1.233-.696L.404 7.304Z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="play" class="d-none">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                             class="bi bi-play-fill" viewBox="0 0 16 16">
+                            <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="pause" class="">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                             class="bi bi-pause-fill" viewBox="0 0 16 16">
+                            <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="forward">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                             class="bi bi-fast-forward-fill" viewBox="0 0 16 16">
+                            <path d="M7.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"/>
+                            <path d="M15.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C8.713 12.69 8 12.345 8 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="skip-forward">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                             class="bi bi-skip-forward-fill" viewBox="0 0 16 16">
+                            <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.753l-6.267 3.636c-.54.313-1.233-.066-1.233-.697v-2.94l-6.267 3.636C.693 12.703 0 12.324 0 11.693V4.308c0-.63.693-1.01 1.233-.696L7.5 7.248v-2.94c0-.63.693-1.01 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="snap-ajax-pagination" class="{% if animals == [] %}d-none{% else %}d-none{% endif %}"
+                 data-page_number="{{ page_number }}" data-pagination_last="{{ pagination_last }}">
+                    <span class="btn btn-primary shadow">
+                        <span data-i18n="anlihouse-A303"></span>
+                        <div class="spinner-grow inactive" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </span>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{# End Content #}

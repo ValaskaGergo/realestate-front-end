@@ -1,0 +1,1667 @@
+{% extends "layout.jinja2" %}
+
+{% set og_img_01 = None %}
+{% set og_img_02 = None %}
+{% set og_img_03 = None %}
+{% set og_img_04 = None %}
+{% set og_img_05 = None %}
+{% set og_img_06 = None %}
+{% set og_img_07 = None %}
+{% set og_img_08 = None %}
+{% set og_img_09 = None %}
+{% set og_img_10 = None %}
+
+{% if animal['animal']['photo']['img_01'] != None %}
+    {% set og_img_01_folder = animal['animal']['photo']['img_01']|replace(".jpg", "") %}
+    {% set og_img_01 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_01_folder + "/cropped/" + animal['animal']['photo']['img_01'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_02'] != None %}
+    {% set og_img_02_folder = animal['animal']['photo']['img_02']|replace(".jpg", "") %}
+    {% set og_img_02 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_02_folder + "/cropped/" + animal['animal']['photo']['img_02'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_03'] != None %}
+    {% set og_img_03_folder = animal['animal']['photo']['img_03']|replace(".jpg", "") %}
+    {% set og_img_03 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_03_folder + "/cropped/" + animal['animal']['photo']['img_03'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_04'] != None %}
+    {% set og_img_04_folder = animal['animal']['photo']['img_04']|replace(".jpg", "") %}
+    {% set og_img_04 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_04_folder + "/cropped/" + animal['animal']['photo']['img_04'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_05'] != None %}
+    {% set og_img_05_folder = animal['animal']['photo']['img_05']|replace(".jpg", "") %}
+    {% set og_img_05 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_05_folder + "/cropped/" + animal['animal']['photo']['img_05'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_06'] != None %}
+    {% set og_img_06_folder = animal['animal']['photo']['img_06']|replace(".jpg", "") %}
+    {% set og_img_06 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_06_folder + "/cropped/" + animal['animal']['photo']['img_06'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_07'] != None %}
+    {% set og_img_07_folder = animal['animal']['photo']['img_07']|replace(".jpg", "") %}
+    {% set og_img_07 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_07_folder + "/cropped/" + animal['animal']['photo']['img_07'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_08'] != None %}
+    {% set og_img_08_folder = animal['animal']['photo']['img_08']|replace(".jpg", "") %}
+    {% set og_img_08 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_08_folder + "/cropped/" + animal['animal']['photo']['img_08'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_09'] != None %}
+    {% set og_img_09_folder = animal['animal']['photo']['img_09']|replace(".jpg", "") %}
+    {% set og_img_09 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_09_folder + "/cropped/" + animal['animal']['photo']['img_09'] %}
+{% endif %}
+
+{% if animal['animal']['photo']['img_10'] != None %}
+    {% set og_img_10_folder = animal['animal']['photo']['img_10']|replace(".jpg", "") %}
+    {% set og_img_10 = config_data['SITE_URL'] + "/static/images/animal/" + og_img_10_folder + "/cropped/" + animal['animal']['photo']['img_10'] %}
+{% endif %}
+
+{% set og_url = config_data['SITE_URL'] + "/" + animal['animal']['category']['name_en_slug'] + "/" + animal['animal']['subcategory']['name_en_slug'] + "/" + animal['animal']['animal']['name_slug'] + "/" ~ animal['animal']['animal']['id'] %}
+
+{% block title %} | {{ animal['animal']['animal']['name'] }}{% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="{{ animal['animal']['animal']['name'] }}"/>
+    <meta property="og:site_name" content="{{ config_data['BRAND_NAME'] }}"/>
+    <meta property="og:image:type" content="image/jpeg"/>
+    <meta property="og:image:width" content="1280"/>
+    <meta property="og:image:height" content="720"/>
+    <meta property="og:image" content="{{ og_img_01 }}"/>
+    <meta property="og:image" content="{{ og_img_02 }}"/>
+    <meta property="og:image" content="{{ og_img_03 }}"/>
+    <meta property="og:image" content="{{ og_img_04 }}"/>
+    {% if animal['animal']['photo']['img_05'] != None %}
+        <meta property="og:image" content="{{ og_img_05 }}"/>
+    {% endif %}
+    {% if animal['animal']['photo']['img_06'] != None %}
+        <meta property="og:image" content="{{ og_img_06 }}"/>
+    {% endif %}
+    {% if animal['animal']['photo']['img_07'] != None %}
+        <meta property="og:image" content="{{ og_img_07 }}"/>
+    {% endif %}
+    {% if animal['animal']['photo']['img_08'] != None %}
+        <meta property="og:image" content="{{ og_img_08 }}"/>
+    {% endif %}
+    {% if animal['animal']['photo']['img_09'] != None %}
+        <meta property="og:image" content="{{ og_img_09 }}"/>
+    {% endif %}
+    {% if animal['animal']['photo']['img_10'] != None %}
+        <meta property="og:image" content="{{ og_img_10 }}"/>
+    {% endif %}
+    <meta property="og:description" content="{{ animal['animal']['animal']['brief_description'] }}"/>
+    <meta property="og:type" content="product"/>
+    <meta property="og:url" content="{{ og_url }}"/>
+    <meta property="og:locale" content="en_GB"/>
+    <meta property="og:locale:alternate" content="de_DE"/>
+    <meta property="og:locale:alternate" content="fr_FR"/>
+    <meta property="og:locale:alternate" content="es_ES"/>
+    <meta property="og:locale:alternate" content="hu_HU"/>
+{% endblock %}
+
+{% block social_scripts %}
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2457125114438415',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <script>window.twttr = (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function (f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
+{% endblock %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="float-left" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="/" data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="/"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item"><a class="hover"
+                                                           href="{{ url_for('index_module.category_list', category_name=animal['animal']['category']['name_en_slug'], category_id=animal['animal']['category']['id']) }}">{{ category }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover"
+                                                           href="{{ url_for('index_module.subcategory_list', category_name=animal['animal']['category']['name_en_slug'], category_id=animal['animal']['category']['id'], subcategory_name=animal['animal']['subcategory']['name_en_slug'], subcategory_id=animal['animal']['subcategory']['id']) }}">{{ subcategory }}</a>
+                            </li>
+                            <li class="breadcrumb-item active"
+                                aria-current="page">{{ animal['animal']['animal']['name'] }}</li>
+                        </ol>
+                    </nav>
+
+                    <div id="light-dark-change" class="dropdown float-right">
+
+                        <div id="dark" class="d-block">
+                            <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div id="dark-show">
+                                <span data-i18n="anlihouse-A414"></span>
+                                <span class="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-moon-stars-fill"
+                                                             viewBox="0 0 16 16"><path
+                                        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                <span data-i18n="anlihouse-dark"></span>
+                            </div>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li class="click-light-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-light"></span>
+                                    </span>
+                                </li>
+                                <li class="click-color-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-palette-fill" viewBox="0 0 16 16"><path
+                                                d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></span>
+                                        <span data-i18n="anlihouse-color"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="disabled">
+                                    <span class="dropdown-item disabled">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-moon-stars-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                        <span data-i18n="anlihouse-dark"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="light" class="d-none">
+                            <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div id="light-show">
+                                <span data-i18n="anlihouse-A414"></span>
+                                <span class="light-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                              fill="currentColor" class="bi bi-sun-fill"
+                                                              viewBox="0 0 16 16"><path
+                                        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                <span data-i18n="anlihouse-light"></span>
+                            </div>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li class="click-dark-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-moon-stars-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                        <span data-i18n="anlihouse-dark"></span>
+                                    </span>
+                                </li>
+                                <li class="click-color-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-palette-fill" viewBox="0 0 16 16"><path
+                                                d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></span>
+                                        <span data-i18n="anlihouse-color"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="disabled">
+                                    <span class="dropdown-item disabled">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-light"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="color" class="d-none">
+                            <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div id="color-show">
+                                <span data-i18n="anlihouse-A414"></span>
+                                <span class="color-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                              fill="currentColor" class="bi bi-palette-fill"
+                                                              viewBox="0 0 16 16"><path
+                                        d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></span>
+                                <span data-i18n="anlihouse-color"></span>
+                            </div>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li class="click-dark-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-moon-stars-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/><path
+                                                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg></span>
+                                        <span data-i18n="anlihouse-dark"></span>
+                                    </span>
+                                </li>
+                                <li class="click-light-mode">
+                                    <span class="dropdown-item">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-light"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="disabled">
+                                    <span class="dropdown-item disabled">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-sun-fill"
+                                                   viewBox="0 0 16 16"><path
+                                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg></span>
+                                        <span data-i18n="anlihouse-color"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div id="full" class="container">
+        <div id="full-page-now-date-reload" style="display:none;" data-time-llll="{{ now_date }}">{{ now_date }}</div>
+        <div class="row">
+            <div class="full col-12">
+                <div id="full-wrap">
+
+                    {% set heartEmpty = '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>' %}
+                    {% set heartHalf = '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="" class="bi bi-heart-half" viewBox="0 0 16 16"><path d="M8 2.748v11.047c3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>' %}
+                    {% set heartFull = '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>' %}
+
+                    {% set img_count = 0 %}
+
+                    {% if animal['animal']['video']['video_01'] != None %}
+                        {% set video_01_folder = animal['animal']['video']['video_01']|replace(".mp4", "") %}
+                        {% set video_01 = "/static/videos/animal/" + video_01_folder + "/cropped/" + animal['animal']['video']['video_01'] %}
+                        {% set video_cover = "/static/videos/animal/" + video_01_folder + "/cropped/video-cover.png" %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_01'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_01_folder = animal['animal']['photo']['img_01']|replace(".jpg", "") %}
+                        {% set img_01 = "/static/images/animal/" + img_01_folder + "/cropped/" + animal['animal']['photo']['img_01'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_02'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_02_folder = animal['animal']['photo']['img_02']|replace(".jpg", "") %}
+                        {% set img_02 = "/static/images/animal/" + img_02_folder + "/cropped/" + animal['animal']['photo']['img_02'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_03'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_03_folder = animal['animal']['photo']['img_03']|replace(".jpg", "") %}
+                        {% set img_03 = "/static/images/animal/" + img_03_folder + "/cropped/" + animal['animal']['photo']['img_03'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_04'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_04_folder = animal['animal']['photo']['img_04']|replace(".jpg", "") %}
+                        {% set img_04 = "/static/images/animal/" + img_04_folder + "/cropped/" + animal['animal']['photo']['img_04'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_05'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_05_folder = animal['animal']['photo']['img_05']|replace(".jpg", "") %}
+                        {% set img_05 = "/static/images/animal/" + img_05_folder + "/cropped/" + animal['animal']['photo']['img_05'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_06'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_06_folder = animal['animal']['photo']['img_06']|replace(".jpg", "") %}
+                        {% set img_06 = "/static/images/animal/" + img_06_folder + "/cropped/" + animal['animal']['photo']['img_06'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_07'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_07_folder = animal['animal']['photo']['img_07']|replace(".jpg", "") %}
+                        {% set img_07 = "/static/images/animal/" + img_07_folder + "/cropped/" + animal['animal']['photo']['img_07'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_08'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_08_folder = animal['animal']['photo']['img_08']|replace(".jpg", "") %}
+                        {% set img_08 = "/static/images/animal/" + img_08_folder + "/cropped/" + animal['animal']['photo']['img_08'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_09'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_09_folder = animal['animal']['photo']['img_09']|replace(".jpg", "") %}
+                        {% set img_09 = "/static/images/animal/" + img_09_folder + "/cropped/" + animal['animal']['photo']['img_09'] %}
+                    {% endif %}
+
+                    {% if animal['animal']['photo']['img_10'] != None %}
+                        {% set img_count = img_count + 1 %}
+                        {% set img_10_folder = animal['animal']['photo']['img_10']|replace(".jpg", "") %}
+                        {% set img_10 = "/static/images/animal/" + img_10_folder + "/cropped/" + animal['animal']['photo']['img_10'] %}
+                    {% endif %}
+
+                    <div class="full-wrap">
+
+                        <div class="left">
+                            <div id="one-img">
+                                {% if is_video_01_origin == True %}
+                                    <a class="shadow img-fluid" data-fancybox="fullPage" data-thumb={{ video_cover }}
+                                            href="{{ video_01 }}">
+                                        {% if animal['animal']['photo']['img_10'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_10 }}">
+                                        {% elif animal['animal']['photo']['img_09'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_09 }}">
+                                        {% elif animal['animal']['photo']['img_08'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_08 }}">
+                                        {% elif animal['animal']['photo']['img_07'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_07 }}">
+                                        {% elif animal['animal']['photo']['img_06'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_06 }}">
+                                        {% elif animal['animal']['photo']['img_05'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_05 }}">
+                                        {% elif animal['animal']['photo']['img_04'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_04 }}">
+                                        {% elif animal['animal']['photo']['img_03'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_03 }}">
+                                        {% elif animal['animal']['photo']['img_02'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_02 }}">
+                                        {% elif animal['animal']['photo']['img_01'] != None %}
+                                            <img class="shadow img-fluid" src="{{ img_01 }}">
+                                        {% endif %}
+                                        <div id="gallery-play">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65"
+                                                 class="bi bi-play-btn-fill" viewBox="0 0 16 16">
+                                                <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ img_01 }}" data-fancybox="fullPage"
+                                       class="shadow img-fluid">
+                                        <img class="shadow img-fluid" src="{{ img_01 }}">
+                                    </a>
+                                {% endif %}
+
+                                {% if animal['animal']['rating']['rating']|float != 0 %}
+                                    <div class="full-left-rating">
+                                        {% if animal['animal']['rating']['rating']|float == 1.0 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartEmpty }}</div>
+                                            <div class="rating three">{{ heartEmpty }}</div>
+                                            <div class="rating four">{{ heartEmpty }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float >= 1.1 and animal['animal']['rating']['rating']|float <= 1.9 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartHalf }}</div>
+                                            <div class="rating three">{{ heartEmpty }}</div>
+                                            <div class="rating four">{{ heartEmpty }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float == 2.0 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartEmpty }}</div>
+                                            <div class="rating four">{{ heartEmpty }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float >= 2.1 and animal['animal']['rating']['rating']|float <= 2.9 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartHalf }}</div>
+                                            <div class="rating four">{{ heartEmpty }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float == 3.0 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartFull }}</div>
+                                            <div class="rating four">{{ heartEmpty }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float >= 3.1 and animal['animal']['rating']['rating']|float <= 3.9 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartFull }}</div>
+                                            <div class="rating four">{{ heartHalf }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float == 4.0 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartFull }}</div>
+                                            <div class="rating four">{{ heartFull }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float >= 4.1 and animal['animal']['rating']['rating']|float <= 4.9 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartFull }}</div>
+                                            <div class="rating four">{{ heartHalf }}</div>
+                                            <div class="rating five">{{ heartEmpty }}</div>
+                                        {% elif animal['animal']['rating']['rating']|float == 5.0 %}
+                                            <div class="rating one">{{ heartFull }}</div>
+                                            <div class="rating two">{{ heartFull }}</div>
+                                            <div class="rating three">{{ heartFull }}</div>
+                                            <div class="rating four">{{ heartFull }}</div>
+                                            <div class="rating five">{{ heartFull }}</div>
+                                        {% endif %}
+                                        <div class="count">{{ animal['animal']['rating']['rating']|float }}</div>
+                                    </div>
+                                {% else %}
+                                    <div class="full-left-rating">
+
+                                        <div class="rating one">
+                                            {{ heartEmpty }}
+                                        </div>
+
+                                        <div class="rating two">
+                                            {{ heartEmpty }}
+                                        </div>
+
+                                        <div class="rating three">
+                                            {{ heartEmpty }}
+                                        </div>
+
+                                        <div class="rating four">
+                                            {{ heartEmpty }}
+                                        </div>
+
+                                        <div class="rating five">
+                                            {{ heartEmpty }}
+                                        </div>
+
+                                        {# <div class="count">{{ animal['animal']['rating']['rating']|float }}</div> #}
+                                    </div>
+                                {% endif %}
+
+                                <div class="full-left-eye">
+
+                                    <div class="eye">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
+                                             fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                        </svg>
+                                    </div>
+
+                                    <div class="count">2.6k</div>
+
+                                </div>
+
+                            </div>
+                            {% if is_video_01_origin == True %}
+                                <div id="two-img">
+                                    <a href="{{ img_01 }}" data-fancybox="fullPage"
+                                       class="shadow img-fluid">
+                                        <img class="shadow img-fluid" src="{{ img_01 }}">
+                                    </a>
+                                </div>
+                                <div id="three-img">
+                                    <a href="{{ img_02 }}" data-fancybox="fullPage"
+                                       class="shadow img-fluid">
+                                        <img class="shadow img-fluid" src="{{ img_02 }}">
+                                    </a>
+                                    {% if is_video_01_origin == True %}
+                                        {% if img_count - 2 >= 1 %}
+                                            <div class="img-count">+ {{ img_count - 2 }}</div>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if img_count - 3 >= 1 %}
+                                            <div class="img-count">+ {{ img_count - 3 }}</div>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div style="display:none">
+                                    {% if animal['animal']['photo']['img_03'] != None %}
+                                        <a href="{{ img_03 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_03 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_04'] != None %}
+                                        <a href="{{ img_04 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_04 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_05'] != None %}
+                                        <a href="{{ img_05 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_05 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_06'] != None %}
+                                        <a href="{{ img_06 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_06 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_07'] != None %}
+                                        <a href="{{ img_07 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_07 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_08'] != None %}
+                                        <a href="{{ img_08 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_08 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_09'] != None %}
+                                        <a href="{{ img_09 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_09 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_10'] != None %}
+                                        <a href="{{ img_10 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_10 }}">
+                                        </a>
+                                    {% endif %}
+                                    Hello
+                                    {{ img_07 }}
+                                </div>
+                            {% else %}
+                                <div id="two-img">
+                                    <a href="{{ img_02 }}" data-fancybox="fullPage"
+                                       class="shadow img-fluid">
+                                        <img class="shadow img-fluid" src="{{ img_02 }}">
+                                    </a>
+                                </div>
+                                <div id="three-img">
+                                    <a href="{{ img_03 }}" data-fancybox="fullPage"
+                                       class="shadow img-fluid">
+                                        <img class="shadow img-fluid" src="{{ img_03 }}">
+                                    </a>
+                                    {% if is_video_01_origin == True %}
+                                        {% if img_count - 2 >= 1 %}
+                                            <div class="img-count">+ {{ img_count - 2 }}</div>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if img_count - 3 >= 1 %}
+                                            <div class="img-count">+ {{ img_count - 3 }}</div>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div style="display:none">
+                                    {% if animal['animal']['photo']['img_04'] != None %}
+                                        <a href="{{ img_04 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_04 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_05'] != None %}
+                                        <a href="{{ img_05 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_05 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_06'] != None %}
+                                        <a href="{{ img_06 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_06 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_07'] != None %}
+                                        <a href="{{ img_07 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_07 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_08'] != None %}
+                                        <a href="{{ img_08 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_08 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_09'] != None %}
+                                        <a href="{{ img_09 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_09 }}">
+                                        </a>
+                                    {% endif %}
+                                    {% if animal['animal']['photo']['img_10'] != None %}
+                                        <a href="{{ img_10 }}" data-fancybox="fullPage"
+                                           class="shadow img-fluid">
+                                            <img class="shadow img-fluid" src="{{ img_10 }}">
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="right">
+
+                            <div id="name">{{ animal['animal']['animal']['name'] }}</div>
+
+                            <div id="price">
+                                {# <span class="eur"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">EUR</span></span> #}
+                                {# <span class="eur-to-currency"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">USD</span></span> #}
+
+                                <span class="eur"><span
+                                        class="price">{{ animal['animal']['animal']['price'] }}</span> <span
+                                        class="currency">EUR</span></span>
+                                <span class="eur-to-currency"><span class="price"></span> <span class="currency"></span></span>
+                            </div>
+
+                            <div class="translate brief-description-show inactive">
+                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16"><path
+                                        d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/><path
+                                        d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/></svg></span>
+                                <span class="text" data-i18n="anlihouse-A363"></span> <span class="text-link source"
+                                                                                            data-i18n="anlihouse-A364"
+                                                                                            data-translate-text="brief-description-translate"
+                                                                                            data-source=""
+                                                                                            data-target=""></span>
+                            </div>
+
+                            <div id="brief-description" class="brief-description-translate"
+                                 data-brief_description_detect_lang="{{ animal['animal']['animal']['brief_description_detect_lang'] }}"
+                                 data-animal_id="{{ animal['animal']['animal']['id'] }}">
+                                {{ animal['animal']['animal']['brief_description'] }}
+                            </div>
+
+                            <div class="family-tree mother">
+                                <div class="tf-tree tf-mother-mobile-center">
+                                    <ul>
+                                        <li>
+                                            <span class="tf-nc mother"
+                                                  data-type="{{ animal['animal']['animal']['mother'] }}">
+                                                <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                              width="16" height="16" fill="currentColor"
+                                                                              class="bi bi-gender-male"
+                                                                              viewBox="0 0 16 16"><path
+                                                        fill-rule="evenodd"
+                                                        d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                <span class="gender-info" data-i18n="anya"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother'] }}</span>
+                                            </span>
+                                            <ul>
+                                                <li><span class="tf-nc mother_mother"
+                                                          data-type="{{ animal['animal']['animal']['mother_mother'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-male"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                    <span class="gender-info" data-i18n="anya_anyja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother_mother'] }}</span>
+                                                </span>
+
+
+                                                    <ul>
+                                                        <li><span class="tf-nc mother_mother_mother"
+                                                                  data-type="{{ animal['animal']['animal']['mother_mother_mother'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-male"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                            <span class="gender-info"
+                                                                  data-i18n="anya_anyja_anyja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother_mother_mother'] }}</span>
+                                                </span></li>
+                                                        <li><span class="tf-nc mother_mother_father"
+                                                                  data-type="{{ animal['animal']['animal']['mother_mother_father'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-female"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                            <span class="gender-info"
+                                                                  data-i18n="anya_anyja_apja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother_mother_father'] }}</span>
+                                                </span>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </li>
+                                                <li><span class="tf-nc mother_father"
+                                                          data-type="{{ animal['animal']['animal']['mother_father'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-female"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                    <span class="gender-info" data-i18n="anya_apja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother_father'] }}</span>
+                                                </span>
+
+
+                                                    <ul>
+                                                        <li><span class="tf-nc mother_father_mother"
+                                                                  data-type="{{ animal['animal']['animal']['mother_father_mother'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-male"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                            <span class="gender-info"
+                                                                  data-i18n="anya_apja_anyja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother_father_mother'] }}</span>
+                                                </span></li>
+                                                        <li><span class="tf-nc mother_father_father"
+                                                                  data-type="{{ animal['animal']['animal']['mother_father_father'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-female"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                            <span class="gender-info" data-i18n="anya_apja_apja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['mother_father_father'] }}</span>
+                                                </span>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="family-tree father">
+                                <div class="tf-tree tf-father-mobile-center">
+                                    <ul>
+                                        <li>
+                                            <span class="tf-nc father"
+                                                  data-type="{{ animal['animal']['animal']['father'] }}">
+                                                <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                              width="16" height="16" fill="currentColor"
+                                                                              class="bi bi-gender-female"
+                                                                              viewBox="0 0 16 16"><path
+                                                        fill-rule="evenodd"
+                                                        d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                <span class="gender-info" data-i18n="apa"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father'] }}</span>
+                                            </span>
+                                            <ul>
+                                                <li><span class="tf-nc father_mother"
+                                                          data-type="{{ animal['animal']['animal']['father_mother'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-male"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                    <span class="gender-info" data-i18n="apa_anyja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father_mother'] }}</span>
+                                                </span>
+
+
+                                                    <ul>
+                                                        <li><span class="tf-nc father_mother_mother"
+                                                                  data-type="{{ animal['animal']['animal']['father_mother_mother'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-male"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                            <span class="gender-info"
+                                                                  data-i18n="apa_anyja_anyja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father_mother_mother'] }}</span>
+                                                </span></li>
+                                                        <li><span class="tf-nc father_mother_father"
+                                                                  data-type="{{ animal['animal']['animal']['father_mother_father'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-female"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                            <span class="gender-info" data-i18n="apa_anyja_apja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father_mother_father'] }}</span>
+                                                </span>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </li>
+                                                <li><span class="tf-nc father_father"
+                                                          data-type="{{ animal['animal']['animal']['father_father'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-female"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                    <span class="gender-info" data-i18n="apa_apja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father_father'] }}</span>
+                                                </span>
+
+
+                                                    <ul>
+                                                        <li><span class="tf-nc father_father_mother"
+                                                                  data-type="{{ animal['animal']['animal']['father_father_mother'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-male"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+                                                            <span class="gender-info" data-i18n="apa_apja_anyja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father_father_mother'] }}</span>
+                                                </span></li>
+                                                        <li><span class="tf-nc father_father_father"
+                                                                  data-type="{{ animal['animal']['animal']['father_father_father'] }}">
+                                                    <div class="gender-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="16" height="16"
+                                                                                  fill="currentColor"
+                                                                                  class="bi bi-gender-female"
+                                                                                  viewBox="0 0 16 16"><path
+                                                            fill-rule="evenodd"
+                                                            d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/></svg></div>
+                                                            <span class="gender-info" data-i18n="apa_apja_apja"></span>
+                                                <span class="name">{{ animal['animal']['animal']['father_father_father'] }}</span>
+                                                </span>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div id="details-wrap">
+                                <div class="accordion" id="details">
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="detailsHeadingOne">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#detailsCollapseOne" aria-expanded="false"
+                                                    aria-controls="detailsCollapseOne">
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                        height="25" class="bi bi-list-ul"
+                                                                        viewBox="0 0 16 16"><path fill-rule="evenodd"
+                                                                                                  d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></span>
+                                                <span class="title" data-i18n="anlihouse-A305"></span>
+                                            </button>
+                                        </h2>
+                                        <div id="detailsCollapseOne" class="accordion-collapse collapse"
+                                             aria-labelledby="detailsHeadingOne">
+                                            <div class="accordion-body">
+                                                <dl class="row">
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A268"></dt>
+                                                    <dd class="col-sm-7">{{ category }}</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A270"></dt>
+                                                    <dd class="col-sm-7">{{ subcategory }}</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A306"></dt>
+                                                    <dd class="col-sm-7">{{ animal['animal']['animal']['name'] }}</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A307"></dt>
+                                                    <dd class="col-sm-7"><span
+                                                            class="year-month-day">{{ animal['animal']['animal']['age_year'] }}. {{ animal['animal']['animal']['age_month'] }}. {{ animal['animal']['animal']['age_day'] }}.</span>
+                                                        <span class="age">
+                                                            {% if animal['animal']['animal']['years'] != 0 %}
+                                                                {{ animal['animal']['animal']['years'] }}
+                                                                <span data-i18n="anlihouse-A280"></span>,
+                                                            {% endif %}
+
+                                                            {% if animal['animal']['animal']['months'] != 0 %}
+                                                                {{ animal['animal']['animal']['months'] }}
+                                                                <span data-i18n="anlihouse-A281"></span>,
+                                                            {% endif %}
+
+                                                            {% if animal['animal']['animal']['days'] != 0 %}
+                                                                {{ animal['animal']['animal']['days'] }}
+                                                                <span data-i18n="anlihouse-A282"></span>
+                                                            {% endif %}
+                                                            </span></dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A271"></dt>
+                                                    <dd class="col-sm-7">{{ gender }}</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A272">Szín:</dt>
+                                                    <dd class="col-sm-7">{{ color }}</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A308"></dt>
+                                                    <dd class="col-sm-7">{{ animal['animal']['animal']['height'] }}
+                                                        <span data-i18n="anlihouse-A283"></span></dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A273"></dt>
+                                                    <dd class="col-sm-7">{{ be_used_for }}</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A277"></dt>
+                                                    <dd class="col-sm-7">
+                                                        {% for country in countries['data'] %}
+                                                            {% if country['country_code'] == animal['animal']['animal']['country_origin'] %}
+                                                                {{ country['country'] }}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A276"></dt>
+                                                    <dd class="col-sm-7">
+                                                        {% for country in countries['data'] %}
+                                                            {% if country['country_code'] == animal['animal']['animal']['country_residence'] %}
+                                                                {{ country['country'] }}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A309"></dt>
+                                                    <dd class="col-sm-7" style="filter:blur(3px)">123-456-789</dd>
+
+                                                    <dt class="col-sm-5" data-i18n="anlihouse-A311"></dt>
+                                                    <dd class="col-sm-7">
+                                                        {# <div id="price-show"><span class="eur"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">EUR</span></span><span class="eur-to-currency"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">USD</span></span></div> #}
+                                                        <div id="price-details">
+                                                            <span class="eur"><span
+                                                                    class="price">{{ animal['animal']['animal']['price'] }}</span> <span
+                                                                    class="currency">EUR</span></span>
+                                                        </div>
+                                                    </dd>
+
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item description">
+                                        <h2 class="accordion-header" id="detailsHeadingTwo">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#detailsCollapseTwo" aria-expanded="true"
+                                                    aria-controls="detailsCollapseTwo">
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                        height="25"
+                                                                        class="bi bi-body-text" viewBox="0 0 16 16"><path
+                                                        fill-rule="evenodd"
+                                                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z"/></svg></span>
+                                                <span class="title" data-i18n="leiras"></span>
+                                            </button>
+                                        </h2>
+
+                                        <div id="detailsCollapseTwo" class="accordion-collapse collapse show"
+                                             aria-labelledby="detailsHeadingTwo">
+                                            <div id="details-description" class="accordion-body">
+
+                                                <div class="translate full-description-show inactive">
+                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16"><path
+                                        d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/><path
+                                        d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/></svg></span>
+                                                    <span class="text" data-i18n="anlihouse-A363"></span> <span
+                                                        class="text-link source"
+                                                        data-i18n="anlihouse-A364"
+                                                        data-translate-text="full-description-translate"
+                                                        data-source=""
+                                                        data-target=""></span>
+                                                </div>
+
+                                                <span class="text full-description-translate"
+                                                      data-description_detect_lang="{{ animal['animal']['animal']['description_detect_lang'] }}"
+                                                      data-not-truncute=""
+                                                      data-animal_id="{{ animal['animal']['animal']['id'] }}">{{ animal['animal']['animal']['description'] }}</span>
+                                                <span class="truncateStringMore inactive"
+                                                      data-i18n="anlihouse-A362"></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% if animal['animal']['animal']['url_01'] != "" or animal['animal']['animal']['url_02'] != "" %}
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="detailsHeadingThree">
+                                                <button class="accordion-button collapsed disabled pointer-events-none"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#detailsCollapseThree" aria-expanded="false"
+                                                        aria-controls="detailsCollapseThree">
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                        height="25" class="bi bi-trophy"
+                                                                        viewBox="0 0 16 16"><path
+                                                        d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z"/></svg></span>
+                                                    <span class="title" data-i18n="anlihouse-A310"></span>
+                                                </button>
+                                            </h2>
+                                            <div id="detailsCollapseThree" class="accordion-collapse collapse"
+                                                 aria-labelledby="detailsHeadingThree">
+                                                <div class="accordion-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="accordion-item documents">
+                                        <h2 class="accordion-header" id="detailsHeadingFour">
+                                            <button class="accordion-button collapsed disabled pointer-events-none"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#detailsCollapseFour" aria-expanded="false"
+                                                    aria-controls="detailsCollapseFour">
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                        height="25" class="bi bi-files"
+                                                                        viewBox="0 0 16 16"><path
+                                                        d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/></svg></span>
+                                                <span class="title" data-i18n="ourdocuments"></span>
+                                            </button>
+                                        </h2>
+                                        <div id="detailsCollapseFour" class="accordion-collapse collapse"
+                                             aria-labelledby="detailsHeadingFour">
+                                            <div class="accordion-body">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item reviews">
+                                        <h2 class="accordion-header" id="detailsHeadingFive">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#detailsCollapseFive" aria-expanded="false"
+                                                    aria-controls="detailsCollapseFive">
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                        height="25" class="bi bi-heart"
+                                                                        viewBox="0 0 16 16"><path
+                                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg></span>
+                                                <span class="title" data-i18n="anlihouse-A318"></span>
+                                            </button>
+                                        </h2>
+                                        <div id="detailsCollapseFive" class="accordion-collapse collapse"
+                                             aria-labelledby="detailsHeadingFive">
+                                            <div class="accordion-body" style="display: flex">
+
+                                                <div id="rating-wrap">
+                                                    <div id="rating">
+                                                        {% if animal['animal']['rating']['rating']|float != 0 %}
+                                                            <div class="heart">
+                                                                {% if animal['animal']['rating']['rating']|float == 1.0 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartEmpty }}</div>
+                                                                    <div class="rating three">{{ heartEmpty }}</div>
+                                                                    <div class="rating four">{{ heartEmpty }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float >= 1.1 and animal['animal']['rating']['rating']|float <= 1.9 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartHalf }}</div>
+                                                                    <div class="rating three">{{ heartEmpty }}</div>
+                                                                    <div class="rating four">{{ heartEmpty }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float == 2.0 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartEmpty }}</div>
+                                                                    <div class="rating four">{{ heartEmpty }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float >= 2.1 and animal['animal']['rating']['rating']|float <= 2.9 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartHalf }}</div>
+                                                                    <div class="rating four">{{ heartEmpty }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float == 3.0 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartFull }}</div>
+                                                                    <div class="rating four">{{ heartEmpty }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float >= 3.1 and animal['animal']['rating']['rating']|float <= 3.9 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartFull }}</div>
+                                                                    <div class="rating four">{{ heartHalf }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float == 4.0 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartFull }}</div>
+                                                                    <div class="rating four">{{ heartFull }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float >= 4.1 and animal['animal']['rating']['rating']|float <= 4.9 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartFull }}</div>
+                                                                    <div class="rating four">{{ heartHalf }}</div>
+                                                                    <div class="rating five">{{ heartEmpty }}</div>
+                                                                {% elif animal['animal']['rating']['rating']|float == 5.0 %}
+                                                                    <div class="rating one">{{ heartFull }}</div>
+                                                                    <div class="rating two">{{ heartFull }}</div>
+                                                                    <div class="rating three">{{ heartFull }}</div>
+                                                                    <div class="rating four">{{ heartFull }}</div>
+                                                                    <div class="rating five">{{ heartFull }}</div>
+                                                                {% endif %}
+                                                                <div class="count">{{ animal['animal']['rating']['rating']|float }}</div>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="heart">
+
+                                                                <div class="rating one">
+                                                                    {{ heartEmpty }}
+                                                                </div>
+
+                                                                <div class="rating two">
+                                                                    {{ heartEmpty }}
+                                                                </div>
+
+                                                                <div class="rating three">
+                                                                    {{ heartEmpty }}
+                                                                </div>
+
+                                                                <div class="rating four">
+                                                                    {{ heartEmpty }}
+                                                                </div>
+
+                                                                <div class="rating five">
+                                                                    {{ heartEmpty }}
+                                                                </div>
+
+                                                                <div class="count"></div>
+
+                                                            </div>
+                                                        {% endif %}
+
+                                                        <div class="based-on-reviews"><span class="reviews-count"
+                                                                                            data-reviews-count="{{ animal['animal']['rating']['rating_count_all'] }}"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="rating-stat">
+                                                        <ul class="">
+
+                                                            <li class="five">
+                                                                <span class="text">5 <span
+                                                                        data-i18n="anlihouse-A323"></span></span>
+                                                                <span class="line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: {{ animal['animal']['rating']['rating_count_five_percent']|float }}%"
+                                                         aria-valuenow="{{ animal['animal']['rating']['rating_count_five_percent']|float }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">{{ animal['animal']['rating']['rating_count_five'] }}</div>
+                                                </div>
+
+                                            </span>
+                                                            </li>
+
+                                                            <li class="four">
+                                                                <span class="text">4 <span
+                                                                        data-i18n="anlihouse-A323"></span></span>
+                                                                <span class="line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: {{ animal['animal']['rating']['rating_count_four_percent']|float }}%"
+                                                         aria-valuenow="{{ animal['animal']['rating']['rating_count_four_percent']|float }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">{{ animal['animal']['rating']['rating_count_four'] }}</div>
+                                                </div>
+
+                                            </span>
+                                                            </li>
+
+                                                            <li class="three">
+                                                                <span class="text">3 <span
+                                                                        data-i18n="anlihouse-A323"></span></span>
+                                                                <span class="line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: {{ animal['animal']['rating']['rating_count_three_percent']|float }}%"
+                                                         aria-valuenow="{{ animal['animal']['rating']['rating_count_three_percent']|float }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">{{ animal['animal']['rating']['rating_count_three'] }}</div>
+                                                </div>
+
+                                            </span>
+                                                            </li>
+
+                                                            <li class="two">
+                                                                <span class="text">2 <span
+                                                                        data-i18n="anlihouse-A323"></span></span>
+                                                                <span class="line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: {{ animal['animal']['rating']['rating_count_two_percent']|float }}%"
+                                                         aria-valuenow="{{ animal['animal']['rating']['rating_count_two_percent']|float }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">{{ animal['animal']['rating']['rating_count_two'] }}</div>
+                                                </div>
+
+                                            </span>
+                                                            </li>
+
+                                                            <li class="one">
+                                                                <span class="text">1 <span
+                                                                        data-i18n="anlihouse-A323"></span></span>
+                                                                <span class="line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: {{ animal['animal']['rating']['rating_count_one_percent']|float }}%"
+                                                         aria-valuenow="{{ animal['animal']['rating']['rating_count_one_percent']|float }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">{{ animal['animal']['rating']['rating_count_one'] }}</div>
+                                                </div>
+
+                                            </span>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="detailsHeadingSix">
+                                            <button class="accordion-button collapsed disabled pointer-events-none"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#detailsCollapseSix" aria-expanded="false"
+                                                    aria-controls="detailsCollapseSix">
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                        height="25" class="bi bi-question-circle"
+                                                                        viewBox="0 0 16 16"><path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path
+                                                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/></svg></span>
+                                                <span class="title">Kérdések és válaszok</span>
+                                            </button>
+                                        </h2>
+                                        <div id="detailsCollapseSix" class="accordion-collapse collapse"
+                                             aria-labelledby="detailsHeadingSix">
+                                            <div class="accordion-body" style="display:flex;position:relative;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="detailsHeadingSeven">
+                                            <button class="accordion-button collapsed disabled pointer-events-none"
+                                                    type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#detailsCollapseSeven" aria-expanded="false"
+                                                    aria-controls="detailsCollapseSeven">
+                                                <span class="icon" style="margin-top:-7px;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                         class="bi bi-cup-hot" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                              d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6H.5ZM13 12.5a2.01 2.01 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5ZM2.64 13.825 1.123 7h11.754l-1.517 6.825A1.5 1.5 0 0 1 9.896 15H4.104a1.5 1.5 0 0 1-1.464-1.175Z"/>
+                                                        <path d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z"/>
+                                                    </svg>
+                                                </span>
+                                                <span class="title">
+                                                    <span>{{ subcategory }}</span> <span
+                                                        data-i18n="anlihouse-A348"></span>
+                                                </span>
+                                            </button>
+                                        </h2>
+                                        <div id="detailsCollapseSeven" class="accordion-collapse collapse"
+                                             aria-labelledby="detailsHeadingSeven">
+                                            <div id="details-description" class="accordion-body">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {% for seller in seller_data %}
+                                <div id="full-action-wrap">
+
+                                    <div id="action-six-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 fill="currentColor" class="bi bi-badge-ad-fill" viewBox="0 0 16 16">
+                                                <path d="M11.35 8.337c0-.699-.42-1.138-1.001-1.138-.584 0-.954.444-.954 1.239v.453c0 .8.374 1.248.972 1.248.588 0 .984-.44.984-1.2v-.602zm-5.413.237-.734-2.426H5.15l-.734 2.426h1.52z"/>
+                                                <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm6.209 6.32c0-1.28.694-2.044 1.753-2.044.655 0 1.156.294 1.336.769h.053v-2.36h1.16V11h-1.138v-.747h-.057c-.145.474-.69.804-1.367.804-1.055 0-1.74-.764-1.74-2.043v-.695zm-4.04 1.138L3.7 11H2.5l2.013-5.999H5.9L7.905 11H6.644l-.47-1.542H4.17z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title" data-i18n="anlihouse-A445"></div>
+                                            <div class="text"
+                                                 data-advertisement_id="{{ animal['animal']['animal']['advertisement_id'] }}">{{ animal['animal']['animal']['advertisement_id'] }}</div>
+                                            <input style="position:absolute;left:-10000px;top:-10000px;" type="text"
+                                                   id="advertisementId" name="advertisementId"
+                                                   value="{{ animal['animal']['animal']['advertisement_id'] }}">
+                                        </div>
+                                    </div>
+                                    <div class="action-line-wrap">
+                                        <div class="line-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div id="action-seven-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 fill="currentColor" class="bi bi-alarm-fill" viewBox="0 0 16 16">
+                                                <path d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zm2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title" data-i18n="anlihouse-A446"></div>
+                                            <div class="text time active"
+                                                 data-time-relative="{{ animal['animal']['animal']['created_at'] }}">{{ animal['animal']['animal']['updated_at'] }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="action-line-wrap">
+                                        <div class="line-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div id="action-three-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title">{{ animal['animal']['animal']['name'] }}</div>
+                                            <div class="text pointer-events-none" data-i18n="anlihouse-A370"
+                                                 style="text-decoration:line-through;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="action-line-wrap">
+                                        <div class="line-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div id="action-one-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title">{{ seller['seller_last_name'] }} <span
+                                                    style="opacity:0.5;">({{ seller_country['region'] }}/{{ seller_country['country'] }}/{{ seller['seller_place'] }})</span>
+                                            </div>
+                                            <a href="{{ url_for('index_module.user_animal_list', user_id=seller['seller_id'], user_name=seller['seller_last_name_slug']) }}"
+                                               class="text"><span data-i18n="anlihouse-A367"></span>
+                                                <span>({{ seller['animal_count'] }})</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="action-line-wrap">
+                                        <div class="line-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div id="action-two-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                                                <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title" data-i18n="anlihouse-A368"></div>
+                                            <div class="text pointer-events-none" data-i18n="anlihouse-A369"
+                                                 style="text-decoration:line-through;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="action-line-wrap">
+                                        <div class="line-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div id="action-four-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 class="bi bi-share-fill" viewBox="0 0 16 16">
+                                                <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title" data-i18n="anlihouse-A371"></div>
+                                            <div class="text-multiple">
+                                                <span class="social facebook">Facebook</span>
+                                                <span class="social twitter"><a class="twitterBtn smGlobalBtn"
+                                                                                target=_blank
+                                                                                href="https://twitter.com/share?text={{ animal['animal']['animal']['brief_description'] }}&url={{ og_url }}&hashtags=anlihouse&hashtags=anlibreeders">Twitter</a></span>
+                                                <span class="social vk"><a
+                                                        href="https://vk.com/share.php?url={{ og_url }}"
+                                                        target="_blank">VKontakte</a></span>
+                                                <span class="social">YouTube</span>
+                                                <span class="social full-data-pdf" data-page_id="{{ page_id }}"
+                                                      data-pdf_action="pdf">PDF</span>
+                                                <span class="social full-data-pdf" data-page_id="{{ page_id }}"
+                                                      data-pdf_action="printer" data-i18n="anlihouse-A372"></span>
+                                                {# <a class="twitterBtn smGlobalBtn" target=_blank href="https://twitter.com/share?text=my_text&url=my_url&hashtags=my_hash&via=my_name&related=my_name">Tweet</a> #}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="action-line-wrap">
+                                        <div class="line-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div id="action-five-wrap">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                 fill="currentColor" class="bi bi-exclamation-triangle-fill"
+                                                 viewBox="0 0 16 16">
+                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="data">
+                                            <div class="title" data-i18n="anlihouse-A373"></div>
+                                            <div class="text pointer-events-none" data-i18n="anlihouse-A374"
+                                                 style="text-decoration:line-through;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-map-row">
+        <div class="left">
+            <div id="full-page-map-wrap">
+                <div id="full-page-map"></div>
+            </div>
+        </div>
+        <div class="right">
+            <div id="full-page-geocoder"></div>
+            <pre id="full-page-result"></pre>
+        </div>
+    </div>
+
+    {# Start alike #}
+    <div id="list" class="alike container" data-subcategory_id="{{ animal['animal']['subcategory']['id'] }}"
+         data-animal_id="{{ animal['animal']['animal']['id'] }}" style="margin-top:1rem;">
+
+        <div id="list-top">
+            <div id="filter-info-wrap">
+                <ul>
+                    <li class="elem active"><span data-i18n="anlihouse-A383"></span>:</li>
+                    <li class="elem active subcategoryName"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row alike-row-box">
+        </div>
+    </div>
+    {# End alike #}
+
+    {# Start ANLI Shop #}
+    <div id="list" class="alikeshop container" data-subcategory_id="{{ animal['animal']['subcategory']['id'] }}">
+
+        <div id="list-top">
+            <div id="filter-info-wrap">
+                <ul>
+                    <li class="elem active"><span>ANLI Shop</span>:</li>
+                    <li class="elem active categoryName">{{ category }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row alikeshop-row-box">
+        </div>
+    </div>
+    {# End ANLI Shop #}
+
+    {# Start Full Data Info Box #}
+    <div id="full-data-info-box" class="shadow" data-animal_id="{{ page_id }}">
+        <div id="reviews">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25"
+                     height="25" class="bi bi-heart"
+                     viewBox="0 0 16 16">
+                    <path
+                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                </svg>
+            </div>
+            <div class="count"></div>
+        </div>
+
+        <div class="vr"></div>
+
+        <div id="question">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25"
+                     height="25" class="bi bi-question-circle"
+                     viewBox="0 0 16 16">
+                    <path
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path
+                            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                </svg>
+            </div>
+            <div class="count"></div>
+        </div>
+
+        <div class="vr"></div>
+
+        <div id="talk">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                     class="bi bi-cup-hot" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6H.5ZM13 12.5a2.01 2.01 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5ZM2.64 13.825 1.123 7h11.754l-1.517 6.825A1.5 1.5 0 0 1 9.896 15H4.104a1.5 1.5 0 0 1-1.464-1.175Z"/>
+                    <path d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z"/>
+                </svg>
+            </div>
+            <div class="count"></div>
+        </div>
+    </div>
+    {# End Full Data Info Box #}
+
+    <script>
+        document.getElementById('content').style.margin = '0 0 0 0';
+        // document.getElementById('body-color').style.backgroundColor = '#4c6180';
+    </script>
+{% endblock %}
+{# End Content #}

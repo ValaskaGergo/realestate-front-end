@@ -1,0 +1,277 @@
+{% extends "layout.jinja2" %}
+
+{# Start Breadcrumb #}
+{% block breadcrumb %}
+    <div id="breadcrumb">
+
+        <div class="container w-100 mw-100 pl-3 pr-3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlihouse"></a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="hover" href="{{ url_for('index_module.index') }}"
+                                                           data-i18n="anlihouse-anlibreeders"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page" data-i18n="beallitasok"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{# End Breadcrumb #}
+
+{# Start Content #}
+{% block content %}
+    <div class="container adminSettings">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <span data-i18n="beallitasok"></span>
+                        <span id="addSettingsIcon" class="card-header-icon cursor-pointer plus-icon inactive"
+                              data-toggle="modal"
+                              data-target="#addSettings">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                            </svg>
+                        </span>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col" data-i18n="id"></th>
+                                    <th scope="col" data-i18n="be_megnev"></th>
+                                    <th scope="col" data-i18n="be_tipus"></th>
+                                    <th scope="col" data-i18n="be_ertek"></th>
+                                    <th scope="col" data-i18n="utolso_mod_user"></th>
+                                    <th scope="col" data-i18n="utolso_mod_ideje"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for i in settings_data %}
+                                    <tr>
+                                        <th scope="row">#{{ i.settings_id }}</th>
+                                        <td>{{ i.settings_name|replace("\n", "<br>") }}</td>
+                                        <td>{{ i.settings_type }}</td>
+                                        <td>{{ i.settings_value }}</td>
+                                        <td>
+                                            <a href="{{ url_for('user_management_module.user_management_user_id', user_id=i.settings_user_id) }}" target="_blank">{{ i.settings_user_name }}</a>
+                                        </td>
+                                        <td data-time-llll="{{ i.updated_at }}">{{ i.updated_at }}</td>
+                                        <td class="text-center">
+                                            <span class="icon-click" data-id="{{ i.settings_id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                            </svg>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-end" data-i18n="anlihouse-anlibreeders">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addSettings" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-i18n="anlihouse-A60"></span>
+
+                    <div class="modal-close cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                            <path fill-rule="evenodd"
+                                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <form id="add-settings-form" onsubmit="return false" novalidate="novalidate">
+                        {{ add_settings_form.csrf_token }}
+
+                        {{ add_settings_form.settings_type(type='hidden', id='addSettingsType', class='form-control') }}
+
+                        <div class="mb-4">
+                            <label for="addSettingsName" class="form-label">
+                                <span data-i18n="be_megnev"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+                            {{ add_settings_form.settings_name(type='text', id='addSettingsName', class='form-control') }}
+                            <small class="text-danger input-error add-settings-name-error d-none">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="mb-4 d-inline-block">
+                            <label for="addSettingsTypeTextInteger" class="form-label w-100">
+                                <span data-i18n="be_tipus"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+
+                            <div style="line-height:20px;" class="radio-input float-left">
+                                <input class="addSettingsTypeText" type="radio" id="addSettingsTypeText" name="radio"
+                                       checked>
+                                <label class="d-content" for="addSettingsTypeText" data-i18n="szoveg"></label>
+                            </div>
+
+                            <div style="line-height:20px;" class="radio-input float-left ml-3">
+                                <input class="addSettingsTypeInteger" type="radio" id="addSettingsTypeInteger"
+                                       name="radio">
+                                <label class="d-content" for="addSettingsTypeInteger" data-i18n="szam"></label>
+                            </div>
+
+                            <small class="text-danger input-error add-settings-type-error d-none w-100 d-inline-block">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="addSettingsValue" class="form-label w-100">
+                                <span data-i18n="be_ertek"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+                            {{ add_settings_form.settings_value(type='text', id='addSettingsValue', class='form-control') }}
+                            <small class="text-danger input-error add-settings-value-error d-none">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="button-right text-right">
+                            <button id="add-settings-form-button" type="submit" class="btn btn-primary"
+                                    data-i18n="mentes"></button>
+                        </div>
+
+                        <div class="alert alert-danger form-alert-danger mb-0 mt-3 d-none" role="alert"
+                             data-i18n="anlihouse-A21">
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer text-end" data-i18n="anlihouse-anlibreeders">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editSettings" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-i18n="be_szerk"></span>
+
+                    <div class="modal-close cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                            <path fill-rule="evenodd"
+                                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <form id="edit-settings-form" onsubmit="return false" novalidate="novalidate">
+                        {{ edit_settings_form.csrf_token }}
+
+                        {{ edit_settings_form.settings_id(type='hidden', id='editSettingsId', class='form-control') }}
+                        {{ edit_settings_form.settings_type(type='hidden', id='editSettingsType', class='form-control') }}
+
+                        <div class="mb-4">
+                            <label for="editSettingsName" class="form-label">
+                                <span data-i18n="be_megnev"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+                            {{ edit_settings_form.settings_name(type='text', id='editSettingsName', class='form-control') }}
+                            <small class="text-danger input-error edit-settings-name-error d-none">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="mb-4 d-inline-block">
+                            <label for="editSettingsTypeTextInteger" class="form-label w-100">
+                                <span data-i18n="be_tipus"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+
+                            <div style="line-height:20px;" class="radio-input float-left">
+                                <input class="editSettingsTypeText" type="radio" id="editSettingsTypeText" name="radio"
+                                       checked>
+                                <label class="d-content" for="editSettingsTypeText" data-i18n="szoveg"></label>
+                            </div>
+
+                            <div style="line-height:20px;" class="radio-input float-left ml-3">
+                                <input class="editSettingsTypeInteger" type="radio" id="editSettingsTypeInteger"
+                                       name="radio">
+                                <label class="d-content" for="editSettingsTypeInteger" data-i18n="szam"></label>
+                            </div>
+
+                            <small class="text-danger input-error edit-settings-type-error d-none w-100 d-inline-block">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="editSettingsValue" class="form-label w-100">
+                                <span data-i18n="be_ertek"></span>
+                                <span class="text-danger text-lowercase fs-12px"
+                                      data-i18n="anlihouse-A18"></span>
+                            </label>
+                            {{ edit_settings_form.settings_value(type='text', id='editSettingsValue', class='form-control') }}
+                            <small class="text-danger input-error edit-settings-value-error d-none">
+                                <span data-i18n=""></span>
+                            </small>
+                        </div>
+
+                        <div class="button-right text-right">
+                            <button id="edit-settings-form-button" type="submit" class="btn btn-primary"
+                                    data-i18n="mentes"></button>
+                        </div>
+
+                        <div class="alert alert-danger form-alert-danger mb-0 mt-3 d-none" role="alert"
+                             data-i18n="anlihouse-A21">
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer text-end" data-i18n="anlihouse-anlibreeders">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{# End Content #}

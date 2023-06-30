@@ -1,0 +1,1113 @@
+<div id="header" class="pt-3 pb-3">
+
+    <div class="container w-100 mw-100 pl-3 pr-3">
+        <div class="row">
+            <div class="col-12">
+
+                <a href="{{ url_for('index_module.index') }}" id="header-logo" class="">
+                    <img class="img" src="{{ url_for("static", filename="images/layout/anli_breeders_logo.png") }}"
+                         alt="ANLI Breeders"/>
+                    <span class="text" data-i18n="anlihouse-anlibreeders"></span>
+                </a>
+
+                <div id="hamburger" class="closed user-select-none">
+                    <span class="hamburger-line line01"></span>
+                    <span class="hamburger-line line02"></span>
+                    <span class="hamburger-line line03"></span>
+                    <span class="hamburger-line line04"></span>
+                    <span class="hamburger-text" data-i18n="anlihouse-A01"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="search">
+    <div class="container w-100 mw-100 pl-3 pr-3">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="search auth">
+
+                    <div class="search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+
+                    <div class="search-text">
+                        <form id="filter-form" onsubmit="return false" novalidate="novalidate">
+                            {{ filter_form.csrf_token }}
+
+                            <input type="hidden" id="room" name="room"
+                                   value="{{ is_user_login['user_profile']['username'] }}" readonly>
+
+                            {{ filter_form.where_input(type='text', id='searchInput', class='form-control') }}
+
+                            {{ filter_form.where_all(type='hidden', id='filterWhereAllInput', class='form-control') }}
+
+                            {{ filter_form.where_name(type='hidden', id='filterWhereNameInput', class='form-control') }}
+
+                            {{ filter_form.where_description(type='hidden', id='filterWhereDescriptionInput', class='form-control') }}
+
+                            {{ filter_form.where_family(type='hidden', id='filterWhereFamilyInput', class='form-control') }}
+                            {{ filter_form.where_family_mother(type='hidden', id='filterWhereFamilyMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_mother_mother(type='hidden', id='filterWhereFamilyMotherMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_mother_father(type='hidden', id='filterWhereFamilyMotherFatherInput', class='form-control') }}
+                            {{ filter_form.where_family_mother_mother_mother(type='hidden', id='filterWhereFamilyMotherMotherMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_mother_mother_father(type='hidden', id='filterWhereFamilyMotherMotherFatherInput', class='form-control') }}
+                            {{ filter_form.where_family_mother_father_mother(type='hidden', id='filterWhereFamilyMotherFatherMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_mother_father_father(type='hidden', id='filterWhereFamilyMotherFatherFatherInput', class='form-control') }}
+                            {{ filter_form.where_family_father(type='hidden', id='filterWhereFamilyFatherInput', class='form-control') }}
+                            {{ filter_form.where_family_father_mother(type='hidden', id='filterWhereFamilyFatherMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_father_father(type='hidden', id='filterWhereFamilyFatherFatherInput', class='form-control') }}
+                            {{ filter_form.where_family_father_mother_mother(type='hidden', id='filterWhereFamilyFatherMotherMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_father_mother_father(type='hidden', id='filterWhereFamilyFatherMotherFatherInput', class='form-control') }}
+                            {{ filter_form.where_family_father_father_mother(type='hidden', id='filterWhereFamilyFatherFatherMotherInput', class='form-control') }}
+                            {{ filter_form.where_family_father_father_father(type='hidden', id='filterWhereFamilyFatherFatherFatherInput', class='form-control') }}
+
+                            {{ filter_form.price_min(type='hidden', id='filterPriceMinInput', class='form-control') }}
+                            {{ filter_form.price_max(type='hidden', id='filterPriceMaxInput', class='form-control') }}
+
+                            {{ filter_form.category_all(type='hidden', id='filterCategoryInput', class='form-control') }}
+
+                            {{ filter_form.subcategory_all(type='hidden', id='filterSubcategoryInput', class='form-control') }}
+
+                            {{ filter_form.gender_all(type='hidden', id='filterGenderInput', class='form-control') }}
+
+                            {{ filter_form.color_all(type='hidden', id='filterColorInput', class='form-control') }}
+
+                            {{ filter_form.be_used_for_all(type='hidden', id='filterBeUsedForInput', class='form-control') }}
+
+                            {{ filter_form.age_min(type='hidden', id='filterAgeMinInput', class='form-control') }}
+                            {{ filter_form.age_max(type='hidden', id='filterAgeMaxInput', class='form-control') }}
+
+                            {{ filter_form.height_min(type='hidden', id='filterHeightMinInput', class='form-control') }}
+                            {{ filter_form.height_max(type='hidden', id='filterHeightMaxInput', class='form-control') }}
+
+                            {{ filter_form.region_residence(type='hidden', id='filterRegionResidenceInput', class='form-control') }}
+                            {{ filter_form.country_residence(type='hidden', id='filterCountryResidenceInput', class='form-control') }}
+
+                            {{ filter_form.region_origin(type='hidden', id='filterRegionOriginInput', class='form-control') }}
+                            {{ filter_form.country_origin(type='hidden', id='filterCountryOriginInput', class='form-control') }}
+
+                            {{ filter_form.order_by_price(type='hidden', id='filterOrderByPrice', class='form-control') }}
+                            {{ filter_form.order_by_age(type='hidden', id='filterOrderByAge', class='form-control') }}
+                            {{ filter_form.order_by_height(type='hidden', id='filterOrderByHeight', class='form-control') }}
+                            {{ filter_form.order_by_rating(type='hidden', id='filterOrderByRating', class='form-control') }}
+
+                            {{ filter_form.encode(type='hidden', id='filterEncode', class='form-control') }}
+
+                            {{ filter_form.only_one_category_id(type='hidden', id='filterOnlyOneCategoryId', class='form-control') }}
+                            {{ filter_form.only_one_subcategory_id(type='hidden', id='filterOnlyOneSubcategoryId', class='form-control') }}
+
+                            {{ filter_form.seller_user_id(type='hidden', id='filterSellerUserId', class='form-control') }}
+                            {{ filter_form.seller_user_name(type='hidden', id='filterSellerUserName', class='form-control') }}
+
+                            {{ filter_form.wishlist(type='hidden', id='filterWishlist', class='form-control') }}
+
+                            {{ filter_form.snap(type='hidden', id='filterSnap', class='form-control') }}
+                        </form>
+                    </div>
+
+                    <div class="search-close inactive">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                             class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+                <div id="search-user-info" class="closed">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                         class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+
+                    <div id="userinfo-wrap" class="closed">
+                        <div id="userinfo" class="shadow">
+                            <div class="container w-100 mw-100 pl-3 pr-3">
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        <div class="loader-wrap closed">
+                                            <span class="loader"></span>
+                                        </div>
+
+                                        <div id="userinfo-container" class="d-none">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="search-user-notification" class="closed">
+                    {% if is_user_login['messages_received']['received'] != 0 %}
+                        <span class="badge bell">{{ is_user_login['messages_received']['received'] }}</span>
+                    {% else %}
+                        <span class="badge bell "
+                              style="display:none;">{{ is_user_login['messages_received']['received'] }}</span>
+                    {% endif %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-bell-fill" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                    </svg>
+
+                    <div id="notification-wrap" class="closed">
+                        <div id="notification" class="shadow">
+                            <div class="container w-100 mw-100 pl-3 pr-3">
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        <div class="loader-wrap closed">
+                                            <span class="loader"></span>
+                                        </div>
+
+                                        <div id="notification-container" class="d-none">
+
+                                            <div id="head">
+                                                <div id="title" data-i18n="anlihouse-A233"></div>
+                                                <div id="settings" data-bs-toggle="dropdown">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-gear-fill"
+                                                         viewBox="0 0 16 16">
+                                                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                                    </svg>
+                                                </div>
+                                                <ul class="dropdown-menu shadow settings-ul mt-2">
+                                                    <li class="dropdown-item"><a
+                                                            href="{{ url_for('notification_module.notifications') }}"
+                                                            data-i18n="anlihouse-A403"></a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div id="content-list">
+                                            </div>
+
+                                            <div id="chat-list-additional" class="d-none"
+                                                 data-i18n="anlihouse-A241"></div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container w-100 mw-100 pl-3 pr-3">
+        <div class="row">
+            <div class="col-12">
+                <div id="filter-wrap" class="inactive">
+                    <div id="filter">
+
+                        <div id="where" class="">
+                            <div class="title" data-i18n="anlihouse-A248"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single filterWhereAll active" data-name="filterWhereAll"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A249"></span>
+                                </span>
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+
+                                <span class="badge elem single filterWhereAll active" data-name="filterWhereAll"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A249"></span>
+                                </span>
+
+                                <span class="badge elem multiple filterWhereName inactive" data-name="filterWhereName"
+                                      data-status="inactive">
+                                    <span class="text" data-i18n="anlihouse-A250"></span>
+                                </span>
+
+                                <span class="badge elem multiple filterWhereDescription inactive"
+                                      data-name="filterWhereDescription" data-status="inactive">
+                                    <span class="text" data-i18n="anlihouse-A251"></span>
+                                </span>
+
+                                <span class="badge elem multiple filterWhereFamily inactive"
+                                      data-name="filterWhereFamily" data-status="inactive">
+                                    <span class="text" data-i18n="anlihouse-A252"></span>
+                                </span>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="family-group inactive">
+                                    <span class="badge elem multiple filterWhereFamilyMother inactive"
+                                          data-name="filterWhereFamilyMother"
+                                          data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A253"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyMotherMother inactive"
+                                          data-name="filterWhereFamilyMotherMother"
+                                          data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A254"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyMotherFather inactive"
+                                          data-name="filterWhereFamilyMotherFather"
+                                          data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A255"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyMotherMotherMother inactive"
+                                          data-name="filterWhereFamilyMotherMotherMother" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A256"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyMotherMotherFather inactive"
+                                          data-name="filterWhereFamilyMotherMotherFather" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A257"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyMotherFatherMother inactive"
+                                          data-name="filterWhereFamilyMotherFatherMother" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A258"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyMotherFatherFather inactive"
+                                          data-name="filterWhereFamilyMotherFatherFather" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A259"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFather inactive"
+                                          data-name="filterWhereFamilyFather"
+                                          data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A260"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFatherMother inactive"
+                                          data-name="filterWhereFamilyFatherMother"
+                                          data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A261"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFatherFather inactive"
+                                          data-name="filterWhereFamilyFatherFather"
+                                          data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A262"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFatherMotherMother inactive"
+                                          data-name="filterWhereFamilyFatherMotherMother" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A263"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFatherMotherFather inactive"
+                                          data-name="filterWhereFamilyFatherMotherFather" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A264"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFatherFatherMother inactive"
+                                          data-name="filterWhereFamilyFatherFatherMother" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A265"></span>
+                                    </span>
+
+                                    <span class="badge elem multiple filterWhereFamilyFatherFatherFather inactive"
+                                          data-name="filterWhereFamilyFatherFatherFather" data-status="inactive">
+                                        <span class="text" data-i18n="anlihouse-A266"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="price">
+                            <div class="title" data-i18n="anlihouse-A267"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem active" style="pointer-events:none;">
+                                    <span class="text"><span class="tooltip-lower"></span> - <span
+                                            class="tooltip-upper"></span></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+
+                                <span class="badge elem active" style="pointer-events:none;">
+                                    <span class="text"><span class="tooltip-lower"></span> - <span
+                                            class="tooltip-upper"></span></span>
+                                </span>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                                {% if is_user_login['user_permission']['is_admin'] == "True" or is_user_login['user_permission']['subscribed'] == "True" %}
+                                    <div id="price-slider"></div>
+                                {% else %}
+                                    {# <div id="price-slider" disabled="false"></div> #}
+                                    <div id="price-slider"></div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="category">
+                            <div class="title" data-i18n="anlihouse-A268"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single filterCategoryAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single filterCategoryAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                {% for category in filter_category_all %}
+                                    {% if category['lang'] == "hu" %}
+                                        <span class="badge elem multiple inactive" data-name="{{ category['id'] }}"
+                                              data-status="inactive">
+                                            <span class="text">{{ category['name_hu'] }}</span>
+                                        </span>
+                                    {% elif category['lang'] == "en" %}
+                                        <span class="badge elem multiple inactive" data-name="{{ category['id'] }}"
+                                              data-status="inactive">
+                                            <span class="text">{{ category['name_en'] }}</span>
+                                        </span>
+                                    {% elif category['lang'] == "de" %}
+                                        <span class="badge elem multiple inactive" data-name="{{ category['id'] }}"
+                                              data-status="inactive">
+                                            <span class="text">{{ category['name_de'] }}</span>
+                                        </span>
+                                    {% elif category['lang'] == "fr" %}
+                                        <span class="badge elem multiple inactive" data-name="{{ category['id'] }}"
+                                              data-status="inactive">
+                                            <span class="text">{{ category['name_fr'] }}</span>
+                                        </span>
+                                    {% elif category['lang'] == "es" %}
+                                        <span class="badge elem multiple inactive" data-name="{{ category['id'] }}"
+                                              data-status="inactive">
+                                            <span class="text">{{ category['name_es'] }}</span>
+                                        </span>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="subcategory" class="">
+                            <div class="title" data-i18n="anlihouse-A270"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single filterSubcategoryAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single filterSubcategoryAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <div class="filterSubcategories"></div>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div id="gender" class="">
+                            <div class="title" data-i18n="anlihouse-A271"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single filterGenderAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single filterGenderAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <div class="filterGender"></div>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="color" class="">
+                            <div class="title" data-i18n="anlihouse-A272"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single filterColorAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single filterColorAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <div class="filterColor"></div>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div id="beUsedFor" class="">
+                            <div class="title" data-i18n="anlihouse-A273"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single filterBeUsedForAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g></svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single filterBeUsedForAll active" data-name="0"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <div class="filterBeUsedFor"></div>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="age" class="">
+                            <div class="title" data-i18n="anlihouse-A274"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single active" style="pointer-events:none;">
+                                    <span class="text"><span class="tooltip-lower"></span> - <span
+                                            class="tooltip-upper"></span></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+
+                                <span class="badge elem single active" style="pointer-events:none;">
+                                    <span class="text"><span class="tooltip-lower"></span> - <span
+                                            class="tooltip-upper"></span></span>
+                                </span>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                                <div id="age-slider"></div>
+                            </div>
+                        </div>
+
+                        <div id="height" class="">
+                            <div class="title" data-i18n="anlihouse-A275"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single active" style="pointer-events:none;">
+                                    <span class="text"><span class="tooltip-lower"></span> - <span
+                                            class="tooltip-upper"></span></span>
+                                </span>
+
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+
+                                <span class="badge elem single active" style="pointer-events:none;">
+                                    <span class="text"><span class="tooltip-lower"></span> - <span
+                                            class="tooltip-upper"></span></span>
+                                </span>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                                <div id="height-slider"></div>
+                            </div>
+                        </div>
+
+                        <div id="countryResidence">
+                            <div class="title" data-i18n="anlihouse-A276"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single region filterCountryResidenceAll active" data-name="ALL"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single region filterCountryResidenceAll active" data-name="ALL"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <span id="{{ filter_countries['Americas'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Americas'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Americas'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Europe'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Europe'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Europe'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Asia'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Asia'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Asia'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Africa'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Africa'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Africa'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Oceania'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Oceania'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Oceania'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Antarctic'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Antarctic'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Antarctic'][0]['region'] }}</span>
+                                </span>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="countries-group countries-residence inactive"
+                                      data-region_code="{{ filter_countries['Americas'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Americas'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-residence inactive"
+                                      data-region_code="{{ filter_countries['Europe'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Europe'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-residence inactive"
+                                      data-region_code="{{ filter_countries['Asia'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Asia'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-residence inactive"
+                                      data-region_code="{{ filter_countries['Africa'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Africa'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-residence inactive"
+                                      data-region_code="{{ filter_countries['Oceania'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Oceania'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-residence inactive"
+                                      data-region_code="{{ filter_countries['Antarctic'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Antarctic'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="countryOrigin">
+                            <div class="title" data-i18n="anlihouse-A277"></div>
+
+                            <span class="plus" style="display:none">
+                                <span class="badge elem single region filterCountryOriginAll active" data-name="ALL"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+                                <span class="badge elem plus-icon">
+                                    <svg width="16" height="16" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
+                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
+                                            clip-path="url(.p)"><path
+                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
+                                            fill-rule="evenodd"/></g>
+                                    </svg>
+                                </span>
+                            </span>
+
+                            <div class="badge-group active">
+                                <span class="badge elem single region filterCountryOriginAll active" data-name="ALL"
+                                      data-status="active">
+                                    <span class="text" data-i18n="anlihouse-A269"></span>
+                                </span>
+
+                                <span id="{{ filter_countries['Americas'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Americas'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Americas'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Europe'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Europe'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Europe'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Asia'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Asia'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Asia'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Africa'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Africa'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Africa'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Oceania'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Oceania'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Oceania'][0]['region'] }}</span>
+                                </span>
+
+                                <span id="{{ filter_countries['Antarctic'][0]['region_code'] }}"
+                                      class="badge elem multiple region inactive"
+                                      data-name="{{ filter_countries['Antarctic'][0]['region_code'] }}"
+                                      data-status="inactive">
+                                    <span class="text">{{ filter_countries['Antarctic'][0]['region'] }}</span>
+                                </span>
+
+                                <span class="badge elem minus-icon">
+                                    <svg width="16" height="716" viewBox="0 0 752 752"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
+                                    </svg>
+                                </span>
+
+                                <span class="countries-group countries-origin inactive"
+                                      data-region_code="{{ filter_countries['Americas'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Americas'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-origin inactive"
+                                      data-region_code="{{ filter_countries['Europe'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Europe'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-origin inactive"
+                                      data-region_code="{{ filter_countries['Asia'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Asia'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-origin inactive"
+                                      data-region_code="{{ filter_countries['Africa'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Africa'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-origin inactive"
+                                      data-region_code="{{ filter_countries['Oceania'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Oceania'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+
+                                <span class="countries-group countries-origin inactive"
+                                      data-region_code="{{ filter_countries['Antarctic'][0]['region_code'] }}">
+                                    {% for country in filter_countries['Antarctic'] %}
+                                        <span class="badge elem multiple country inactive"
+                                              data-name="{{ country['country_code'] }}"
+                                              data-status="inactive">
+                                        <span class="text">{{ country['country'] }}</span>
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="search-btn" class="inactive">
+                            <a id="searchBtn" class="btn btn-primary" href="" role="button" data-i18n=""><span
+                                    class="text" data-i18n="anlihouse-A301"></span><span class="count"><span
+                                    class="count-data">0</span> <span data-i18n="anlihouse-A302"></span></span></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{# Start Chat Modal #}
+<div class="modal fade" id="chatmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="chat-modal-title-name"></span>
+
+                <div class="modal-close cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                        <path fill-rule="evenodd"
+                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="loader-wrap">
+                                <span class="loader open"></span>
+                            </div>
+
+                            <div id="messages">
+
+                                <div class="messages">
+                                </div>
+
+                                <div id="typing-actions-wrap">
+                                    <div class="typing-actions">
+                                        <span class="one"></span>
+                                        <span class="two"></span>
+                                        <span class="three"></span>
+                                    </div>
+                                </div>
+
+                                <div class="chat progress d-none position-relative overflow-visible">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                                         style="width:0;"
+                                         aria-valuenow="0"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        <span class="file-percent d-content">0%</span> <span
+                                            class="file-size d-content"></span>
+                                    </div>
+                                </div>
+
+                                <div class="input-group chat-input-group mt-3 send">
+                                    <textarea class="form-control" id="chat-input" type="text" rows="1"
+                                              placeholder="Írd be üzenetedet..."></textarea>
+                                    <input type="hidden" id="room" name="room" value="" readonly>
+                                    <input type="hidden" id="from_username" name="from_username" value="" readonly>
+                                    <input type="hidden" id="sender_id" name="sender_id" value="" readonly>
+                                    <input type="hidden" id="to_username" name="to_username" value="" readonly>
+                                    <input type="hidden" id="host_id" name="host_id" value="" readonly>
+
+                                    <span class="chat-emoji-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                             fill="currentColor" class="bi bi-emoji-smile-fill" viewBox="0 0 16 16">
+                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                                        </svg>
+                                    </span>
+
+                                    <span class="chat-img-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                             fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                            <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                                        </svg>
+                                    </span>
+
+                                    <span class="chat-input-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                             fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                                        </svg>
+                                    </span>
+
+                                    <small class="text-danger input-error chat-img-error d-none"
+                                           style="width:100%;margin-left:1px;">
+                                        <span data-i18n=""></span>
+                                    </small>
+                                </div>
+
+                                <div id="chat-emoji-list-wrap" class="shadow inactive">
+                                    <div class="container">
+                                        <div class="chat-emoji-list">
+                                            <div class="emoji"><span class="text">👍</span></div>
+                                            <div class="emoji"><span class="text">👌</span></div>
+                                            <div class="emoji"><span class="text">😎</span></div>
+                                            <div class="emoji"><span class="text">😇</span></div>
+                                            <div class="emoji"><span class="text">😘</span></div>
+                                            <div class="emoji"><span class="text">😍</span></div>
+                                            <div class="emoji"><span class="text">🤩</span></div>
+                                            <div class="emoji"><span class="text">💰</span></div>
+                                            <div class="emoji"><span class="text">🤑</span></div>
+                                            <div class="emoji"><span class="text">😄</span></div>
+                                            <div class="emoji"><span class="text">😅</span></div>
+                                            <div class="emoji"><span class="text">😂</span></div>
+                                            <div class="emoji"><span class="text">😜</span></div>
+                                            <div class="emoji"><span class="text">😱</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-scroll-down inactive">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                         class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                </div>
+
+            </div>
+            <div class="modal-footer text-end">
+                <div class="modal-close cursor-pointer" style="position:absolute;left:10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                        <path fill-rule="evenodd"
+                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                    </svg>
+                </div>
+                <span data-i18n="anlihouse-anlibreeders"></span>
+            </div>
+        </div>
+    </div>
+</div>
+{# End Chat Modal #}

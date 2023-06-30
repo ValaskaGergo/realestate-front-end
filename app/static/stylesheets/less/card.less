@@ -1,0 +1,46 @@
+.card {
+  border: none;
+
+  .card-header {
+    font-size: 16px;
+    color: @White;
+    background: @HeaderGradient;
+    border: none;
+
+    .card-header-icon {
+      float: right;
+
+      svg {
+        width: 22px;
+        height: auto;
+      }
+
+      &.inactive {
+        svg {
+          fill: @White;
+        }
+      }
+
+      &.active {
+        svg {
+          fill: @Plaster;
+        }
+      }
+
+      &:hover {
+        svg {
+          fill: @Plaster;
+        }
+      }
+    }
+  }
+
+  .card-body {
+  }
+
+  .card-footer {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+}
