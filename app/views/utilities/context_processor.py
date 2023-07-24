@@ -113,9 +113,6 @@ def inject_filter_form():
             filter_form.age_min.data = query_decode['age_min']
             filter_form.age_max.data = query_decode['age_max']
 
-            filter_form.height_min.data = query_decode['height_min']
-            filter_form.height_max.data = query_decode['height_max']
-
             filter_form.region_residence.data = query_decode['region_residence']
             filter_form.country_residence.data = query_decode['country_residence']
 
@@ -124,7 +121,6 @@ def inject_filter_form():
 
             filter_form.order_by_price.data = query_decode['order_by_price']
             filter_form.order_by_age.data = query_decode['order_by_age']
-            filter_form.order_by_height.data = query_decode['order_by_height']
             filter_form.order_by_rating.data = query_decode['order_by_rating']
 
             filter_form.only_one_category_id.data = query_decode['only_one_category_id']
@@ -180,9 +176,6 @@ def inject_filter_form():
             filter_form.age_min.data = app.config['FILTER_AGE_MIN']
             filter_form.age_max.data = app.config['FILTER_AGE_MAX']
 
-            filter_form.height_min.data = app.config['FILTER_HEIGHT_MIN']
-            filter_form.height_max.data = app.config['FILTER_HEIGHT_MAX']
-
             filter_form.region_residence.data = 'ALL'
             filter_form.country_residence.data = 'ALL'
 
@@ -191,7 +184,6 @@ def inject_filter_form():
 
             filter_form.order_by_price.data = "None"
             filter_form.order_by_age.data = "None"
-            filter_form.order_by_height.data = "None"
             filter_form.order_by_rating.data = "desc"
 
             filter_form.encode.data = "None"
@@ -247,9 +239,6 @@ def inject_filter_form():
         filter_form.age_min.data = app.config['FILTER_AGE_MIN']
         filter_form.age_max.data = app.config['FILTER_AGE_MAX']
 
-        filter_form.height_min.data = app.config['FILTER_HEIGHT_MIN']
-        filter_form.height_max.data = app.config['FILTER_HEIGHT_MAX']
-
         filter_form.region_residence.data = 'ALL'
         filter_form.country_residence.data = 'ALL'
 
@@ -258,7 +247,6 @@ def inject_filter_form():
 
         filter_form.order_by_price.data = "None"
         filter_form.order_by_age.data = "None"
-        filter_form.order_by_height.data = "None"
         filter_form.order_by_rating.data = "desc"
 
         filter_form.encode.data = "None"

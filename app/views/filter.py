@@ -91,8 +91,6 @@ def _get_filter_count():
     age_min = data['age_min']
     age_max = data['age_max']
 
-    height_min = data['height_min']
-    height_max = data['height_max']
 
     region_residence = data['region_residence']
     country_residence = data['country_residence']
@@ -102,7 +100,6 @@ def _get_filter_count():
 
     order_by_price = data['order_by_price']
     order_by_age = data['order_by_age']
-    order_by_height = data['order_by_height']
     order_by_rating = data['order_by_rating']
 
     category_all_list = json.loads(category_all)
@@ -178,8 +175,6 @@ def _get_filter_count():
         "age_min": age_min,
         "age_max": age_max,
 
-        "height_min": height_min,
-        "height_max": height_max,
 
         "region_residence": region_residence,
         "country_residence": country_residence,
@@ -189,7 +184,6 @@ def _get_filter_count():
 
         "order_by_price": order_by_price,
         "order_by_age": order_by_age,
-        "order_by_height": order_by_height,
         "order_by_rating": order_by_rating,
 
         "only_one_category_id": only_one_category_id,

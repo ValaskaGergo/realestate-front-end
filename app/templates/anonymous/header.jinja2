@@ -81,9 +81,6 @@
                             {{ filter_form.age_min(type='hidden', id='filterAgeMinInput', class='form-control') }}
                             {{ filter_form.age_max(type='hidden', id='filterAgeMaxInput', class='form-control') }}
 
-                            {{ filter_form.height_min(type='hidden', id='filterHeightMinInput', class='form-control') }}
-                            {{ filter_form.height_max(type='hidden', id='filterHeightMaxInput', class='form-control') }}
-
                             {{ filter_form.region_residence(type='hidden', id='filterRegionResidenceInput', class='form-control') }}
                             {{ filter_form.country_residence(type='hidden', id='filterCountryResidenceInput', class='form-control') }}
 
@@ -92,7 +89,6 @@
 
                             {{ filter_form.order_by_price(type='hidden', id='filterOrderByPrice', class='form-control') }}
                             {{ filter_form.order_by_age(type='hidden', id='filterOrderByAge', class='form-control') }}
-                            {{ filter_form.order_by_height(type='hidden', id='filterOrderByHeight', class='form-control') }}
                             {{ filter_form.order_by_rating(type='hidden', id='filterOrderByRating', class='form-control') }}
 
                             {{ filter_form.encode(type='hidden', id='filterEncode', class='form-control') }}
@@ -550,44 +546,6 @@
                                 </span>
 
                                 <div id="age-slider"></div>
-                            </div>
-                        </div>
-
-                        <div id="height" class="">
-                            <div class="title" data-i18n="anlihouse-A275"></div>
-
-                            <span class="plus" style="display:none">
-                                <span class="badge elem single active" style="pointer-events:none;">
-                                    <span class="text"><span class="tooltip-lower"></span> - <span
-                                            class="tooltip-upper"></span></span>
-                                </span>
-
-                                <span class="badge elem plus-icon">
-                                    <svg width="16" height="16" viewBox="0 0 752 752"
-                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
-                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
-                                            clip-path="url(.p)"><path
-                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
-                                            fill-rule="evenodd"/></g>
-                                    </svg>
-                                </span>
-                            </span>
-
-                            <div class="badge-group active">
-
-                                <span class="badge elem single active" style="pointer-events:none;">
-                                    <span class="text"><span class="tooltip-lower"></span> - <span
-                                            class="tooltip-upper"></span></span>
-                                </span>
-
-                                <span class="badge elem minus-icon">
-                                    <svg width="16" height="716" viewBox="0 0 752 752"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
-                                    </svg>
-                                </span>
-
-                                <div id="height-slider"></div>
                             </div>
                         </div>
 

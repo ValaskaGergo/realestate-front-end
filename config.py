@@ -42,9 +42,6 @@ class Config(object):
     FILTER_AGE_MIN = 0
     FILTER_AGE_MAX = 150
     FILTER_AGE_STEP = 1
-    FILTER_HEIGHT_MIN = 0
-    FILTER_HEIGHT_MAX = 200
-    FILTER_HEIGHT_STEP = 1
 
     # CACHE_TYPE = 'FileSystemCache'
     # CACHE_DIR = _static + '/caching'
@@ -148,4 +145,3 @@ class DevelopmentConfig(Config):
     API_SERVER_URL = "https://api.anlirealestate.com"
     SOCKET_SERVER_URL = "https://socket.anlirealestate.com"
     CORS_ALLOWED_ORIGINS = "https://anlirealestate.com"
-

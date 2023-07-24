@@ -692,19 +692,6 @@ class AnlibreedersAnimal {
                                         }
 
 
-                                        if (result['message']['message']['height']) {
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error span").removeData("i18n");
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error span").text("");
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error span").attr("data-i18n", result['message']['message']['height']);
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error").removeClass("d-none");
-                                            $('body').i18n();
-                                        } else {
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error span").removeData("i18n");
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error span").text("");
-                                            $uploadingAnimalForm.find(".uploading-animal-height-error").addClass("d-none");
-                                            $('body').i18n();
-                                        }
-
                                         if (result['message']['message']['age_year']) {
                                             $uploadingAnimalForm.find(".uploading-animal-year-select-error span").removeData("i18n");
                                             $uploadingAnimalForm.find(".uploading-animal-year-select-error span").text("");

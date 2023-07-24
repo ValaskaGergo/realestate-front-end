@@ -1133,65 +1133,6 @@ class AnlibreedersSearch {
                 });
             },
 
-            searchFilterHeight: function () {
-                const heightSlider = document.getElementById('height-slider');
-
-                const $filter = $("#filter");
-                const $filterHeight = $filter.find("#height");
-                const $filterHeightTooltipLower = $filterHeight.find(".text .tooltip-lower");
-                const $filterHeightTooltipUpper = $filterHeight.find(".text .tooltip-upper");
-
-                const $filterHeightMinInput = $("#filterHeightMinInput");
-                const $filterHeightMaxInput = $("#filterHeightMaxInput");
-
-                noUiSlider.create(heightSlider, {
-                    start: [parseInt(process.env.FILTER_HEIGHT_MIN), parseInt(process.env.FILTER_HEIGHT_MAX)],
-                    step: parseInt(process.env.FILTER_HEIGHT_STEP),
-                    connect: true,
-                    tooltips: [true, true],
-                    format: wNumb({
-                        decimals: 0,
-                        thousand: '.',
-                        suffix: 'cm',
-                        prefix: ''
-                    }),
-                    range: {
-                        'min': [parseInt(process.env.FILTER_HEIGHT_MIN)],
-                        'max': [parseInt(process.env.FILTER_HEIGHT_MAX)]
-                    }
-                });
-
-                heightSlider.noUiSlider.on('update', function (values, handle) {
-                    $filterHeightTooltipLower.text(values[0]);
-                    $filterHeightTooltipUpper.text(values[1]);
-                });
-
-                heightSlider.noUiSlider.on('change', function (values, handle) {
-                    let valMin = values[0].replace("cm", "");
-                    let valMax = values[1].replace("cm", "");
-
-                    $filterHeightMinInput.val(valMin.replace(".", ""));
-                    $filterHeightMaxInput.val(valMax.replace(".", ""));
-
-                    $filterHeightMinInput.trigger("change");
-                    $filterHeightMaxInput.trigger("change");
-                });
-
-                $filterHeight.addClass("inactive");
-                $filter.find("#subcategory").addClass("inactive");
-                $filter.find("#gender").addClass("inactive");
-                $filter.find("#color").addClass("inactive");
-                $filter.find("#beUsedFor").addClass("inactive");
-            },
-
-            searchFilterHeightUpdate: function () {
-                const heightSlider = document.getElementById('height-slider');
-
-                heightSlider.noUiSlider.updateOptions({
-                    start: [parseInt(process.env.FILTER_HEIGHT_MIN), parseInt(process.env.FILTER_HEIGHT_MAX)],
-                });
-            },
-
             searchFilterCountryResidence: function () {
                 const $filter = $("#filter");
                 const $countryResidence = $filter.find("#countryResidence");
@@ -1959,7 +1900,6 @@ class AnlibreedersSearch {
                 loadSearch.searchFilterColor();
                 loadSearch.searchFilterBeUsedFor();
                 loadSearch.searchFilterAge();
-                loadSearch.searchFilterHeight();
                 loadSearch.searchFilterCountryResidence();
                 loadSearch.searchFilterCountryOrigin();
                 loadSearch.filterSetFormElem();

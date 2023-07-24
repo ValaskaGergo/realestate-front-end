@@ -1947,7 +1947,6 @@ def edit_of_uploaded_animal(animal_id):
             uploading_animal_form.subcategory_id.data = animal['animal']['subcategory_id']
             uploading_animal_form.subcategory_id_name.data = animal['subcategory']['name_en']
             uploading_animal_form.name.data = animal['animal']['name']
-            uploading_animal_form.height.data = animal['animal']['height']
             uploading_animal_form.age_year.data = animal['animal']['age_year']
             uploading_animal_form.age_month.data = animal['animal']['age_month']
             uploading_animal_form.age_day.data = animal['animal']['age_day']

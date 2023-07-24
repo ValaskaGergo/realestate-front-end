@@ -111,14 +111,6 @@ class FilterForm(FlaskForm):
         render_kw={'readonly': True}
     )
 
-    height_min = HiddenField(
-        render_kw={'readonly': True}
-    )
-
-    height_max = HiddenField(
-        render_kw={'readonly': True}
-    )
-
     region_residence = HiddenField(
         render_kw={'readonly': True}
     )
@@ -140,10 +132,6 @@ class FilterForm(FlaskForm):
     )
 
     order_by_age = HiddenField(
-        render_kw={'readonly': True}
-    )
-
-    order_by_height = HiddenField(
         render_kw={'readonly': True}
     )
 
