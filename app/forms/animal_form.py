@@ -36,14 +36,6 @@ class UploadingAnimalForm(FlaskForm):
         render_kw={'placeholder': ""}
     )
 
-    chip = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    height = StringField(
-        render_kw={'placeholder': ""}
-    )
-
     age_year = StringField(
         render_kw={'readonly': True}
     )

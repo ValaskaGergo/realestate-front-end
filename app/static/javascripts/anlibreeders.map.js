@@ -69,7 +69,7 @@ class AnlibreedersMap {
         };
 
         $(function () {
-            loadMap.initializ()
+            //loadMap.initializ()
         });
     }
 }

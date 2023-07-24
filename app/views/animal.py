@@ -100,8 +100,6 @@ def _uploading_animal():
     category_id_name = form_data['category_id_name']
     subcategory_id_name = form_data['subcategory_id_name']
     name = form_data['name']
-    chip = form_data['chip']
-    height = form_data['height']
     age_year = form_data['age_year']
     age_month = form_data['age_month']
     age_day = form_data['age_day']
@@ -205,8 +203,6 @@ def _uploading_animal():
         "category_id": category_id,
         "subcategory_id": subcategory_id,
         "name": name,
-        "chip": chip,
-        "height": height,
         "age_year": age_year,
         "age_month": age_month,
         "age_day": age_day,
@@ -290,7 +286,8 @@ def _uploading_animal():
         "x_ray_data": x_ray_data,
         "x_ray_data_old": x_ray_data_old,
         "x_ray_status": x_ray_status,
-        "price": price
+        "price": price,
+
     }
     r = requests.post(url, headers=headers, data=json.dumps(payload), verify=app.config['TLS_VERIFY'])
 
@@ -1950,7 +1947,6 @@ def edit_of_uploaded_animal(animal_id):
             uploading_animal_form.subcategory_id.data = animal['animal']['subcategory_id']
             uploading_animal_form.subcategory_id_name.data = animal['subcategory']['name_en']
             uploading_animal_form.name.data = animal['animal']['name']
-            uploading_animal_form.chip.data = animal['animal']['chip']
             uploading_animal_form.height.data = animal['animal']['height']
             uploading_animal_form.age_year.data = animal['animal']['age_year']
             uploading_animal_form.age_month.data = animal['animal']['age_month']

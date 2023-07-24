@@ -475,10 +475,6 @@ def _animal_pdf():
         country_residence = jq2.at("data").where("country_code", "=",
                                                  data['animal']['animal']['country_residence']).get()
 
-        if g.logged_in:
-            chip = data['animal']['animal']['chip']
-        else:
-            chip = "*****"
         #  End Detail
 
         # description = data['animal']['animal']['description'].replace("<br>", "\n")
@@ -652,7 +648,6 @@ def _animal_pdf():
         pdf.set_font_size(10)
         pdf.set_y(pdf.get_y() + 5)
         pdf.set_x(84)
-        pdf.cell(0, 0, chip)
 
         pdf.set_font_size(12)
         pdf.set_y(pdf.get_y() - 5)

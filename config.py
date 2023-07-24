@@ -7,7 +7,7 @@ _templates = os.path.join(_basedir, 'app/templates')
 
 
 class Config(object):
-    BRAND_NAME = "ANLI Breeders"
+    BRAND_NAME = "ANLI Realestate"
     VERSION = "v1.3-rc2"
     #: python -c "print(repr(__import__('os').urandom(24)))"
     SECRET_KEY = '\xb4u\xce0]\xa5\xc8\x8aa\x02\xc9DE8\x13\xabm\x084)=p\x92\x04'

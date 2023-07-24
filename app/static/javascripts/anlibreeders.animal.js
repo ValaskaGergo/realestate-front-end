@@ -691,18 +691,6 @@ class AnlibreedersAnimal {
                                             $('body').i18n();
                                         }
 
-                                        if (result['message']['message']['chip']) {
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error span").removeData("i18n");
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error span").text("");
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error span").attr("data-i18n", result['message']['message']['chip']);
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error").removeClass("d-none");
-                                            $('body').i18n();
-                                        } else {
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error span").removeData("i18n");
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error span").text("");
-                                            $uploadingAnimalForm.find(".uploading-animal-chip-error").addClass("d-none");
-                                            $('body').i18n();
-                                        }
 
                                         if (result['message']['message']['height']) {
                                             $uploadingAnimalForm.find(".uploading-animal-height-error span").removeData("i18n");

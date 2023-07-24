@@ -243,7 +243,8 @@
 
                     <div class="full-wrap">
 
-                        <div class="alert alert-top alert-danger alert-billing-danger" style="margin:1rem 1rem 0 1rem;" role="alert">
+                        <div class="alert alert-top alert-danger alert-billing-danger" style="margin:1rem 1rem 0 1rem;"
+                             role="alert">
                             {{ animal['animal']['animal']['deleted'] }}: Törölt jószág...
 
                         </div>
@@ -882,14 +883,7 @@
                                                         {% endfor %}
                                                     </dd>
 
-                                                    <dt class="col-sm-5" data-i18n="anlihouse-A309"></dt>
-                                                    {% if is_user_login and is_user_login['user_permission']['is_worker'] == "True" or is_user_login['user_permission']['subscribed'] == "True" %}
-                                                        <dd class="col-sm-7">{{ animal['animal']['animal']['chip'] }}</dd>
-                                                    {% else %}
-                                                        <dd class="col-sm-7" style="filter:blur(3px)">123-456-789</dd>
-                                                    {% endif %}
 
-                                                    <dt class="col-sm-5" data-i18n="anlihouse-A311"></dt>
                                                     <dd class="col-sm-7">
 
 
