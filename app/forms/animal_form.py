@@ -384,22 +384,6 @@ class UploadingAnimalForm(FlaskForm):
         render_kw={'placeholder': ""}
     )
 
-    medical_paper = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    medical_paper_data = StringField(
-        render_kw={'readonly': True}
-    )
-
-    medical_paper_data_old = StringField(
-        render_kw={'readonly': True}
-    )
-
-    medical_paper_status = StringField(
-        render_kw={'readonly': True}
-    )
-
     breed_registry = StringField(
         render_kw={'placeholder': ""}
     )

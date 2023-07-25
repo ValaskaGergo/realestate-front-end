@@ -1194,18 +1194,6 @@ class AnlibreedersAnimal {
                                             $('body').i18n();
                                         }
 
-                                        if (result['message']['message']['medical_paper_data']) {
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").removeData("i18n");
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").text("");
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").attr("data-i18n", result['message']['message']['medical_paper_data']);
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error").removeClass("d-none");
-                                            $('body').i18n();
-                                        } else {
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").removeData("i18n");
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").text("");
-                                            $uploadingAnimalForm.find(".uploading-animal-medical-paper-error").addClass("d-none");
-                                            $('body').i18n();
-                                        }
 
                                         if (result['message']['message']['breed_registry_data']) {
                                             $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
@@ -1989,32 +1977,6 @@ class AnlibreedersAnimal {
                     }
                     // End Video01
 
-                    // Start Medical paper
-                    const pdfOptions = {
-                        height: "500px",
-                        pdfOpenParams: {
-                            pagemode: 'none'
-                        }
-                    };
-
-                    let $uploadingAnimalMedicalPaperShow = $("#uploading-animal-form .uploadingAnimalMedicalPaperShow");
-                    let $uploadingAnimalMedicalPaperPdf = $uploadingAnimalMedicalPaperShow.find("#uploadingAnimalMedicalPaperPdf");
-
-                    if ($uploadingAnimalMedicalPaperPdf.val() !== "") {
-                        $uploadingAnimalMedicalPaperPdf.addClass("pointer-events-none");
-                        $uploadingAnimalMedicalPaperShow.find(".animal.medicalPaper.img-icon").addClass("d-none");
-                        $uploadingAnimalMedicalPaperShow.find(".animal.medicalPaper.trash-icon").removeClass("d-none");
-
-                        let $uploadingAnimalMedicalPaperPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalMedicalPaperPdfDataOld").val());
-
-                        if (PDFObject.supportsPDFs) {
-                            PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalMedicalPaperPdfData['folder'] + "/" + $uploadingAnimalMedicalPaperPdfData['filename'], "#animal-new-medical-paper-cropper", pdfOptions);
-                            $uploadingAnimalMedicalPaperShow.find(".animal.medicalPaper.cropper-img").removeClass("d-none");
-                        } else {
-                            console.log("Not supported by this browser.");
-                        }
-                    }
-                    // End Medical Paper
 
                     // Start Breed Registry
                     let $uploadingAnimalBreedRegistryShow = $("#uploading-animal-form .uploadingAnimalBreedRegistryShow");

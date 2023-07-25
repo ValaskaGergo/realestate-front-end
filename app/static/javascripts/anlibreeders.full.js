@@ -18,17 +18,12 @@ class AnlibreedersFull {
             documents: function () {
                 const $full = $("#full");
                 const $accordionItemDocuments = $full.find(".accordion-item.documents");
-                const $medicalPaper = $accordionItemDocuments.find(".medical-paper");
-                const $medicalPaperData = $accordionItemDocuments.find(".medical-paper .data");
                 const $breedRegistry = $accordionItemDocuments.find(".breed-registry");
                 const $breedRegistryData = $accordionItemDocuments.find(".breed-registry .data");
                 const $xRay = $accordionItemDocuments.find(".x-ray");
                 const $xRayData = $accordionItemDocuments.find(".x-ray .data");
                 const $isPdfYes = $accordionItemDocuments.find(".is-pdf-yes");
                 const $isPdfNo = $accordionItemDocuments.find(".is-pdf-no");
-
-                const medicalPaperFolder = $medicalPaper.attr("data-medical_paper_folder");
-                const medicalPaperFile = $medicalPaper.attr("data-medical_paper_file");
 
                 const breedRegistryFolder = $breedRegistry.attr("data-breed_registry_folder");
                 const breedRegistryFile = $breedRegistry.attr("data-breed_registry_file");
@@ -47,9 +42,6 @@ class AnlibreedersFull {
                     $isPdfNo.hide();
                     $isPdfYes.show();
 
-                    if ($medicalPaperData.length !== 0) {
-                        PDFObject.embed("/static/pdf/animal/" + medicalPaperFolder + "/" + medicalPaperFile, $medicalPaperData, pdfOptions);
-                    }
 
                     if ($breedRegistryData.length !== 0) {
                         PDFObject.embed("/static/pdf/animal/" + breedRegistryFolder + "/" + breedRegistryFile, $breedRegistryData, pdfOptions);

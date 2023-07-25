@@ -517,10 +517,6 @@ class AnlibreedersList {
                                     // End Countries
 
                                     // Start PDF
-                                    let medical_paper = ""
-                                    if (pdf['medical_paper'] !== null) {
-                                        medical_paper = '<span class="shadow badge default" data-i18n="anlihouse-A286"></span>';
-                                    }
 
                                     let breed_registry = "";
                                     if (pdf['breed_registry'] !== null) {
@@ -693,7 +689,6 @@ class AnlibreedersList {
                                         '</span>' + // End .country-origin-residence-elem
                                         video_01_elem +
                                         '<span class="shadow badge default"><span>' + img_count + '</span> <span data-i18n="anlihouse-A284"></span></span>' +
-                                        medical_paper +
                                         breed_registry +
                                         x_ray +
                                         url_01 +

@@ -176,9 +176,6 @@ def _uploading_animal():
     video_01_status = form_data['video_01_status']
     url_01 = form_data['url_01']
     url_02 = form_data['url_02']
-    medical_paper_data = form_data['medical_paper_data']
-    medical_paper_data_old = form_data['medical_paper_data_old']
-    medical_paper_status = form_data['medical_paper_status']
     breed_registry_data = form_data['breed_registry_data']
     breed_registry_data_old = form_data['breed_registry_data_old']
     breed_registry_status = form_data['breed_registry_status']
@@ -277,9 +274,6 @@ def _uploading_animal():
         "video_01_data": video_01_data,
         "url_01": url_01,
         "url_02": url_02,
-        "medical_paper_data": medical_paper_data,
-        "medical_paper_data_old": medical_paper_data_old,
-        "medical_paper_status": medical_paper_status,
         "breed_registry_data": breed_registry_data,
         "breed_registry_data_old": breed_registry_data_old,
         "breed_registry_status": breed_registry_status,
@@ -1040,38 +1034,6 @@ def _uploading_animal():
                      path=app.config['TMP_VIDEO_DIRECTORY'] + "animal/" + video_01_data['folder'],
                      folder=video_01_data['folder'], is_tmp=True, animal_id=animal_id)
 
-        # Start Medical Paper PDF
-        medical_paper_data_old_json = None
-        try:
-            medical_paper_data_old_json = json.loads(medical_paper_data_old)
-        except:
-            pass
-        if medical_paper_status == "rm":
-            try:
-                shutil.rmtree(app.config['PDF_DIRECTORY'] + "animal/" + medical_paper_data_old_json['folder'])
-            except:
-                pass
-        elif medical_paper_status == "unchanged":
-            pass
-        elif medical_paper_status == "new":
-            medical_paper_data = json.loads(r_data['medical_paper_data'])
-
-            medical_paper_folder = medical_paper_data['folder']
-            medical_paper_filename = medical_paper_data['filename']
-
-            os.makedirs(app.config['PDF_DIRECTORY'] + "animal/" + medical_paper_folder, exist_ok=True)
-            shutil.copy(
-                app.config['TMP_PDF_DIRECTORY'] + "animal/" + medical_paper_folder + "/" + medical_paper_filename,
-                app.config['PDF_DIRECTORY'] + "animal/" + medical_paper_folder + "/" + medical_paper_filename)
-
-            try:
-                shutil.rmtree(app.config['PDF_DIRECTORY'] + "animal/" + medical_paper_data_old_json['folder'])
-            except:
-                pass
-        else:
-            pass
-        # End Medical Paper PDF
-
         # Start Breed Registry PDF
         breed_registry_data_old_json = None
         try:
@@ -1699,58 +1661,6 @@ def uploading_animal_video_upload():
                                 animal_id=animal_id)
 
 
-@app.route('/uploading-animal-medical-paper-pdf-upload', methods=['POST'])
-def uploading_animal_medical_paper_pdf_upload():
-    if g.logged_in:
-        if 'file' not in request.files:
-            return make_response(jsonify('{"status": "errors", "data": "Not Found"}'), 404)
-
-        file_data = request.files['file']
-
-        if file_data.filename == '':
-            return make_response(jsonify('{"status": "errors", "data": "Not Found"}'), 404)
-
-        if not FilePDF.allowed_file(file_data.filename):
-            return make_response(jsonify('{"status": "errors", "data": "Unsupported Media Type"}'), 415)
-
-        file_length = request.content_length
-
-        if file_length is not None and file_length > app.config['MAX_CONTENT_LENGTH_PDF']:
-            return make_response(jsonify('{"status": "errors", "data": "Request Entity Too Large"}'), 413)
-
-        if uploading_animal_img_upload and FilePDF.allowed_file(file_data.filename):
-            now = datetime.now()
-            timestamp = datetime.timestamp(now)
-
-            tmp = app.config['TMP_PDF_DIRECTORY'] + "animal/"
-            folder = str(uuid.uuid4()) + "-" + str(timestamp)
-            path = tmp + folder
-            os.makedirs(path)
-
-            session['tmp_animal_pdf_medical_paper'] = os.path.join(
-                "/static/pdf/tmp/animal/" + folder, folder + ".pdf")
-            file_data.save(os.path.join(path, folder + ".pdf"))
-
-            with pikepdf.open(os.path.join(path, folder + ".pdf"), allow_overwriting_input=True) as pdf:
-                try:
-                    del pdf.Root.Metadata
-                except:
-                    pass
-                with pdf.open_metadata() as meta:
-                    meta['dc:title'] = "Medical Certificates"
-                pdf.save(os.path.join(path, folder + ".pdf"))
-
-            end_time_tmp = now - timedelta(hours=1)
-            for x in os.listdir(tmp):
-                if x != ".gitkeep":
-                    if datetime.fromtimestamp(os.path.getmtime(tmp + "/" + x)) < end_time_tmp:
-                        shutil.rmtree(tmp + "/" + x)
-
-            resp = {"status": "success", "data": session.get('tmp_animal_pdf_medical_paper'), "folder": folder,
-                    "filename": folder + ".pdf"}
-            return make_response(jsonify(resp), 200)
-
-
 @app.route('/uploading-animal-breed-registry-pdf-upload', methods=['POST'])
 def uploading_animal_breed_registry_pdf_upload():
     if g.logged_in:
@@ -2057,11 +1967,6 @@ def edit_of_uploaded_animal(animal_id):
                 uploading_animal_form.video_01_data_old.data = animal['video']['video_01_data']
                 uploading_animal_form.video_01_status.data = "unchanged"
 
-            uploading_animal_form.medical_paper.data = animal['pdf']['medical_paper']
-            uploading_animal_form.medical_paper_data.data = animal['pdf']['medical_paper_data']
-            uploading_animal_form.medical_paper_data_old.data = animal['pdf']['medical_paper_data']
-            uploading_animal_form.medical_paper_status.data = "unchanged"
-
             uploading_animal_form.breed_registry.data = animal['pdf']['breed_registry']
             uploading_animal_form.breed_registry_data.data = animal['pdf']['breed_registry_data']
             uploading_animal_form.breed_registry_data_old.data = animal['pdf']['breed_registry_data']
@@ -2151,8 +2056,6 @@ def _del_of_uploaded_animal():
 
             video_01_data_old = data['video_01_data_old']
 
-            medical_paper_data_old = data['medical_paper_data_old']
-
             breed_registry_data_old = data['breed_registry_data_old']
 
             x_ray_data_old = data['x_ray_data_old']
@@ -2231,13 +2134,6 @@ def _del_of_uploaded_animal():
                 try:
                     video_01_data = json.loads(video_01_data_old)
                     shutil.rmtree(app.config['VIDEO_DIRECTORY'] + "animal/" + video_01_data['folder'])
-                except FileNotFoundError:
-                    pass
-
-            if medical_paper_data_old != "":
-                try:
-                    medical_paper_data = json.loads(medical_paper_data_old)
-                    shutil.rmtree(app.config['PDF_DIRECTORY'] + "animal/" + medical_paper_data['folder'])
                 except FileNotFoundError:
                     pass
 

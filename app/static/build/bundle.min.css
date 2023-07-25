@@ -15983,13 +15983,11 @@ th {
   color: #ffffff;
   text-decoration: underline;
 }
-#full.container .row .full #full-wrap .full-wrap .right #details-wrap .accordion-body .is-pdf-yes .medical-paper,
 #full.container .row .full #full-wrap .full-wrap .right #details-wrap .accordion-body .is-pdf-yes .breed-registry,
 #full.container .row .full #full-wrap .full-wrap .right #details-wrap .accordion-body .is-pdf-yes .x-ray {
   display: block;
   margin-bottom: 1.5rem;
 }
-#full.container .row .full #full-wrap .full-wrap .right #details-wrap .accordion-body .is-pdf-yes .medical-paper .title,
 #full.container .row .full #full-wrap .full-wrap .right #details-wrap .accordion-body .is-pdf-yes .breed-registry .title,
 #full.container .row .full #full-wrap .full-wrap .right #details-wrap .accordion-body .is-pdf-yes .x-ray .title {
   margin-bottom: 0.5rem;

@@ -73,14 +73,6 @@ def full_page(category_name, subcategory_name, page_url, page_id):
         countries = countries_read
 
         try:
-            medical_paper_data = json.loads(data['animal']['pdf']['medical_paper_data'])
-            medical_paper_folder = medical_paper_data['folder']
-            medical_paper_file = medical_paper_data['filename']
-        except TypeError:
-            medical_paper_folder = None
-            medical_paper_file = None
-
-        try:
             breed_registry_data = json.loads(data['animal']['pdf']['breed_registry_data'])
             breed_registry_folder = breed_registry_data['folder']
             breed_registry_file = breed_registry_data['filename']
@@ -161,8 +153,6 @@ def full_page(category_name, subcategory_name, page_url, page_id):
                                color=color,
                                be_used_for=be_used_for,
                                countries=countries,
-                               medical_paper_folder=medical_paper_folder,
-                               medical_paper_file=medical_paper_file,
                                breed_registry_folder=breed_registry_folder,
                                breed_registry_file=breed_registry_file,
                                x_ray_folder=x_ray_folder,
@@ -190,8 +180,6 @@ def full_page(category_name, subcategory_name, page_url, page_id):
                                color=color,
                                be_used_for=be_used_for,
                                countries=countries,
-                               medical_paper_folder=medical_paper_folder,
-                               medical_paper_file=medical_paper_file,
                                breed_registry_folder=breed_registry_folder,
                                breed_registry_file=breed_registry_file,
                                x_ray_folder=x_ray_folder,

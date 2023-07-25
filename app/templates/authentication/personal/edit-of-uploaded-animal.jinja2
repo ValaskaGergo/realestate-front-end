@@ -155,10 +155,6 @@
                             {{ uploading_animal_form.video_01_data_old(type='hidden', id='uploadingAnimalVideo01DataOld', class='form-control') }}
                             {{ uploading_animal_form.video_01_status(type='hidden', id='uploadingAnimalVideo01Status', class='form-control') }}
 
-                            {{ uploading_animal_form.medical_paper_data(type='hidden', id='uploadingAnimalMedicalPaperPdfData', class='form-control') }}
-                            {{ uploading_animal_form.medical_paper_data_old(type='hidden', id='uploadingAnimalMedicalPaperPdfDataOld', class='form-control') }}
-                            {{ uploading_animal_form.medical_paper_status(type='hidden', id='uploadingAnimalMedicalPaperPdfStatus', class='form-control') }}
-
                             {{ uploading_animal_form.breed_registry_data(type='hidden', id='uploadingAnimalBreedRegistryPdfData', class='form-control') }}
                             {{ uploading_animal_form.breed_registry_data_old(type='hidden', id='uploadingAnimalBreedRegistryPdfDataOld', class='form-control') }}
                             {{ uploading_animal_form.breed_registry_status(type='hidden', id='uploadingAnimalBreedRegistryPdfStatus', class='form-control') }}
@@ -2139,102 +2135,6 @@
                             </fieldset>
                             {# End Media #}
 
-                            {# Start Medical paper #}
-                            <fieldset class="border-top-0 uploadingAnimalMedicalPaperShow">
-                                <legend class="w-auto" style="font-size:1.2rem;font-weight:500;">
-                                    <span data-i18n="orvosiPapirok"></span>
-                                </legend>
-
-                                <p class="card-text"><span>Help text lorem ipsum dolor:</span> <a
-                                        href="/static/pdf/sample.pdf" target="_blank"
-                                        data-i18n="orvosiPapirokSzoveg" download></a></p>
-
-                                <div class="row">
-
-                                    <div class="uploadingAnimalMedicalPaperPdfShow">
-                                        {# Start Medical PDF #}
-                                        <div class="mb-3">
-                                            <label for="uploadingAnimalMedicalPaperPdf" class="form-label">
-                                                <span><span data-i18n="anlihouse-A208"></span></span>
-                                                <span class="text-danger text-lowercase fs-12px"
-                                                      data-i18n="anlihouse-A18"></span>
-                                            </label>
-
-                                            <span class="input-group">
-                                    {{ uploading_animal_form.medical_paper(type='text', id='uploadingAnimalMedicalPaperPdf', class='form-control', autocomplete="off") }}
-
-                                    <span class="input-group-text cursor-pointer animal medicalPaper trash-icon d-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                             fill="currentColor"
-                                             class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                            <path fill-rule="evenodd"
-                                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                        </svg>
-                                    </span>
-
-                                    <span class="input-group-text cursor-pointer animal medicalPaper img-icon inactive">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                             fill="currentColor" class="bi bi-file-earmark-pdf-fill"
-                                             viewBox="0 0 16 16">
-                                            <path d="M5.523 12.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.148 21.148 0 0 0 .5-1.05 12.045 12.045 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.881 3.881 0 0 1-.435-.41c.228.005.434.022.612.054.317.057.466.147.518.209a.095.095 0 0 1 .026.064.436.436 0 0 1-.06.2.307.307 0 0 1-.094.124.107.107 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256zM8.278 6.97c-.04.244-.108.524-.2.829a4.86 4.86 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.517.517 0 0 1 .145-.04c.013.03.028.092.032.198.005.122-.007.277-.038.465z"/>
-                                            <path fill-rule="evenodd"
-                                                  d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.651 11.651 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.856.856 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.844.844 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.76 5.76 0 0 0-1.335-.05 10.954 10.954 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.238 1.238 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a19.697 19.697 0 0 1-1.062 2.227 7.662 7.662 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103z"/>
-                                        </svg>
-                                    </span>
-
-                                    <span class="input-group-text cursor-pointer animal medicalPaper trash-back-icon d-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill=""
-                                             class="bi bi-x-lg" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                                            <path fill-rule="evenodd"
-                                                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-                                        </svg>
-                                    </span>
-
-                                    </span>
-                                            <small class="text-danger input-error uploading-animal-medical-paper-error d-none">
-                                                <span data-i18n=""></span>
-                                            </small>
-                                        </div>
-                                        {# End Medical PDF #}
-
-                                        {# Start Medical PDF Progress Preview #}
-                                        <div class="mb-3">
-
-                                            <div class="animal medicalPaper progress d-none position-relative overflow-visible mb-4">
-                                                <div class="progress-bar progress-bar-striped" role="progressbar"
-                                                     style="width:0;"
-                                                     aria-valuenow="0"
-                                                     aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="file-percent d-content">0%</span> <span
-                                                        class="file-size d-content"></span>
-                                                </div>
-
-                                                <div class="img-cancel progress-rm medicalPaper cursor-pointer position-absolute"
-                                                     style="top:15px;left:0;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                         fill="#dc3545" class="bi bi-x" viewBox="0 0 16 16">
-                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="animal medicalPaper cropper-img d-none">
-                                                <div id="animal-new-medical-paper-cropper">
-                                                </div>
-
-                                            </div>
-                                            {# End Medical PDF Progress Preview #}
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                            {# End Medical paper #}
 
                             {# Start Breed Registry #}
                             <fieldset class="border-top-0 uploadingAnimalBreedRegistryShow">
@@ -2424,7 +2324,7 @@
                                 </div>
 
                             </fieldset>
-                            {# End Medical paper #}
+
 
                             {# Start Animal Price #}
                             <fieldset class="border-top-0">

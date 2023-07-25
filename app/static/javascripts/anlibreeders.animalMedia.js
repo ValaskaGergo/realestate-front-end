@@ -3657,7 +3657,6 @@ class AnlibreedersAnimalMedia {
             },
 
             uploadingAnimalPDF: function () {
-                let fileErrorMedicalPaper;
                 let fileErrorBreedRegistry;
                 let fileErrorXRay;
 
@@ -3675,540 +3674,373 @@ class AnlibreedersAnimalMedia {
                     maxSizePDF = process.env.DEVELOPMENT_PDF_MAX_SIZE // Bytes == 25 Megabytes
                 }
 
-                // Start Medical Paper PDF
 
-                $("body").on("click", "#uploading-animal-form #uploadingAnimalMedicalPaperPdf, #uploading-animal-form .animal.medicalPaper.img-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
+        // Start Breed Registry PDF
 
-                    $("#uploading-animal-form .animal.medicalPaper.img-icon").upload({
-                        "action": "/uploading-animal-medical-paper-pdf-upload",
-                        "label": "",
-                        "multiple": false,
-                        "maxSize": maxSizePDF,
-                        "theme": "",
-                        beforeSend: onBeforeSend
-                    }).on("start.upload", onStart)
-                        .on("complete.upload", onComplete)
-                        .on("filestart.upload", onFileStart)
-                        .on("fileprogress.upload", onFileProgress)
-                        .on("filecomplete.upload", onFileComplete)
-                        .on("fileerror.upload", onFileError)
-                        .on("queued.upload", onQueued);
+        $("body").on("click", "#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon", function (event) {
+            event.preventDefault();
+            const _this = $(this);
 
-                    $("#uploading-animal-form").off("click", ".img-cancel.progress-rm.medicalPaper");
-                    $("#uploading-animal-form").on("click", ".img-cancel.progress-rm.medicalPaper", onCancel);
+            $("#uploading-animal-form .animal.breedRegistry.img-icon").upload({
+                "action": "/uploading-animal-breed-registry-pdf-upload",
+                "label": "",
+                "multiple": false,
+                "maxSize": maxSizePDF,
+                "theme": "",
+                beforeSend: onBeforeSend
+            }).on("start.upload", onStart)
+                .on("complete.upload", onComplete)
+                .on("filestart.upload", onFileStart)
+                .on("fileprogress.upload", onFileProgress)
+                .on("filecomplete.upload", onFileComplete)
+                .on("fileerror.upload", onFileError)
+                .on("queued.upload", onQueued);
 
-                    function onCancel(e) {
-                        $("#uploading-animal-form #uploadingAnimalMedicalPaperPdf").val(null);
-                        $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfData").val(null);
-                        $("#uploading-animal-form .animal.medicalPaper.img-icon").upload("abort");
-                        $("#uploading-animal-form .animal.medicalPaper.progress").addClass("d-none");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-percent").html("0%");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-size").html("");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").css({"width": "0"});
+            $("#uploading-animal-form").off("click", ".img-cancel.progress-rm.breedRegistry");
+            $("#uploading-animal-form").on("click", ".img-cancel.progress-rm.breedRegistry", onCancel);
 
-                    }
+            function onCancel(e) {
+                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(null);
+                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(null);
+                $("#uploading-animal-form .animal.breedRegistry.img-icon").upload("abort");
+                $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
 
-                    function onBeforeSend(formData) {
-                        return formData;
-                    }
+            }
 
-                    function onQueued(event, files) {
-                    }
+            function onBeforeSend(formData) {
+                return formData;
+            }
 
-                    function onStart(event) {
-                    }
+            function onQueued(event, files) {
+            }
 
-                    function onComplete(event) {
-                    }
+            function onStart(event) {
+            }
 
-                    function onFileStart(event, file) {
-                        $("#uploading-animal-form .animal.medicalPaper.progress").removeClass("d-none");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-percent").html("0%");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").css({"width": "0"});
-                    }
+            function onComplete(event) {
+            }
 
-                    function onFileProgress(event, file, percent) {
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-percent").html(percent + "%");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").css({"width": percent + "%"})
-                    }
+            function onFileStart(event, file) {
+                $("#uploading-animal-form .animal.breedRegistry.progress").removeClass("d-none");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
+            }
 
-                    function onFileComplete(event, file, response) {
-                        let fileSize = utility.getFormatBytes(file['size']);
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").removeClass("progress-bar-striped").addClass("bg-success");
-                        $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-size").html("- " + fileSize['size'] + " " + fileSize['type']);
+            function onFileProgress(event, file, percent) {
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html(percent + "%");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": percent + "%"})
+            }
 
-                        if (PDFObject.supportsPDFs) {
-                            PDFObject.embed(JSON.parse(response).data, "#animal-new-medical-paper-cropper", pdfOptions);
-                        } else {
-                            console.log("Not supported by this browser.");
-                        }
+            function onFileComplete(event, file, response) {
+                let fileSize = utility.getFormatBytes(file['size']);
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("progress-bar-striped").addClass("bg-success");
+                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("- " + fileSize['size'] + " " + fileSize['type']);
 
-                        setTimeout(
-                            function () {
-                                $("#uploading-animal-form .animal.medicalPaper.progress").addClass("d-none");
-                                $("#uploading-animal-form .animal.medicalPaper.cropper-img").removeClass("d-none");
-                                $("#uploading-animal-form .animal.medicalPaper.trash-icon").removeClass("d-none");
-                                $("#uploading-animal-form .animal.medicalPaper.img-icon").addClass("d-none");
-                                $("#uploading-animal-form #uploadingAnimalMedicalPaperPdf").val(JSON.parse(response).filename);
-                                $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfData").val(response);
-                                $("#uploading-animal-form #uploadingAnimalMedicalPaperPdf, #uploading-animal-form .animal.medicalPaper.img-icon").addClass("pointer-events-none");
-                                $("#uploading-animal-form .animal.medicalPaper.trash-back-icon").addClass("d-none");
-                                $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfStatus").val("new");
+                if (PDFObject.supportsPDFs) {
+                    PDFObject.embed(JSON.parse(response).data, "#animal-new-breed-registry-cropper", pdfOptions);
+                } else {
+                    console.log("Not supported by this browser.");
+                }
 
-                                $("#uploading-animal-form").find(".uploading-animal-medical-paper-error span").removeData("i18n");
-                                $("#uploading-animal-form").find(".uploading-animal-medical-paper-error span").text("");
-                                $("#uploading-animal-form").find(".uploading-animal-medical-paper-error").addClass("d-none");
-
-                                $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                                $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-percent").html("0%");
-                                $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-size").html("");
-                                $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").css({"width": "0"});
-                            }, 2000);
-
-                    }
-
-                    function onFileError(event, file, error) {
-                        if (error) {
-                            fileErrorMedicalPaper = {"fileSize": utility.getFormatBytes(file['size']), "error": error}
-
-                            $("#uploading-animal-form .animal.medicalPaper.progress").addClass("d-none");
-                            $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                            $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-percent").html("0%");
-                            $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar .file-size").html("");
-                            $("#uploading-animal-form .animal.medicalPaper.progress .progress-bar").css({"width": "0"});
-
-                            let $uploadingAnimalForm = $("#uploading-animal-form");
-
-                            if (fileErrorMedicalPaper['error'] === "Request Entity Too Large" || fileErrorMedicalPaper['error'] === "size") {
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").removeData("i18n");
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").text("");
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").attr("data-i18n", "anlihouse-A210");
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error").removeClass("d-none");
-                                $('body').i18n();
-                            } else if (fileErrorMedicalPaper['error'] === "Unsupported Media Type") {
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").removeData("i18n");
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").text("");
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error span").attr("data-i18n", "anlihouse-A209");
-                                $uploadingAnimalForm.find(".uploading-animal-medical-paper-error").removeClass("d-none");
-                                $('body').i18n();
-                            }
-
-
-                        }
-                    }
-
-                    $("#uploading-animal-form .animal.medicalPaper.img-icon .fs-upload-target").trigger("click");
-
-                });
-
-                $("body").on("click", "#uploading-animal-form .animal.medicalPaper.trash-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
-
-                    $("#uploading-animal-form #uploadingAnimalMedicalPaperPdf").val(null);
-                    $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfData").val(null);
-                    $("#uploading-animal-form .animal.medicalPaper.trash-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.medicalPaper.crop-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.medicalPaper.crop-back-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.medicalPaper.img-icon").removeClass("d-none");
-                    $("#uploading-animal-form .animal.medicalPaper.cropper-img").addClass("d-none");
-                    $("#uploading-animal-form .animal.medicalPaper.animal-edit-img01-preview").addClass("d-none");
-                    $("#uploading-animal-form #uploadingAnimalMedicalPaperPdf, #uploading-animal-form .animal.medicalPaper.img-icon").removeClass("pointer-events-none");
-                    $("#uploading-animal-form .animal.medicalPaper.trash-back-icon").removeClass("d-none");
-                    $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfStatus").val("rm");
-                });
-
-                $("body").on("click", "#uploading-animal-form .animal.medicalPaper.trash-back-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
-
-                    _this.addClass("d-none");
-
-                    let $uploadingAnimalMedicalPaperShow = $("#uploading-animal-form .uploadingAnimalMedicalPaperShow");
-                    let $uploadingAnimalMedicalPaperPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalMedicalPaperPdfDataOld").val());
-                    let $uploadingAnimalMedicalPaperPdf = $uploadingAnimalMedicalPaperShow.find("#uploadingAnimalMedicalPaperPdf");
-                    $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfData").val($("#uploading-animal-form #uploadingAnimalMedicalPaperPdfDataOld").val());
-                    $("#uploading-animal-form #uploadingAnimalMedicalPaperPdfStatus").val("unchanged");
-
-                    $uploadingAnimalMedicalPaperPdf.addClass("pointer-events-none");
-                    $uploadingAnimalMedicalPaperPdf.val($uploadingAnimalMedicalPaperPdfData['filename']);
-                    $uploadingAnimalMedicalPaperShow.find(".animal.medicalPaper.img-icon").addClass("d-none");
-                    $uploadingAnimalMedicalPaperShow.find(".animal.medicalPaper.trash-icon").removeClass("d-none");
-
-                    if (PDFObject.supportsPDFs) {
-                        PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalMedicalPaperPdfData['folder'] + "/" + $uploadingAnimalMedicalPaperPdfData['filename'], "#animal-new-medical-paper-cropper", pdfOptions);
-                        $uploadingAnimalMedicalPaperShow.find(".animal.medicalPaper.cropper-img").removeClass("d-none");
-                    } else {
-                        console.log("Not supported by this browser.");
-                    }
-                });
-
-                // End medical Paper PDF
-
-                // Start Breed Registry PDF
-
-                $("body").on("click", "#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
-
-                    $("#uploading-animal-form .animal.breedRegistry.img-icon").upload({
-                        "action": "/uploading-animal-breed-registry-pdf-upload",
-                        "label": "",
-                        "multiple": false,
-                        "maxSize": maxSizePDF,
-                        "theme": "",
-                        beforeSend: onBeforeSend
-                    }).on("start.upload", onStart)
-                        .on("complete.upload", onComplete)
-                        .on("filestart.upload", onFileStart)
-                        .on("fileprogress.upload", onFileProgress)
-                        .on("filecomplete.upload", onFileComplete)
-                        .on("fileerror.upload", onFileError)
-                        .on("queued.upload", onQueued);
-
-                    $("#uploading-animal-form").off("click", ".img-cancel.progress-rm.breedRegistry");
-                    $("#uploading-animal-form").on("click", ".img-cancel.progress-rm.breedRegistry", onCancel);
-
-                    function onCancel(e) {
-                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(null);
-                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(null);
-                        $("#uploading-animal-form .animal.breedRegistry.img-icon").upload("abort");
+                setTimeout(
+                    function () {
                         $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
+                        $("#uploading-animal-form .animal.breedRegistry.cropper-img").removeClass("d-none");
+                        $("#uploading-animal-form .animal.breedRegistry.trash-icon").removeClass("d-none");
+                        $("#uploading-animal-form .animal.breedRegistry.img-icon").addClass("d-none");
+                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(JSON.parse(response).filename);
+                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(response);
+                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon").addClass("pointer-events-none");
+                        $("#uploading-animal-form .animal.breedRegistry.trash-back-icon").addClass("d-none");
+                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("new");
+
+                        $("#uploading-animal-form").find(".uploading-animal-breed-registry-error span").removeData("i18n");
+                        $("#uploading-animal-form").find(".uploading-animal-breed-registry-error span").text("");
+                        $("#uploading-animal-form").find(".uploading-animal-breed-registry-error").addClass("d-none");
+
                         $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
                         $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
                         $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
                         $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
+                    }, 2000);
 
+            }
+
+            function onFileError(event, file, error) {
+                if (error) {
+                    fileErrorBreedRegistry = {"fileSize": utility.getFormatBytes(file['size']), "error": error}
+
+                    $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
+                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
+                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
+                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
+                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
+
+                    let $uploadingAnimalForm = $("#uploading-animal-form");
+
+                    if (fileErrorBreedRegistry['error'] === "Request Entity Too Large" || fileErrorBreedRegistry['error'] === "size") {
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").text("");
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").attr("data-i18n", "anlihouse-A210");
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error").removeClass("d-none");
+                        $('body').i18n();
+                    } else if (fileErrorBreedRegistry['error'] === "Unsupported Media Type") {
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").text("");
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").attr("data-i18n", "anlihouse-A209");
+                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error").removeClass("d-none");
+                        $('body').i18n();
                     }
 
-                    function onBeforeSend(formData) {
-                        return formData;
-                    }
 
-                    function onQueued(event, files) {
-                    }
+                }
+            }
 
-                    function onStart(event) {
-                    }
+            $("#uploading-animal-form .animal.breedRegistry.img-icon .fs-upload-target").trigger("click");
 
-                    function onComplete(event) {
-                    }
+        });
 
-                    function onFileStart(event, file) {
-                        $("#uploading-animal-form .animal.breedRegistry.progress").removeClass("d-none");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
-                    }
+        $("body").on("click", "#uploading-animal-form .animal.breedRegistry.trash-icon", function (event) {
+            event.preventDefault();
+            const _this = $(this);
 
-                    function onFileProgress(event, file, percent) {
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html(percent + "%");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": percent + "%"})
-                    }
+            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(null);
+            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(null);
+            $("#uploading-animal-form .animal.breedRegistry.trash-icon").addClass("d-none");
+            $("#uploading-animal-form .animal.breedRegistry.crop-icon").addClass("d-none");
+            $("#uploading-animal-form .animal.breedRegistry.crop-back-icon").addClass("d-none");
+            $("#uploading-animal-form .animal.breedRegistry.img-icon").removeClass("d-none");
+            $("#uploading-animal-form .animal.breedRegistry.cropper-img").addClass("d-none");
+            $("#uploading-animal-form .animal.breedRegistry.animal-edit-img01-preview").addClass("d-none");
+            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon").removeClass("pointer-events-none");
+            $("#uploading-animal-form .animal.breedRegistry.trash-back-icon").removeClass("d-none");
+            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("rm");
+        });
 
-                    function onFileComplete(event, file, response) {
-                        let fileSize = utility.getFormatBytes(file['size']);
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("progress-bar-striped").addClass("bg-success");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("- " + fileSize['size'] + " " + fileSize['type']);
+        $("body").on("click", "#uploading-animal-form .animal.breedRegistry.trash-back-icon", function (event) {
+            event.preventDefault();
+            const _this = $(this);
 
-                        if (PDFObject.supportsPDFs) {
-                            PDFObject.embed(JSON.parse(response).data, "#animal-new-breed-registry-cropper", pdfOptions);
-                        } else {
-                            console.log("Not supported by this browser.");
-                        }
+            _this.addClass("d-none");
 
-                        setTimeout(
-                            function () {
-                                $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
-                                $("#uploading-animal-form .animal.breedRegistry.cropper-img").removeClass("d-none");
-                                $("#uploading-animal-form .animal.breedRegistry.trash-icon").removeClass("d-none");
-                                $("#uploading-animal-form .animal.breedRegistry.img-icon").addClass("d-none");
-                                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(JSON.parse(response).filename);
-                                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(response);
-                                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon").addClass("pointer-events-none");
-                                $("#uploading-animal-form .animal.breedRegistry.trash-back-icon").addClass("d-none");
-                                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("new");
+            let $uploadingAnimalBreedRegistryShow = $("#uploading-animal-form .uploadingAnimalBreedRegistryShow");
+            let $uploadingAnimalBreedRegistryPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalBreedRegistryPdfDataOld").val());
+            let $uploadingAnimalBreedRegistryPdf = $uploadingAnimalBreedRegistryShow.find("#uploadingAnimalBreedRegistryPdf");
+            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val());
+            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("unchanged");
 
-                                $("#uploading-animal-form").find(".uploading-animal-breed-registry-error span").removeData("i18n");
-                                $("#uploading-animal-form").find(".uploading-animal-breed-registry-error span").text("");
-                                $("#uploading-animal-form").find(".uploading-animal-breed-registry-error").addClass("d-none");
+            $uploadingAnimalBreedRegistryPdf.addClass("pointer-events-none");
+            $uploadingAnimalBreedRegistryPdf.val($uploadingAnimalBreedRegistryPdfData['filename']);
+            $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.img-icon").addClass("d-none");
+            $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.trash-icon").removeClass("d-none");
 
-                                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
-                                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
-                            }, 2000);
+            if (PDFObject.supportsPDFs) {
+                PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalBreedRegistryPdfData['folder'] + "/" + $uploadingAnimalBreedRegistryPdfData['filename'], "#animal-new-breed-registry-cropper", pdfOptions);
+                $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.cropper-img").removeClass("d-none");
+            } else {
+                console.log("Not supported by this browser.");
+            }
+        });
 
-                    }
+        // End Breed Registry PDF
 
-                    function onFileError(event, file, error) {
-                        if (error) {
-                            fileErrorBreedRegistry = {"fileSize": utility.getFormatBytes(file['size']), "error": error}
+        // Start X Ray PDF
 
-                            $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
-                            $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                            $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                            $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
-                            $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
+        $("body").on("click", "#uploading-animal-form #uploadingAnimalXRayPdf, #uploading-animal-form .animal.xRay.img-icon", function (event) {
+            event.preventDefault();
+            const _this = $(this);
 
-                            let $uploadingAnimalForm = $("#uploading-animal-form");
+            $("#uploading-animal-form .animal.xRay.img-icon").upload({
+                "action": "/uploading-animal-x-ray-pdf-upload",
+                "label": "",
+                "multiple": false,
+                "maxSize": maxSizePDF,
+                "theme": "",
+                beforeSend: onBeforeSend
+            }).on("start.upload", onStart)
+                .on("complete.upload", onComplete)
+                .on("filestart.upload", onFileStart)
+                .on("fileprogress.upload", onFileProgress)
+                .on("filecomplete.upload", onFileComplete)
+                .on("fileerror.upload", onFileError)
+                .on("queued.upload", onQueued);
 
-                            if (fileErrorBreedRegistry['error'] === "Request Entity Too Large" || fileErrorBreedRegistry['error'] === "size") {
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").text("");
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").attr("data-i18n", "anlihouse-A210");
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error").removeClass("d-none");
-                                $('body').i18n();
-                            } else if (fileErrorBreedRegistry['error'] === "Unsupported Media Type") {
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").text("");
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").attr("data-i18n", "anlihouse-A209");
-                                $uploadingAnimalForm.find(".uploading-animal-breed-registry-error").removeClass("d-none");
-                                $('body').i18n();
-                            }
+            $("#uploading-animal-form").off("click", ".img-cancel.progress-rm.xRay");
+            $("#uploading-animal-form").on("click", ".img-cancel.progress-rm.xRay", onCancel);
 
+            function onCancel(e) {
+                $("#uploading-animal-form #uploadingAnimalXRAYPdf").val(null);
+                $("#uploading-animal-form #uploadingAnimalXRAYPdfData").val(null);
+                $("#uploading-animal-form .animal.xRay.img-icon").upload("abort");
+                $("#uploading-animal-form .animal.xRay.progress").addClass("d-none");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
 
-                        }
-                    }
+            }
 
-                    $("#uploading-animal-form .animal.breedRegistry.img-icon .fs-upload-target").trigger("click");
+            function onBeforeSend(formData) {
+                return formData;
+            }
 
-                });
+            function onQueued(event, files) {
+            }
 
-                $("body").on("click", "#uploading-animal-form .animal.breedRegistry.trash-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
+            function onStart(event) {
+            }
 
-                    $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(null);
-                    $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(null);
-                    $("#uploading-animal-form .animal.breedRegistry.trash-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.breedRegistry.crop-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.breedRegistry.crop-back-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.breedRegistry.img-icon").removeClass("d-none");
-                    $("#uploading-animal-form .animal.breedRegistry.cropper-img").addClass("d-none");
-                    $("#uploading-animal-form .animal.breedRegistry.animal-edit-img01-preview").addClass("d-none");
-                    $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon").removeClass("pointer-events-none");
-                    $("#uploading-animal-form .animal.breedRegistry.trash-back-icon").removeClass("d-none");
-                    $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("rm");
-                });
+            function onComplete(event) {
+            }
 
-                $("body").on("click", "#uploading-animal-form .animal.breedRegistry.trash-back-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
+            function onFileStart(event, file) {
+                $("#uploading-animal-form .animal.xRay.progress").removeClass("d-none");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
+            }
 
-                    _this.addClass("d-none");
+            function onFileProgress(event, file, percent) {
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html(percent + "%");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": percent + "%"})
+            }
 
-                    let $uploadingAnimalBreedRegistryShow = $("#uploading-animal-form .uploadingAnimalBreedRegistryShow");
-                    let $uploadingAnimalBreedRegistryPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalBreedRegistryPdfDataOld").val());
-                    let $uploadingAnimalBreedRegistryPdf = $uploadingAnimalBreedRegistryShow.find("#uploadingAnimalBreedRegistryPdf");
-                    $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val($("#uploading-animal-form #uploadingAnimalMedicalPaperPdfDataOld").val());
-                    $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("unchanged");
+            function onFileComplete(event, file, response) {
+                let fileSize = utility.getFormatBytes(file['size']);
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("progress-bar-striped").addClass("bg-success");
+                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("- " + fileSize['size'] + " " + fileSize['type']);
 
-                    $uploadingAnimalBreedRegistryPdf.addClass("pointer-events-none");
-                    $uploadingAnimalBreedRegistryPdf.val($uploadingAnimalBreedRegistryPdfData['filename']);
-                    $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.img-icon").addClass("d-none");
-                    $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.trash-icon").removeClass("d-none");
+                if (PDFObject.supportsPDFs) {
+                    PDFObject.embed(JSON.parse(response).data, "#animal-new-x-ray-cropper", pdfOptions);
+                } else {
+                    console.log("Not supported by this browser.");
+                }
 
-                    if (PDFObject.supportsPDFs) {
-                        PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalBreedRegistryPdfData['folder'] + "/" + $uploadingAnimalBreedRegistryPdfData['filename'], "#animal-new-breed-registry-cropper", pdfOptions);
-                        $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.cropper-img").removeClass("d-none");
-                    } else {
-                        console.log("Not supported by this browser.");
-                    }
-                });
-
-                // End Breed Registry PDF
-
-                // Start X Ray PDF
-
-                $("body").on("click", "#uploading-animal-form #uploadingAnimalXRayPdf, #uploading-animal-form .animal.xRay.img-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
-
-                    $("#uploading-animal-form .animal.xRay.img-icon").upload({
-                        "action": "/uploading-animal-x-ray-pdf-upload",
-                        "label": "",
-                        "multiple": false,
-                        "maxSize": maxSizePDF,
-                        "theme": "",
-                        beforeSend: onBeforeSend
-                    }).on("start.upload", onStart)
-                        .on("complete.upload", onComplete)
-                        .on("filestart.upload", onFileStart)
-                        .on("fileprogress.upload", onFileProgress)
-                        .on("filecomplete.upload", onFileComplete)
-                        .on("fileerror.upload", onFileError)
-                        .on("queued.upload", onQueued);
-
-                    $("#uploading-animal-form").off("click", ".img-cancel.progress-rm.xRay");
-                    $("#uploading-animal-form").on("click", ".img-cancel.progress-rm.xRay", onCancel);
-
-                    function onCancel(e) {
-                        $("#uploading-animal-form #uploadingAnimalXRAYPdf").val(null);
-                        $("#uploading-animal-form #uploadingAnimalXRAYPdfData").val(null);
-                        $("#uploading-animal-form .animal.xRay.img-icon").upload("abort");
+                setTimeout(
+                    function () {
                         $("#uploading-animal-form .animal.xRay.progress").addClass("d-none");
+                        $("#uploading-animal-form .animal.xRay.cropper-img").removeClass("d-none");
+                        $("#uploading-animal-form .animal.xRay.trash-icon").removeClass("d-none");
+                        $("#uploading-animal-form .animal.xRay.img-icon").addClass("d-none");
+                        $("#uploading-animal-form #uploadingAnimalXRayPdf").val(JSON.parse(response).filename);
+                        $("#uploading-animal-form #uploadingAnimalXRayPdfData").val(response);
+                        $("#uploading-animal-form #uploadingAnimalXRayPdf, #uploading-animal-form .animal.xRay.img-icon").addClass("pointer-events-none");
+                        $("#uploading-animal-form .animal.xRay.trash-back-icon").addClass("d-none");
+                        $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("new");
+
+                        $("#uploading-animal-form").find(".uploading-animal-x-ray-error span").removeData("i18n");
+                        $("#uploading-animal-form").find(".uploading-animal-x-ray-error span").text("");
+                        $("#uploading-animal-form").find(".uploading-animal-x-ray-error").addClass("d-none");
+
                         $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
                         $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
                         $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("");
                         $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
+                    }, 2000);
 
-                    }
-
-                    function onBeforeSend(formData) {
-                        return formData;
-                    }
-
-                    function onQueued(event, files) {
-                    }
-
-                    function onStart(event) {
-                    }
-
-                    function onComplete(event) {
-                    }
-
-                    function onFileStart(event, file) {
-                        $("#uploading-animal-form .animal.xRay.progress").removeClass("d-none");
-                        $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
-                        $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
-                    }
-
-                    function onFileProgress(event, file, percent) {
-                        $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html(percent + "%");
-                        $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": percent + "%"})
-                    }
-
-                    function onFileComplete(event, file, response) {
-                        let fileSize = utility.getFormatBytes(file['size']);
-                        $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("progress-bar-striped").addClass("bg-success");
-                        $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("- " + fileSize['size'] + " " + fileSize['type']);
-
-                        if (PDFObject.supportsPDFs) {
-                            PDFObject.embed(JSON.parse(response).data, "#animal-new-x-ray-cropper", pdfOptions);
-                        } else {
-                            console.log("Not supported by this browser.");
-                        }
-
-                        setTimeout(
-                            function () {
-                                $("#uploading-animal-form .animal.xRay.progress").addClass("d-none");
-                                $("#uploading-animal-form .animal.xRay.cropper-img").removeClass("d-none");
-                                $("#uploading-animal-form .animal.xRay.trash-icon").removeClass("d-none");
-                                $("#uploading-animal-form .animal.xRay.img-icon").addClass("d-none");
-                                $("#uploading-animal-form #uploadingAnimalXRayPdf").val(JSON.parse(response).filename);
-                                $("#uploading-animal-form #uploadingAnimalXRayPdfData").val(response);
-                                $("#uploading-animal-form #uploadingAnimalXRayPdf, #uploading-animal-form .animal.xRay.img-icon").addClass("pointer-events-none");
-                                $("#uploading-animal-form .animal.xRay.trash-back-icon").addClass("d-none");
-                                $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("new");
-
-                                $("#uploading-animal-form").find(".uploading-animal-x-ray-error span").removeData("i18n");
-                                $("#uploading-animal-form").find(".uploading-animal-x-ray-error span").text("");
-                                $("#uploading-animal-form").find(".uploading-animal-x-ray-error").addClass("d-none");
-
-                                $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
-                                $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("");
-                                $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
-                            }, 2000);
-
-                    }
-
-                    function onFileError(event, file, error) {
-                        if (error) {
-                            fileErrorXRay = {"fileSize": utility.getFormatBytes(file['size']), "error": error}
-
-                            $("#uploading-animal-form .animal.xRay.progress").addClass("d-none");
-                            $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                            $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
-                            $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("");
-                            $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
-
-                            let $uploadingAnimalForm = $("#uploading-animal-form");
-
-                            if (fileErrorXRay['error'] === "Request Entity Too Large" || fileErrorXRay['error'] === "size") {
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").removeData("i18n");
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").text("");
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").attr("data-i18n", "anlihouse-A210");
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error").removeClass("d-none");
-                                $('body').i18n();
-                            } else if (fileErrorXRay['error'] === "Unsupported Media Type") {
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").removeData("i18n");
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").text("");
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").attr("data-i18n", "anlihouse-A209");
-                                $uploadingAnimalForm.find(".uploading-animal-x-ray-error").removeClass("d-none");
-                                $('body').i18n();
-                            }
-
-
-                        }
-                    }
-
-                    $("#uploading-animal-form .animal.xRay.img-icon .fs-upload-target").trigger("click");
-
-                });
-
-                $("body").on("click", "#uploading-animal-form .animal.xRay.trash-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
-
-                    $("#uploading-animal-form #uploadingAnimalXRayPdf").val(null);
-                    $("#uploading-animal-form #uploadingAnimalXRayPdfData").val(null);
-                    $("#uploading-animal-form .animal.xRay.trash-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.xRay.crop-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.xRay.crop-back-icon").addClass("d-none");
-                    $("#uploading-animal-form .animal.xRay.img-icon").removeClass("d-none");
-                    $("#uploading-animal-form .animal.xRay.cropper-img").addClass("d-none");
-                    $("#uploading-animal-form .animal.xRay.animal-edit-img01-preview").addClass("d-none");
-                    $("#uploading-animal-form #uploadingAnimalXRayPdf, #uploading-animal-form .animal.xRay.img-icon").removeClass("pointer-events-none");
-                    $("#uploading-animal-form .animal.xRay.trash-back-icon").removeClass("d-none");
-                    $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("rm");
-                });
-
-                $("body").on("click", "#uploading-animal-form .animal.xRay.trash-back-icon", function (event) {
-                    event.preventDefault();
-                    const _this = $(this);
-
-                    _this.addClass("d-none");
-
-                    let $uploadingAnimalXRayShow = $("#uploading-animal-form .uploadingAnimalXRayShow");
-                    let $uploadingAnimalXRayPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalXRayPdfDataOld").val());
-                    let $uploadingAnimalXRayPdf = $uploadingAnimalXRayShow.find("#uploadingAnimalXRayPdf");
-                    $("#uploading-animal-form #uploadingAnimalXRayPdfData").val($("#uploading-animal-form #uploadingAnimalMedicalPaperPdfDataOld").val());
-                    $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("unchanged");
-
-                    $uploadingAnimalXRayPdf.addClass("pointer-events-none");
-                    $uploadingAnimalXRayPdf.val($uploadingAnimalXRayPdfData['filename']);
-                    $uploadingAnimalXRayShow.find(".animal.xRay.img-icon").addClass("d-none");
-                    $uploadingAnimalXRayShow.find(".animal.xRay.trash-icon").removeClass("d-none");
-
-                    if (PDFObject.supportsPDFs) {
-                        PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalXRayPdfData['folder'] + "/" + $uploadingAnimalXRayPdfData['filename'], "#animal-new-breed-registry-cropper", pdfOptions);
-                        $uploadingAnimalXRayShow.find(".animal.xRay.cropper-img").removeClass("d-none");
-                    } else {
-                        console.log("Not supported by this browser.");
-                    }
-                });
-
-                // End X Ray PDF
-
-            },
-
-            initializ: function () {
-                loadAnimalMedia.uploadingAnimalImages();
-                loadAnimalMedia.uploadingAnimalNewImg();
-                loadAnimalMedia.uploadingAnimalVideos();
-                loadAnimalMedia.uploadingAnimalPDF();
             }
 
-        };
+            function onFileError(event, file, error) {
+                if (error) {
+                    fileErrorXRay = {"fileSize": utility.getFormatBytes(file['size']), "error": error}
 
-        $(function () {
-            loadAnimalMedia.initializ()
+                    $("#uploading-animal-form .animal.xRay.progress").addClass("d-none");
+                    $("#uploading-animal-form .animal.xRay.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
+                    $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-percent").html("0%");
+                    $("#uploading-animal-form .animal.xRay.progress .progress-bar .file-size").html("");
+                    $("#uploading-animal-form .animal.xRay.progress .progress-bar").css({"width": "0"});
+
+                    let $uploadingAnimalForm = $("#uploading-animal-form");
+
+                    if (fileErrorXRay['error'] === "Request Entity Too Large" || fileErrorXRay['error'] === "size") {
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").removeData("i18n");
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").text("");
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").attr("data-i18n", "anlihouse-A210");
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error").removeClass("d-none");
+                        $('body').i18n();
+                    } else if (fileErrorXRay['error'] === "Unsupported Media Type") {
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").removeData("i18n");
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").text("");
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error span").attr("data-i18n", "anlihouse-A209");
+                        $uploadingAnimalForm.find(".uploading-animal-x-ray-error").removeClass("d-none");
+                        $('body').i18n();
+                    }
+
+
+                }
+            }
+
+            $("#uploading-animal-form .animal.xRay.img-icon .fs-upload-target").trigger("click");
+
         });
+
+        $("body").on("click", "#uploading-animal-form .animal.xRay.trash-icon", function (event) {
+            event.preventDefault();
+            const _this = $(this);
+
+            $("#uploading-animal-form #uploadingAnimalXRayPdf").val(null);
+            $("#uploading-animal-form #uploadingAnimalXRayPdfData").val(null);
+            $("#uploading-animal-form .animal.xRay.trash-icon").addClass("d-none");
+            $("#uploading-animal-form .animal.xRay.crop-icon").addClass("d-none");
+            $("#uploading-animal-form .animal.xRay.crop-back-icon").addClass("d-none");
+            $("#uploading-animal-form .animal.xRay.img-icon").removeClass("d-none");
+            $("#uploading-animal-form .animal.xRay.cropper-img").addClass("d-none");
+            $("#uploading-animal-form .animal.xRay.animal-edit-img01-preview").addClass("d-none");
+            $("#uploading-animal-form #uploadingAnimalXRayPdf, #uploading-animal-form .animal.xRay.img-icon").removeClass("pointer-events-none");
+            $("#uploading-animal-form .animal.xRay.trash-back-icon").removeClass("d-none");
+            $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("rm");
+        });
+
+        $("body").on("click", "#uploading-animal-form .animal.xRay.trash-back-icon", function (event) {
+            event.preventDefault();
+            const _this = $(this);
+
+            _this.addClass("d-none");
+
+            let $uploadingAnimalXRayShow = $("#uploading-animal-form .uploadingAnimalXRayShow");
+            let $uploadingAnimalXRayPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalXRayPdfDataOld").val());
+            let $uploadingAnimalXRayPdf = $uploadingAnimalXRayShow.find("#uploadingAnimalXRayPdf");
+            $("#uploading-animal-form #uploadingAnimalXRayPdfData").val());
+            $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("unchanged");
+
+            $uploadingAnimalXRayPdf.addClass("pointer-events-none");
+            $uploadingAnimalXRayPdf.val($uploadingAnimalXRayPdfData['filename']);
+            $uploadingAnimalXRayShow.find(".animal.xRay.img-icon").addClass("d-none");
+            $uploadingAnimalXRayShow.find(".animal.xRay.trash-icon").removeClass("d-none");
+
+            if (PDFObject.supportsPDFs) {
+                PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalXRayPdfData['folder'] + "/" + $uploadingAnimalXRayPdfData['filename'], "#animal-new-breed-registry-cropper", pdfOptions);
+                $uploadingAnimalXRayShow.find(".animal.xRay.cropper-img").removeClass("d-none");
+            } else {
+                console.log("Not supported by this browser.");
+            }
+        });
+
+        // End X Ray PDF
+
+    },
+
+        initializ: function () {
+            loadAnimalMedia.uploadingAnimalImages();
+            loadAnimalMedia.uploadingAnimalNewImg();
+            loadAnimalMedia.uploadingAnimalVideos();
+            loadAnimalMedia.uploadingAnimalPDF();
+        }
+
+    };
+
+    $(
+
+    function() {
+        loadAnimalMedia.initializ()
     }
+
+)
+    ;
+}
 }
 
 export let anlibreedersAnimalMedia = new AnlibreedersAnimalMedia();

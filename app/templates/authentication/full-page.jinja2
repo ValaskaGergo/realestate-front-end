@@ -1030,7 +1030,7 @@
                                         {% endif %}
                                     {% endif %}
 
-                                    {% if animal['animal']['pdf']['medical_paper'] != "" or animal['animal']['pdf']['breed_registry'] != "" or animal['animal']['pdf']['x_ray'] != "" %}
+                                    {% if animal['animal']['pdf'] != "" or animal['animal']['pdf']['breed_registry'] != "" or animal['animal']['pdf']['x_ray'] != "" %}
                                         {% if is_user_login and is_user_login['user_permission']['is_worker'] == "True" or is_user_login['user_permission']['subscribed'] == "True" %}
                                             <div class="accordion-item documents">
                                                 <h2 class="accordion-header" id="detailsHeadingFour">
@@ -1050,15 +1050,7 @@
                                                     <div class="accordion-body">
 
                                                         <div class="is-pdf-yes">
-                                                            {% if medical_paper_folder != None %}
-                                                                <div class="medical-paper"
-                                                                     data-medical_paper_folder="{{ medical_paper_folder }}"
-                                                                     data-medical_paper_file="{{ medical_paper_file }}">
-                                                                    <span class="title"
-                                                                          data-i18n="anlihouse-A314"></span>
-                                                                    <span class="data"></span>
-                                                                </div>
-                                                            {% endif %}
+
 
                                                             {% if breed_registry_folder != None %}
                                                                 <div class="breed-registry"
@@ -1082,14 +1074,7 @@
                                                         </div>
 
                                                         <dl class="row is-pdf-no">
-                                                            {% if medical_paper_folder != None %}
-                                                                <dt class="col-sm-5" data-i18n="anlihouse-A314"></dt>
-                                                                <dd class="col-sm-7"><a
-                                                                        href="{{ url_for("static", filename="pdf/animal/" + medical_paper_folder + "/" + medical_paper_file) }}"
-                                                                        target="_blank"
-                                                                        data-i18n="anlihouse-A317"></a>
-                                                                </dd>
-                                                            {% endif %}
+
 
                                                             {% if breed_registry_folder != None %}
                                                                 <dt class="col-sm-5" data-i18n="anlihouse-A315"></dt>
