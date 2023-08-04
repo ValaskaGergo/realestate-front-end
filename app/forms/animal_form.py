@@ -36,26 +36,6 @@ class UploadingAnimalForm(FlaskForm):
         render_kw={'placeholder': ""}
     )
 
-    age_year = StringField(
-        render_kw={'readonly': True}
-    )
-
-    age_month = StringField(
-        render_kw={'readonly': True}
-    )
-
-    age_day = StringField(
-        render_kw={'readonly': True}
-    )
-
-    region_origin = StringField(
-        render_kw={'readonly': True}
-    )
-
-    country_origin = StringField(
-        render_kw={'readonly': True}
-    )
-
     region_residence = StringField(
         render_kw={'readonly': True}
     )
@@ -141,62 +121,6 @@ class UploadingAnimalForm(FlaskForm):
     )
 
     description = TextAreaField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother_mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother_mother_mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother_mother_father = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother_father = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother_father_mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    mother_father_father = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father_mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father_mother_mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father_mother_father = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father_father = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father_father_mother = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    father_father_father = StringField(
         render_kw={'placeholder': ""}
     )
 
@@ -382,22 +306,6 @@ class UploadingAnimalForm(FlaskForm):
 
     url_02 = StringField(
         render_kw={'placeholder': ""}
-    )
-
-    breed_registry = StringField(
-        render_kw={'placeholder': ""}
-    )
-
-    breed_registry_data = StringField(
-        render_kw={'readonly': True}
-    )
-
-    breed_registry_data_old = StringField(
-        render_kw={'readonly': True}
-    )
-
-    breed_registry_status = StringField(
-        render_kw={'readonly': True}
     )
 
     x_ray = StringField(

@@ -72,13 +72,6 @@ def full_page(category_name, subcategory_name, page_url, page_id):
         countries_read = json.loads(countries_json.read())
         countries = countries_read
 
-        try:
-            breed_registry_data = json.loads(data['animal']['pdf']['breed_registry_data'])
-            breed_registry_folder = breed_registry_data['folder']
-            breed_registry_file = breed_registry_data['filename']
-        except TypeError:
-            breed_registry_folder = None
-            breed_registry_file = None
 
         try:
             x_ray_data = json.loads(data['animal']['pdf']['x_ray_data'])
@@ -153,8 +146,6 @@ def full_page(category_name, subcategory_name, page_url, page_id):
                                color=color,
                                be_used_for=be_used_for,
                                countries=countries,
-                               breed_registry_folder=breed_registry_folder,
-                               breed_registry_file=breed_registry_file,
                                x_ray_folder=x_ray_folder,
                                x_ray_file=x_ray_file,
                                seller_data=[seller],
@@ -180,8 +171,6 @@ def full_page(category_name, subcategory_name, page_url, page_id):
                                color=color,
                                be_used_for=be_used_for,
                                countries=countries,
-                               breed_registry_folder=breed_registry_folder,
-                               breed_registry_file=breed_registry_file,
                                x_ray_folder=x_ray_folder,
                                x_ray_file=x_ray_file,
                                seller_data=[seller],
@@ -287,8 +276,6 @@ def _animal_pdf():
         pdf_tmp = app.config['TMP_PDF_DIRECTORY'] + "full/"
         pdf_folder = str(uuid.uuid4()) + "-" + str(timestamp) + "/"
         pdf_filename = str(uuid.uuid4()) + "-" + str(timestamp) + ".pdf"
-        family1_filename = str(uuid.uuid4()) + "-" + str(timestamp) + "family1.png"
-        family2_filename = str(uuid.uuid4()) + "-" + str(timestamp) + "family2.png"
         pdf_path = pdf_tmp + pdf_folder
         os.makedirs(pdf_path)
 
@@ -313,105 +300,8 @@ def _animal_pdf():
         img_01 = app.config['IMG_DIRECTORY'] + "animal/" + img_01_folder + "/cropped/" + data['animal']['photo'][
             'img_01']
 
-        #  Start Family Tree
-        font_title = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
-        font_body = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
 
-        i18n_unknown = i18n['anlihouse-A304']
 
-        father = data['animal']['animal']['father'] if data['animal']['animal'][
-                                                           'father'] != "" else i18n_unknown
-        father_mother = data['animal']['animal']['father_mother'] if data['animal']['animal'][
-                                                                         'father_mother'] != "" else i18n_unknown
-        father_mother_mother = data['animal']['animal']['father_mother_mother'] if data['animal']['animal'][
-                                                                                       'father_mother_mother'] != "" else i18n_unknown
-        father_mother_father = data['animal']['animal']['father_mother_father'] if data['animal']['animal'][
-                                                                                       'father_mother_father'] != "" else i18n_unknown
-        father_father = data['animal']['animal']['father_father'] if data['animal']['animal'][
-                                                                         'father_father'] != "" else i18n_unknown
-        father_father_mother = data['animal']['animal']['father_father_mother'] if data['animal']['animal'][
-                                                                                       'father_father_mother'] != "" else i18n_unknown
-        father_father_father = data['animal']['animal']['father_father_father'] if data['animal']['animal'][
-                                                                                       'father_father_father'] != "" else i18n_unknown
-
-        mother = data['animal']['animal']['mother'] if data['animal']['animal'][
-                                                           'mother'] != "" else i18n_unknown
-        mother_mother = data['animal']['animal']['mother_mother'] if data['animal']['animal'][
-                                                                         'mother_mother'] != "" else i18n_unknown
-        mother_mother_mother = data['animal']['animal']['mother_mother_mother'] if data['animal']['animal'][
-                                                                                       'mother_mother_mother'] != "" else i18n_unknown
-        mother_mother_father = data['animal']['animal']['mother_mother_father'] if data['animal']['animal'][
-                                                                                       'mother_mother_father'] != "" else i18n_unknown
-        mother_father = data['animal']['animal']['mother_father'] if data['animal']['animal'][
-                                                                         'mother_father'] != "" else i18n_unknown
-        mother_father_mother = data['animal']['animal']['mother_father_mother'] if data['animal']['animal'][
-                                                                                       'mother_father_mother'] != "" else i18n_unknown
-        mother_father_father = data['animal']['animal']['mother_father_father'] if data['animal']['animal'][
-                                                                                       'mother_father_father'] != "" else i18n_unknown
-
-        #  End Family Tree
-
-        #  Start Family Tree 1
-        family_tree1_origin = Image.open(app.config['IMG_DIRECTORY'] + "pdf/layout/familytree1.png")
-        family_tree1_draw = ImageDraw.Draw(family_tree1_origin)
-
-        family_tree1_draw.text((517, 50), i18n['apa'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((517, 75), father, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_draw.text((245, 178), i18n['apa_anyja'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((245, 202), father_mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_draw.text((101, 315), i18n['apa_anyja_anyja'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((101, 340), father_mother_mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_draw.text((375, 315), i18n['apa_anyja_apja'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((375, 340), father_mother_father, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_draw.text((790, 178), i18n['apa_apja'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((790, 202), father_father, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_draw.text((661, 315), i18n['apa_apja_anyja'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((661, 340), father_father_mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_draw.text((919, 315), i18n['apa_apja_apja'], fill="black", anchor="mm", font=font_title)
-        family_tree1_draw.text((919, 340), father_father_father, fill="black", anchor="mm", font=font_body)
-
-        family_tree1_origin.save(pdf_path + family1_filename)
-        family_tree1_origin.close()
-
-        family_tree1 = pdf_path + family1_filename
-        #  Start Family Tree 1
-
-        #  Start Family Tree 2
-        family_tree2_origin = Image.open(app.config['IMG_DIRECTORY'] + "pdf/layout/familytree2.png")
-        family_tree2_draw = ImageDraw.Draw(family_tree2_origin)
-
-        family_tree2_draw.text((517, 50), i18n['anya'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((517, 75), mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_draw.text((245, 178), i18n['anya_anyja'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((245, 202), mother_mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_draw.text((101, 315), i18n['anya_anyja_anyja'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((101, 340), mother_mother_mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_draw.text((375, 315), i18n['anya_anyja_apja'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((375, 340), mother_mother_father, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_draw.text((790, 178), i18n['anya_apja'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((790, 202), mother_father, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_draw.text((661, 315), i18n['anya_apja_anyja'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((661, 340), mother_father_mother, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_draw.text((919, 315), i18n['anya_apja_apja'], fill="black", anchor="mm", font=font_title)
-        family_tree2_draw.text((919, 340), mother_father_father, fill="black", anchor="mm", font=font_body)
-
-        family_tree2_origin.save(pdf_path + family2_filename)
-        family_tree2_origin.close()
-
-        family_tree2 = pdf_path + family2_filename
-        #  End Family Tree 2
 
         #  Start Details
         if lang == "hu":
@@ -459,7 +349,6 @@ def _animal_pdf():
 
         jq = JsonQ(data=countries)
         jq2 = JsonQ(data=countries)
-        country_origin = jq.at("data").where("country_code", "=", data['animal']['animal']['country_origin']).get()
         country_residence = jq2.at("data").where("country_code", "=",
                                                  data['animal']['animal']['country_residence']).get()
 
@@ -529,11 +418,10 @@ def _animal_pdf():
 
         pdf.ln(20)
 
-        pdf.image(family_tree2, w=pdf.epw, h=0)
 
         pdf.ln(10)
 
-        pdf.image(family_tree1, w=pdf.epw, h=0)
+
 
         pdf.ln(20)
 
@@ -599,7 +487,6 @@ def _animal_pdf():
         pdf.set_y(pdf.get_y() + 5)
         pdf.set_font_size(10)
         pdf.set_x(15)
-        pdf.cell(0, 0, str(data['animal']['animal']['height']) + " cm")
 
         pdf.set_font_size(12)
         pdf.set_y(pdf.get_y() - 5)
@@ -613,11 +500,9 @@ def _animal_pdf():
         pdf.set_font_size(12)
         pdf.set_y(pdf.get_y() - 5)
         pdf.set_x(150)
-        pdf.cell(0, 0, i18n['anlihouse-A277'])
         pdf.set_font_size(10)
         pdf.set_y(pdf.get_y() + 5)
         pdf.set_x(154)
-        pdf.cell(0, 0, country_origin[0]['country'])
 
         pdf.ln(20)
 

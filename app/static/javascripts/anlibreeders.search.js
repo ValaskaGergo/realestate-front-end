@@ -76,44 +76,14 @@ class AnlibreedersSearch {
                 const $filterWhereAllInput = $("#filterWhereAllInput");
                 const $filterWhereNameInput = $("#filterWhereNameInput");
                 const $filterWhereDescriptionInput = $("#filterWhereDescriptionInput");
-                const $filterWhereFamilyInput = $("#filterWhereFamilyInput");
 
-                const $filterWhereFamilyMotherInput = $("#filterWhereFamilyMotherInput");
-                const $filterWhereFamilyMotherMotherInput = $("#filterWhereFamilyMotherMotherInput");
-                const $filterWhereFamilyMotherFatherInput = $("#filterWhereFamilyMotherFatherInput");
-                const $filterWhereFamilyMotherMotherMotherInput = $("#filterWhereFamilyMotherMotherMotherInput");
-                const $filterWhereFamilyMotherMotherFatherInput = $("#filterWhereFamilyMotherMotherFatherInput");
-                const $filterWhereFamilyMotherFatherMotherInput = $("#filterWhereFamilyMotherFatherMotherInput");
-                const $filterWhereFamilyMotherFatherFatherInput = $("#filterWhereFamilyMotherFatherFatherInput");
-                const $filterWhereFamilyFatherInput = $("#filterWhereFamilyFatherInput");
-                const $filterWhereFamilyFatherMotherInput = $("#filterWhereFamilyFatherMotherInput");
-                const $filterWhereFamilyFatherFatherInput = $("#filterWhereFamilyFatherFatherInput");
-                const $filterWhereFamilyFatherMotherMotherInput = $("#filterWhereFamilyFatherMotherMotherInput");
-                const $filterWhereFamilyFatherMotherFatherInput = $("#filterWhereFamilyFatherMotherFatherInput");
-                const $filterWhereFamilyFatherFatherMotherInput = $("#filterWhereFamilyFatherFatherMotherInput");
-                const $filterWhereFamilyFatherFatherFatherInput = $("#filterWhereFamilyFatherFatherFatherInput");
 
                 const $filterWhereElem = $filterWhere.find(".elem");
 
                 const $filterWhereAll = $filterWhere.find(".filterWhereAll");
                 const $filterWhereName = $filterWhere.find(".filterWhereName");
                 const $filterWhereDescription = $filterWhere.find(".filterWhereDescription");
-                const $filterWhereFamily = $filterWhere.find(".filterWhereFamily");
-                const $filterWhereFamilyGroup = $filterWhere.find(".family-group");
-                const $filterWhereFamilyMother = $filterWhere.find(".filterWhereFamilyMother");
-                const $filterWhereFamilyMotherMother = $filterWhere.find(".filterWhereFamilyMotherMother");
-                const $filterWhereFamilyMotherFather = $filterWhere.find(".filterWhereFamilyMotherFather");
-                const $filterWhereFamilyMotherMotherMother = $filterWhere.find(".filterWhereFamilyMotherMotherMother");
-                const $filterWhereFamilyMotherMotherFather = $filterWhere.find(".filterWhereFamilyMotherMotherFather");
-                const $filterWhereFamilyMotherFatherMother = $filterWhere.find(".filterWhereFamilyMotherFatherMother");
-                const $filterWhereFamilyMotherFatherFather = $filterWhere.find(".filterWhereFamilyMotherFatherFather");
-                const $filterWhereFamilyFather = $filterWhere.find(".filterWhereFamilyFather");
-                const $filterWhereFamilyFatherMother = $filterWhere.find(".filterWhereFamilyFatherMother");
-                const $filterWhereFamilyFatherFather = $filterWhere.find(".filterWhereFamilyFatherFather");
-                const $filterWhereFamilyFatherMotherMother = $filterWhere.find(".filterWhereFamilyFatherMotherMother");
-                const $filterWhereFamilyFatherMotherFather = $filterWhere.find(".filterWhereFamilyFatherMotherFather");
-                const $filterWhereFamilyFatherFatherMother = $filterWhere.find(".filterWhereFamilyFatherFatherMother");
-                const $filterWhereFamilyFatherFatherFather = $filterWhere.find(".filterWhereFamilyFatherFatherFather");
+
 
                 // Start Search Input
                 if ($searchInput.val() !== "") {
@@ -150,27 +120,13 @@ class AnlibreedersSearch {
                             $filterWhereAllInput.val("active");
                             $filterWhereNameInput.val("inactive");
                             $filterWhereDescriptionInput.val("inactive");
-                            $filterWhereFamilyInput.val("inactive");
-                            $filterWhereFamilyMotherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherFatherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherFatherInput.val("inactive");
+
                         });
 
                         $filterWhereAll.each(function () {
                             $(this).removeClass("inactive").addClass("active").attr("data-status", "active");
                         });
-                        $filterWhereFamilyGroup.removeClass("active").addClass("inactive");
+
                     }
 
                 });
@@ -197,30 +153,10 @@ class AnlibreedersSearch {
                                 $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
                             });
 
-                            $filterWhereFamilyGroup.removeClass("active").addClass("inactive");
-                            $("#filter #where .family-group .elem.multiple.active").each(function () {
-                                $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                                $filterWhereAllInput.val("active");
-                            });
 
                             $filterWhereAllInput.val("active");
                             $filterWhereNameInput.val("inactive");
                             $filterWhereDescriptionInput.val("inactive");
-                            $filterWhereFamilyInput.val("inactive");
-                            $filterWhereFamilyMotherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherFatherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherFatherInput.val("inactive");
                         }
                     }
                     // End Single
@@ -243,66 +179,6 @@ class AnlibreedersSearch {
                             $filterWhereDescriptionInput.val("active");
                         }
 
-                        if (dataName === "filterWhereFamily") {
-                            $filterWhereFamilyInput.val("active");
-                            $filterWhereFamilyGroup.removeClass("inactive").addClass("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMother") {
-                            $filterWhereFamilyMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherMother") {
-                            $filterWhereFamilyMotherMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherFather") {
-                            $filterWhereFamilyMotherFatherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherMotherMother") {
-                            $filterWhereFamilyMotherMotherMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherMotherFather") {
-                            $filterWhereFamilyMotherMotherFatherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherFatherMother") {
-                            $filterWhereFamilyMotherFatherMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherFatherFather") {
-                            $filterWhereFamilyMotherFatherFatherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFather") {
-                            $filterWhereFamilyFatherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherMother") {
-                            $filterWhereFamilyFatherMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherFather") {
-                            $filterWhereFamilyFatherFatherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherMotherMother") {
-                            $filterWhereFamilyFatherMotherMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherMotherFather") {
-                            $filterWhereFamilyFatherMotherFatherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherFatherMother") {
-                            $filterWhereFamilyFatherFatherMotherInput.val("active");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherFatherFather") {
-                            $filterWhereFamilyFatherFatherFatherInput.val("active");
-                        }
 
                     } else if (_this.hasClass("multiple") && _this.hasClass("active")) {
 
@@ -316,93 +192,6 @@ class AnlibreedersSearch {
                             $filterWhereDescriptionInput.val("inactive");
                         }
 
-                        if (dataName === "filterWhereFamily") {
-                            $filterWhereFamilyInput.val("inactive");
-                            $filterWhereFamilyGroup.removeClass("active").addClass("inactive");
-
-                            $("#filter #where .family-group .elem.multiple.active").each(function () {
-                                $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                                $filterWhereAllInput.val("active");
-                            });
-
-                            $filterWhereFamilyMotherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherMotherFatherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherMotherInput.val("inactive");
-                            $filterWhereFamilyMotherFatherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherMotherFatherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherMotherInput.val("inactive");
-                            $filterWhereFamilyFatherFatherFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMother") {
-                            $filterWhereFamilyMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherMother") {
-                            $filterWhereFamilyMotherMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherFather") {
-                            $filterWhereFamilyMotherFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherMotherMother") {
-                            $filterWhereFamilyMotherMotherMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherMotherFather") {
-                            $filterWhereFamilyMotherMotherFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherFatherMother") {
-                            $filterWhereFamilyMotherFatherMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyMotherFatherFather") {
-                            $filterWhereFamilyMotherFatherFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFather") {
-                            $filterWhereFamilyFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherMother") {
-                            $filterWhereFamilyFatherMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherFather") {
-                            $filterWhereFamilyFatherFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherMotherMother") {
-                            $filterWhereFamilyFatherMotherMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherMotherFather") {
-                            $filterWhereFamilyFatherMotherFatherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherFatherMother") {
-                            $filterWhereFamilyFatherFatherMotherInput.val("inactive");
-                        }
-
-                        if (dataName === "filterWhereFamilyFatherFatherFather") {
-                            $filterWhereFamilyFatherFatherFatherInput.val("inactive");
-                        }
-
-                        if ($("#filter #where .elem.multiple.active").length === 0) {
-                            $filterWhereAll.each(function () {
-                                $(this).removeClass("inactive").addClass("active").attr("data-status", "active");
-                                $filterWhereAllInput.val("active");
-                            });
-                        }
 
                     }
                     // End Multiple
@@ -418,65 +207,7 @@ class AnlibreedersSearch {
                         $filterWhereDescriptionInput.trigger("change");
                     }
 
-                    if (dataName === "filterWhereFamily") {
-                        $filterWhereFamilyInput.trigger("change");
-                    }
 
-                    if (dataName === "filterWhereFamilyMother") {
-                        $filterWhereFamilyMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyMotherMother") {
-                        $filterWhereFamilyMotherMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyMotherFather") {
-                        $filterWhereFamilyMotherFatherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyMotherMotherMother") {
-                        $filterWhereFamilyMotherMotherMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyMotherMotherFather") {
-                        $filterWhereFamilyMotherMotherFatherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyMotherFatherMother") {
-                        $filterWhereFamilyMotherFatherMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyMotherFatherFather") {
-                        $filterWhereFamilyMotherFatherFatherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFather") {
-                        $filterWhereFamilyFatherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFatherMother") {
-                        $filterWhereFamilyFatherMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFatherFather") {
-                        $filterWhereFamilyFatherFatherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFatherMotherMother") {
-                        $filterWhereFamilyFatherMotherMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFatherMotherFather") {
-                        $filterWhereFamilyFatherMotherFatherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFatherFatherMother") {
-                        $filterWhereFamilyFatherFatherMotherInput.trigger("change");
-                    }
-
-                    if (dataName === "filterWhereFamilyFatherFatherFather") {
-                        $filterWhereFamilyFatherFatherFatherInput.trigger("change");
-                    }
                 });
                 // End Elem Click
             },
@@ -546,9 +277,6 @@ class AnlibreedersSearch {
                 let $beUsedFor = $filter.find("#beUsedFor");
                 let $filterBeUsedFor = $beUsedFor.find(".filterBeUsedFor");
 
-                let $age = $filter.find("#age");
-
-                let $height = $filter.find("#height");
 
                 let subcategoryData;
                 $.ajax({
@@ -666,17 +394,7 @@ class AnlibreedersSearch {
                             }
                             // End Color
 
-                            // Start Age
-                            $age.removeClass("inactive").addClass("active");
 
-                            loadSearch.searchFilterAgeUpdate();
-                            // End Age
-
-                            // Start Height
-                            $height.removeClass("inactive").addClass("active");
-
-                            loadSearch.searchFilterHeightUpdate();
-                            // End Height
                         } else {
                         }
                     },
@@ -706,9 +424,6 @@ class AnlibreedersSearch {
                 let $beUsedFor = $filter.find("#beUsedFor");
                 let $filterBeUsedFor = $beUsedFor.find(".filterBeUsedFor");
 
-                let $age = $filter.find("#age");
-
-                let $height = $filter.find("#height");
 
                 // Start Elem Click
                 $filterCategoryElem.on("click", function (event) {
@@ -730,17 +445,6 @@ class AnlibreedersSearch {
                     $color.find(".elem.single").removeClass("inactive").addClass("active");
                     $beUsedFor.find(".elem.single").removeClass("inactive").addClass("active");
 
-                    loadSearch.searchFilterAgeUpdate();
-                    const $filterAgeMinInput = $("#filterAgeMinInput");
-                    const $filterAgeMaxInput = $("#filterAgeMaxInput");
-                    $filterAgeMinInput.val(process.env.FILTER_AGE_MIN);
-                    $filterAgeMaxInput.val(process.env.FILTER_AGE_MAX);
-
-                    loadSearch.searchFilterHeightUpdate();
-                    const $filterHeightMinInput = $("#filterHeightMinInput");
-                    const $filterHeightMaxInput = $("#filterHeightMaxInput");
-                    $filterHeightMinInput.val(process.env.FILTER_HEIGHT_MIN);
-                    $filterHeightMaxInput.val(process.env.FILTER_HEIGHT_MAX);
 
                     // Start Single
                     if (_this.hasClass("single") && _this.hasClass("active")) {
@@ -796,16 +500,14 @@ class AnlibreedersSearch {
                             $gender.removeClass("active").addClass("inactive");
                             $color.removeClass("active").addClass("inactive");
                             $beUsedFor.removeClass("active").addClass("inactive");
-                            $age.removeClass("active").addClass("inactive");
-                            $height.removeClass("active").addClass("inactive");
+
                         }
                     } else {
                         $subcategory.removeClass("active").addClass("inactive");
                         $gender.removeClass("active").addClass("inactive");
                         $color.removeClass("active").addClass("inactive");
                         $beUsedFor.removeClass("active").addClass("inactive");
-                        $age.removeClass("active").addClass("inactive");
-                        $height.removeClass("active").addClass("inactive");
+
                     }
                     // End Multiple
                     $filterCategoryInput.trigger("change");
@@ -1081,57 +783,6 @@ class AnlibreedersSearch {
                 // End Elem Click
             },
 
-            searchFilterAge: function () {
-                const ageSlider = document.getElementById('age-slider');
-
-                const $filter = $("#filter");
-                const $filterAge = $filter.find("#age");
-                const $filterAgeTooltipLower = $filterAge.find(".text .tooltip-lower");
-                const $filterAgeTooltipUpper = $filterAge.find(".text .tooltip-upper");
-
-                const $filterAgeMinInput = $("#filterAgeMinInput");
-                const $filterAgeMaxInput = $("#filterAgeMaxInput");
-
-                noUiSlider.create(ageSlider, {
-                    start: [parseInt(process.env.FILTER_AGE_MIN), parseInt(process.env.FILTER_AGE_MAX)],
-                    step: parseInt(process.env.FILTER_AGE_STEP),
-                    connect: true,
-                    tooltips: [true, true],
-                    format: wNumb({
-                        decimals: 0,
-                    }),
-                    range: {
-                        'min': [parseInt(process.env.FILTER_AGE_MIN)],
-                        'max': [parseInt(process.env.FILTER_AGE_MAX)]
-                    }
-                });
-
-                ageSlider.noUiSlider.on('update', function (values, handle) {
-                    $filterAgeTooltipLower.text(values[0]);
-                    $filterAgeTooltipUpper.text(values[1]);
-                });
-
-                ageSlider.noUiSlider.on('change', function (values, handle) {
-                    let valMin = values[0].replace("€", "");
-                    let valMax = values[1].replace("€", "");
-
-                    $filterAgeMinInput.val(valMin.replace(".", ""));
-                    $filterAgeMaxInput.val(valMax.replace(".", ""));
-
-                    $filterAgeMinInput.trigger("change");
-                    $filterAgeMaxInput.trigger("change");
-                });
-
-                $filterAge.addClass("inactive");
-            },
-
-            searchFilterAgeUpdate: function () {
-                const ageSlider = document.getElementById('age-slider');
-
-                ageSlider.noUiSlider.updateOptions({
-                    start: [parseInt(process.env.FILTER_AGE_MIN), parseInt(process.env.FILTER_AGE_MAX)],
-                });
-            },
 
             searchFilterCountryResidence: function () {
                 const $filter = $("#filter");
@@ -1219,91 +870,6 @@ class AnlibreedersSearch {
                 // End Elem Click
             },
 
-            searchFilterCountryOrigin: function () {
-                const $filter = $("#filter");
-                const $countryOrigin = $filter.find("#countryOrigin");
-
-                const $filterRegionOriginInput = $("#filterRegionOriginInput");
-                const $filterCountryOriginInput = $("#filterCountryOriginInput");
-
-                const $filterCountryOriginAll = $countryOrigin.find(".filterCountryOriginAll");
-                const $filterCountryOriginElem = $countryOrigin.find(".elem");
-                const $filterCountryOriginRegionElem = $countryOrigin.find(".elem.region");
-                const $filterCountryOriginCountryElem = $countryOrigin.find(".elem.country");
-                const $filterCountryOriginCountriesGroup = $countryOrigin.find(".countries-group");
-
-                // Start Elem Click
-                $filterCountryOriginElem.on("click", function (event) {
-                    event.stopPropagation();
-                    const _this = $(this);
-
-                    let dataName = _this.attr("data-name");
-                    let dataStatus = _this.attr("data-status");
-
-                    // Start Single
-                    if (_this.hasClass("single") && _this.hasClass("active")) {
-                    } else if (_this.hasClass("single") && _this.hasClass("inactive")) {
-                        $filterCountryOriginCountryElem.each(function () {
-                            $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                        });
-                        $filterCountryOriginCountriesGroup.each(function () {
-                            $(this).removeClass("active").addClass("inactive");
-                        });
-                        $filterCountryOriginRegionElem.each(function () {
-                            $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                        });
-
-                        $filterCountryOriginAll.each(function () {
-                            $(this).removeClass("inactive").addClass("active").attr("data-status", "active");
-                        });
-                        $filterRegionOriginInput.val("ALL");
-                        $filterCountryOriginInput.val("ALL");
-                    }
-                    // End Single
-
-                    // Start Multiple
-                    if (_this.hasClass("multiple") && _this.hasClass("inactive")) {
-                        if (_this.hasClass("region")) {
-
-                            $filterCountryOriginAll.each(function () {
-                                $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                            });
-                            $filterCountryOriginRegionElem.each(function () {
-                                $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                            });
-                            $filterCountryOriginCountriesGroup.each(function () {
-                                $(this).removeClass("active").addClass("inactive");
-                            });
-                            $filterCountryOriginCountryElem.each(function () {
-                                $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                            });
-                            $filterCountryOriginInput.val("ALL");
-
-                            $(this).removeClass("inactive").addClass("active").attr("data-status", "active");
-                            $filterRegionOriginInput.val(dataName);
-
-                            $('.countries-group.countries-origin[data-region_code="' + _this.attr("ID") + '"]').removeClass("inactive").addClass("active");
-                        } else if (_this.hasClass("country")) {
-
-                            $filterCountryOriginCountryElem.each(function () {
-                                $(this).removeClass("active").addClass("inactive").attr("data-status", "inactive");
-                            });
-
-                            $(this).removeClass("inactive").addClass("active").attr("data-status", "active");
-                            $filterCountryOriginInput.val(dataName);
-
-                        }
-                    } else if (_this.hasClass("multiple") && _this.hasClass("active")) {
-                        if (_this.hasClass("region")) {
-                        } else if (_this.hasClass("country")) {
-                        }
-                    }
-                    // End Multiple
-                    $filterRegionOriginInput.trigger("change");
-                    $filterCountryOriginInput.trigger("change");
-                })
-                // End Elem Click
-            },
 
             filterSetFormElem: function () {
                 const $searchInput = $("#searchInput");
@@ -1313,27 +879,11 @@ class AnlibreedersSearch {
                 // Start Where
                 const $where = $filter.find("#where");
                 const $whereElem = $filter.find("#where .elem");
-                const $whereFamilyGroup = $filter.find("#where .family-group");
 
                 const $filterWhereAllInput = $("#filterWhereAllInput");
                 const $filterWhereNameInput = $("#filterWhereNameInput");
                 const $filterWhereDescriptionInput = $("#filterWhereDescriptionInput");
-                const $filterWhereFamilyInput = $("#filterWhereFamilyInput");
 
-                const $filterWhereFamilyMotherInput = $("#filterWhereFamilyMotherInput");
-                const $filterWhereFamilyMotherMotherInput = $("#filterWhereFamilyMotherMotherInput");
-                const $filterWhereFamilyMotherFatherInput = $("#filterWhereFamilyMotherFatherInput");
-                const $filterWhereFamilyMotherMotherMotherInput = $("#filterWhereFamilyMotherMotherMotherInput");
-                const $filterWhereFamilyMotherMotherFatherInput = $("#filterWhereFamilyMotherMotherFatherInput");
-                const $filterWhereFamilyMotherFatherMotherInput = $("#filterWhereFamilyMotherFatherMotherInput");
-                const $filterWhereFamilyMotherFatherFatherInput = $("#filterWhereFamilyMotherFatherFatherInput");
-                const $filterWhereFamilyFatherInput = $("#filterWhereFamilyFatherInput");
-                const $filterWhereFamilyFatherMotherInput = $("#filterWhereFamilyFatherMotherInput");
-                const $filterWhereFamilyFatherFatherInput = $("#filterWhereFamilyFatherFatherInput");
-                const $filterWhereFamilyFatherMotherMotherInput = $("#filterWhereFamilyFatherMotherMotherInput");
-                const $filterWhereFamilyFatherMotherFatherInput = $("#filterWhereFamilyFatherMotherFatherInput");
-                const $filterWhereFamilyFatherFatherMotherInput = $("#filterWhereFamilyFatherFatherMotherInput");
-                const $filterWhereFamilyFatherFatherFatherInput = $("#filterWhereFamilyFatherFatherFatherInput");
 
                 if ($filterWhereAllInput.val() === "active") {
                     $where.find(".filterWhereAll").removeClass("inactive").addClass("active");
@@ -1359,132 +909,6 @@ class AnlibreedersSearch {
                     $where.find(".filterWhereDescription").attr("data-status", "inactive");
                 }
 
-                if ($filterWhereFamilyInput.val() === "active") {
-                    $where.find(".filterWhereFamily").removeClass("inactive").addClass("active");
-                    $where.find(".filterWhereFamily").attr("data-status", "active");
-
-                    // Start whereFamilyGroup
-                    $whereFamilyGroup.removeClass("inactive").addClass("active");
-
-                    if ($filterWhereFamilyMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyMotherMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyMotherFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFather").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyMotherMotherMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyMotherMotherFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherMotherFather").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyMotherFatherMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyMotherFatherFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyMotherFatherFather").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFather").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFather").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherMotherMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherMotherFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherMotherFather").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherFatherMotherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherMother").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherMother").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherMother").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherMother").attr("data-status", "inactive");
-                    }
-
-                    if ($filterWhereFamilyFatherFatherFatherInput.val() === "active") {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherFather").removeClass("inactive").addClass("active");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherFather").attr("data-status", "active");
-                    } else {
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherFather").removeClass("active").addClass("inactive");
-                        $whereFamilyGroup.find(".filterWhereFamilyFatherFatherFather").attr("data-status", "inactive");
-                    }
-                    // End whereFamilyGroup
-                } else {
-                    $where.find(".filterWhereFamily").removeClass("active").addClass("inactive");
-                    $where.find(".filterWhereFamily").attr("data-status", "inactive");
-
-                    $whereFamilyGroup.removeClass("active").addClass("inactive");
-                }
-                // End Where
 
                 // Start Price
                 const $price = $filter.find("#price");
@@ -1617,42 +1041,6 @@ class AnlibreedersSearch {
                 });
                 // End Be Used For
 
-                // Start Age
-                const $age = $filter.find("#age");
-                const ageSlider = document.getElementById('age-slider');
-
-                const $filterAgeMinInput = $("#filterAgeMinInput");
-                const $filterAgeMaxInput = $("#filterAgeMaxInput");
-
-                let eachRunAge = true;
-                $searchInput.on("focus", function () {
-                    if (eachRunAge === true) {
-                        ageSlider.noUiSlider.updateOptions({
-                            start: [$filterAgeMinInput.val(), $filterAgeMaxInput.val()]
-                        });
-                        eachRunAge = false;
-                    }
-                });
-                // End Age
-
-
-                // Start Height
-                const $height = $filter.find("#height");
-                const heightSlider = document.getElementById('height-slider');
-
-                const $filterHeightMinInput = $("#filterHeightMinInput");
-                const $filterHeightMaxInput = $("#filterHeightMaxInput");
-
-                let eachRunHeight = true;
-                $searchInput.on("focus", function () {
-                    if (eachRunHeight === true) {
-                        heightSlider.noUiSlider.updateOptions({
-                            start: [$filterHeightMinInput.val(), $filterHeightMaxInput.val()]
-                        });
-                        eachRunHeight = false;
-                    }
-                });
-                // End Age
 
                 // Start Country Residence
                 const $countryResidence = $filter.find("#countryResidence");
@@ -1683,39 +1071,9 @@ class AnlibreedersSearch {
                         $(this).attr("data-status", "inactive");
                     }
                 });
-                // End Country Residence
-
-                // Start Country Origin
-                const $countryOrigin = $filter.find("#countryOrigin");
-                const $countryOriginElem = $filter.find("#countryOrigin .elem");
-                const $countryOriginGroup = $filter.find("#countryOrigin .countries-group.countries-origin");
-
-                const $filterRegionOriginInput = $("#filterRegionOriginInput");
-                const $filterCountryOriginInput = $("#filterCountryOriginInput");
-
-                $.each($("#countryOrigin .elem.region"), function () {
-                    if ($filterRegionOriginInput.val().includes($(this).attr("data-name"))) {
-                        $(this).removeClass("inactive").addClass("active");
-                        $(this).attr("data-status", "active");
-
-                        $('.countries-group.countries-origin[data-region_code="' + $(this).attr("ID") + '"]').removeClass("inactive").addClass("active");
-                    } else {
-                        $(this).removeClass("active").addClass("inactive");
-                        $(this).attr("data-status", "inactive");
-                    }
-                });
-
-                $.each($("#countryOrigin .elem.country"), function () {
-                    if ($filterCountryOriginInput.val().includes($(this).attr("data-name"))) {
-                        $(this).removeClass("inactive").addClass("active");
-                        $(this).attr("data-status", "active");
-                    } else {
-                        $(this).removeClass("active").addClass("inactive");
-                        $(this).attr("data-status", "inactive");
-                    }
-                });
-                // End Country Origin
             },
+
+            // End Country Residence
 
             getFilterCountAjax: function () {
                 const $searchBtn = $("#search #search-btn");
@@ -1766,7 +1124,8 @@ class AnlibreedersSearch {
                     error: function (xhr, status, error) {
                     }
                 });
-            },
+            }
+            ,
 
             getFilterCount: function () {
                 const $searchInput = $("#searchInput");
@@ -1788,7 +1147,8 @@ class AnlibreedersSearch {
 
                     loadSearch.getFilterCountAjax();
                 });
-            },
+            }
+            ,
 
             dropdownFilterLink: function () {
                 const $list = $("#list");
@@ -1796,14 +1156,10 @@ class AnlibreedersSearch {
                 const $dropdownFilterLinksItem = $dropdownFilterLinks.find("span.dropdown-item");
 
                 const $filterOrderByPrice = $("#filterOrderByPrice");
-                const $filterOrderByAge = $("#filterOrderByAge");
-                const $filterOrderByHeight = $("#filterOrderByHeight");
                 const $filterOrderByRating = $("#filterOrderByRating");
 
                 function NoneOrderByInputVal() {
                     $filterOrderByPrice.val("None");
-                    $filterOrderByAge.val("None");
-                    $filterOrderByHeight.val("None");
                     $filterOrderByRating.val("None");
                 }
 
@@ -1819,18 +1175,7 @@ class AnlibreedersSearch {
                     } else if (dataType === "price-desc") {
                         NoneOrderByInputVal();
                         $filterOrderByPrice.val("desc");
-                    } else if (dataType === "age-asc") {
-                        NoneOrderByInputVal();
-                        $filterOrderByAge.val("asc");
-                    } else if (dataType === "age-desc") {
-                        NoneOrderByInputVal();
-                        $filterOrderByAge.val("desc");
-                    } else if (dataType === "height-asc") {
-                        NoneOrderByInputVal();
-                        $filterOrderByHeight.val("asc");
-                    } else if (dataType === "height-desc") {
-                        NoneOrderByInputVal();
-                        $filterOrderByHeight.val("desc");
+
                     } else if (dataType === "rating-asc") {
                         NoneOrderByInputVal();
                         $filterOrderByRating.val("asc");
@@ -1855,7 +1200,8 @@ class AnlibreedersSearch {
 
                     loadSearch.getFilterCountAjax();
                 });
-            },
+            }
+            ,
 
             dropdownSnapView: function () {
                 const $list = $("#list");
@@ -1887,7 +1233,8 @@ class AnlibreedersSearch {
                     } else {
                     }
                 });
-            },
+            }
+            ,
 
             initializ: function () {
                 loadSearch.searchInput();
@@ -1899,9 +1246,7 @@ class AnlibreedersSearch {
                 loadSearch.searchFilterGender();
                 loadSearch.searchFilterColor();
                 loadSearch.searchFilterBeUsedFor();
-                loadSearch.searchFilterAge();
                 loadSearch.searchFilterCountryResidence();
-                loadSearch.searchFilterCountryOrigin();
                 loadSearch.filterSetFormElem();
                 loadSearch.getFilterCount();
                 loadSearch.dropdownFilterLink();
@@ -1911,9 +1256,11 @@ class AnlibreedersSearch {
         };
 
         $(function () {
-            loadSearch.initializ()
-        });
+                loadSearch.initializ()
+            }
+        )
     }
 }
 
-export let anlibreedersSearch = new AnlibreedersSearch();
+export let
+    anlibreedersSearch = new AnlibreedersSearch();

@@ -49,21 +49,6 @@
 
                             {{ filter_form.where_description(type='hidden', id='filterWhereDescriptionInput', class='form-control') }}
 
-                            {{ filter_form.where_family(type='hidden', id='filterWhereFamilyInput', class='form-control') }}
-                            {{ filter_form.where_family_mother(type='hidden', id='filterWhereFamilyMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_mother_mother(type='hidden', id='filterWhereFamilyMotherMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_mother_father(type='hidden', id='filterWhereFamilyMotherFatherInput', class='form-control') }}
-                            {{ filter_form.where_family_mother_mother_mother(type='hidden', id='filterWhereFamilyMotherMotherMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_mother_mother_father(type='hidden', id='filterWhereFamilyMotherMotherFatherInput', class='form-control') }}
-                            {{ filter_form.where_family_mother_father_mother(type='hidden', id='filterWhereFamilyMotherFatherMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_mother_father_father(type='hidden', id='filterWhereFamilyMotherFatherFatherInput', class='form-control') }}
-                            {{ filter_form.where_family_father(type='hidden', id='filterWhereFamilyFatherInput', class='form-control') }}
-                            {{ filter_form.where_family_father_mother(type='hidden', id='filterWhereFamilyFatherMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_father_father(type='hidden', id='filterWhereFamilyFatherFatherInput', class='form-control') }}
-                            {{ filter_form.where_family_father_mother_mother(type='hidden', id='filterWhereFamilyFatherMotherMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_father_mother_father(type='hidden', id='filterWhereFamilyFatherMotherFatherInput', class='form-control') }}
-                            {{ filter_form.where_family_father_father_mother(type='hidden', id='filterWhereFamilyFatherFatherMotherInput', class='form-control') }}
-                            {{ filter_form.where_family_father_father_father(type='hidden', id='filterWhereFamilyFatherFatherFatherInput', class='form-control') }}
 
                             {{ filter_form.price_min(type='hidden', id='filterPriceMinInput', class='form-control') }}
                             {{ filter_form.price_max(type='hidden', id='filterPriceMaxInput', class='form-control') }}
@@ -78,17 +63,12 @@
 
                             {{ filter_form.be_used_for_all(type='hidden', id='filterBeUsedForInput', class='form-control') }}
 
-                            {{ filter_form.age_min(type='hidden', id='filterAgeMinInput', class='form-control') }}
-                            {{ filter_form.age_max(type='hidden', id='filterAgeMaxInput', class='form-control') }}
 
                             {{ filter_form.region_residence(type='hidden', id='filterRegionResidenceInput', class='form-control') }}
                             {{ filter_form.country_residence(type='hidden', id='filterCountryResidenceInput', class='form-control') }}
 
-                            {{ filter_form.region_origin(type='hidden', id='filterRegionOriginInput', class='form-control') }}
-                            {{ filter_form.country_origin(type='hidden', id='filterCountryOriginInput', class='form-control') }}
 
                             {{ filter_form.order_by_price(type='hidden', id='filterOrderByPrice', class='form-control') }}
-                            {{ filter_form.order_by_age(type='hidden', id='filterOrderByAge', class='form-control') }}
                             {{ filter_form.order_by_rating(type='hidden', id='filterOrderByRating', class='form-control') }}
 
                             {{ filter_form.encode(type='hidden', id='filterEncode', class='form-control') }}
@@ -167,10 +147,6 @@
                                     <span class="text" data-i18n="anlihouse-A251"></span>
                                 </span>
 
-                                <span class="badge elem multiple filterWhereFamily inactive"
-                                      data-name="filterWhereFamily" data-status="inactive">
-                                    <span class="text" data-i18n="anlihouse-A252"></span>
-                                </span>
 
                                 <span class="badge elem minus-icon">
                                     <svg width="16" height="716" viewBox="0 0 752 752"
@@ -179,83 +155,7 @@
                                     </svg>
                                 </span>
 
-                                <span class="family-group inactive">
-                                    <span class="badge elem multiple filterWhereFamilyMother inactive"
-                                          data-name="filterWhereFamilyMother"
-                                          data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A253"></span>
-                                    </span>
 
-                                    <span class="badge elem multiple filterWhereFamilyMotherMother inactive"
-                                          data-name="filterWhereFamilyMotherMother"
-                                          data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A254"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyMotherFather inactive"
-                                          data-name="filterWhereFamilyMotherFather"
-                                          data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A255"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyMotherMotherMother inactive"
-                                          data-name="filterWhereFamilyMotherMotherMother" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A256"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyMotherMotherFather inactive"
-                                          data-name="filterWhereFamilyMotherMotherFather" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A257"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyMotherFatherMother inactive"
-                                          data-name="filterWhereFamilyMotherFatherMother" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A258"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyMotherFatherFather inactive"
-                                          data-name="filterWhereFamilyMotherFatherFather" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A259"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFather inactive"
-                                          data-name="filterWhereFamilyFather"
-                                          data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A260"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFatherMother inactive"
-                                          data-name="filterWhereFamilyFatherMother"
-                                          data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A261"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFatherFather inactive"
-                                          data-name="filterWhereFamilyFatherFather"
-                                          data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A262"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFatherMotherMother inactive"
-                                          data-name="filterWhereFamilyFatherMotherMother" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A263"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFatherMotherFather inactive"
-                                          data-name="filterWhereFamilyFatherMotherFather" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A264"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFatherFatherMother inactive"
-                                          data-name="filterWhereFamilyFatherFatherMother" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A265"></span>
-                                    </span>
-
-                                    <span class="badge elem multiple filterWhereFamilyFatherFatherFather inactive"
-                                          data-name="filterWhereFamilyFatherFatherFather" data-status="inactive">
-                                        <span class="text" data-i18n="anlihouse-A266"></span>
-                                    </span>
-                                </span>
                             </div>
                         </div>
 
@@ -691,147 +591,7 @@
                             </div>
                         </div>
 
-                        <div id="countryOrigin">
-                            <div class="title" data-i18n="anlihouse-A277"></div>
 
-                            <span class="plus" style="display:none">
-                                <span class="badge elem single region filterCountryOriginAll active" data-name="ALL"
-                                      data-status="active">
-                                    <span class="text" data-i18n="anlihouse-A269"></span>
-                                </span>
-                                <span class="badge elem plus-icon">
-                                    <svg width="16" height="16" viewBox="0 0 752 752"
-                                         xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path
-                                            d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g
-                                            clip-path="url(.p)"><path
-                                            d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z"
-                                            fill-rule="evenodd"/></g>
-                                    </svg>
-                                </span>
-                            </span>
-
-                            <div class="badge-group active">
-                                <span class="badge elem single region filterCountryOriginAll active" data-name="ALL"
-                                      data-status="active">
-                                    <span class="text" data-i18n="anlihouse-A269"></span>
-                                </span>
-
-                                <span id="{{ filter_countries['Americas'][0]['region_code'] }}"
-                                      class="badge elem multiple region inactive"
-                                      data-name="{{ filter_countries['Americas'][0]['region_code'] }}"
-                                      data-status="inactive">
-                                    <span class="text">{{ filter_countries['Americas'][0]['region'] }}</span>
-                                </span>
-
-                                <span id="{{ filter_countries['Europe'][0]['region_code'] }}"
-                                      class="badge elem multiple region inactive"
-                                      data-name="{{ filter_countries['Europe'][0]['region_code'] }}"
-                                      data-status="inactive">
-                                    <span class="text">{{ filter_countries['Europe'][0]['region'] }}</span>
-                                </span>
-
-                                <span id="{{ filter_countries['Asia'][0]['region_code'] }}"
-                                      class="badge elem multiple region inactive"
-                                      data-name="{{ filter_countries['Asia'][0]['region_code'] }}"
-                                      data-status="inactive">
-                                    <span class="text">{{ filter_countries['Asia'][0]['region'] }}</span>
-                                </span>
-
-                                <span id="{{ filter_countries['Africa'][0]['region_code'] }}"
-                                      class="badge elem multiple region inactive"
-                                      data-name="{{ filter_countries['Africa'][0]['region_code'] }}"
-                                      data-status="inactive">
-                                    <span class="text">{{ filter_countries['Africa'][0]['region'] }}</span>
-                                </span>
-
-                                <span id="{{ filter_countries['Oceania'][0]['region_code'] }}"
-                                      class="badge elem multiple region inactive"
-                                      data-name="{{ filter_countries['Oceania'][0]['region_code'] }}"
-                                      data-status="inactive">
-                                    <span class="text">{{ filter_countries['Oceania'][0]['region'] }}</span>
-                                </span>
-
-                                <span id="{{ filter_countries['Antarctic'][0]['region_code'] }}"
-                                      class="badge elem multiple region inactive"
-                                      data-name="{{ filter_countries['Antarctic'][0]['region_code'] }}"
-                                      data-status="inactive">
-                                    <span class="text">{{ filter_countries['Antarctic'][0]['region'] }}</span>
-                                </span>
-
-                                <span class="badge elem minus-icon">
-                                    <svg width="16" height="716" viewBox="0 0 752 752"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="m538.79 376c0 32.695-32.695 59.199-59.199 59.199h-207.19c-32.695 0-59.199-26.504-59.199-59.199s32.695-59.199 59.199-59.199h207.19c32.695 0 59.199 26.504 59.199 59.199z"/>
-                                    </svg>
-                                </span>
-
-                                <span class="countries-group countries-origin inactive"
-                                      data-region_code="{{ filter_countries['Americas'][0]['region_code'] }}">
-                                    {% for country in filter_countries['Americas'] %}
-                                        <span class="badge elem multiple country inactive"
-                                              data-name="{{ country['country_code'] }}"
-                                              data-status="inactive">
-                                        <span class="text">{{ country['country'] }}</span>
-                                    </span>
-                                    {% endfor %}
-                                </span>
-
-                                <span class="countries-group countries-origin inactive"
-                                      data-region_code="{{ filter_countries['Europe'][0]['region_code'] }}">
-                                    {% for country in filter_countries['Europe'] %}
-                                        <span class="badge elem multiple country inactive"
-                                              data-name="{{ country['country_code'] }}"
-                                              data-status="inactive">
-                                        <span class="text">{{ country['country'] }}</span>
-                                    </span>
-                                    {% endfor %}
-                                </span>
-
-                                <span class="countries-group countries-origin inactive"
-                                      data-region_code="{{ filter_countries['Asia'][0]['region_code'] }}">
-                                    {% for country in filter_countries['Asia'] %}
-                                        <span class="badge elem multiple country inactive"
-                                              data-name="{{ country['country_code'] }}"
-                                              data-status="inactive">
-                                        <span class="text">{{ country['country'] }}</span>
-                                    </span>
-                                    {% endfor %}
-                                </span>
-
-                                <span class="countries-group countries-origin inactive"
-                                      data-region_code="{{ filter_countries['Africa'][0]['region_code'] }}">
-                                    {% for country in filter_countries['Africa'] %}
-                                        <span class="badge elem multiple country inactive"
-                                              data-name="{{ country['country_code'] }}"
-                                              data-status="inactive">
-                                        <span class="text">{{ country['country'] }}</span>
-                                    </span>
-                                    {% endfor %}
-                                </span>
-
-                                <span class="countries-group countries-origin inactive"
-                                      data-region_code="{{ filter_countries['Oceania'][0]['region_code'] }}">
-                                    {% for country in filter_countries['Oceania'] %}
-                                        <span class="badge elem multiple country inactive"
-                                              data-name="{{ country['country_code'] }}"
-                                              data-status="inactive">
-                                        <span class="text">{{ country['country'] }}</span>
-                                    </span>
-                                    {% endfor %}
-                                </span>
-
-                                <span class="countries-group countries-origin inactive"
-                                      data-region_code="{{ filter_countries['Antarctic'][0]['region_code'] }}">
-                                    {% for country in filter_countries['Antarctic'] %}
-                                        <span class="badge elem multiple country inactive"
-                                              data-name="{{ country['country_code'] }}"
-                                              data-status="inactive">
-                                        <span class="text">{{ country['country'] }}</span>
-                                    </span>
-                                    {% endfor %}
-                                </span>
-                            </div>
-                        </div>
 
                         <div id="search-btn" class="inactive">
                             <a id="searchBtn" class="btn btn-primary" href="" role="button" data-i18n=""><span

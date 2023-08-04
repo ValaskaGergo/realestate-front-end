@@ -3297,11 +3297,6 @@ class AnlibreedersAnimalMedia {
                         let animalName;
                         let animalGender;
                         let animalColor;
-                        let animalAgeYear;
-                        let animalAgeMonth;
-                        let animalAgeDay;
-                        let animalMother;
-                        let animalFather;
                         let animalImg01;
                         let animalImg02;
                         let animalImg03;
@@ -3343,27 +3338,6 @@ class AnlibreedersAnimalMedia {
                             animalColor = "-"
                         }
 
-                        if ($("#uploading-animal-form #uploadingAnimalYear").val() !== "" && $("#uploading-animal-form #uploadingAnimalMonth").val() !== "" && $("#uploading-animal-form #uploadingAnimalDay").val() !== "") {
-                            animalAgeYear = $("#uploading-animal-form #uploadingAnimalYear").val();
-                            animalAgeMonth = $("#uploading-animal-form #uploadingAnimalMonth").val();
-                            animalAgeDay = $("#uploading-animal-form #uploadingAnimalDay").val();
-                        } else {
-                            animalAgeYear = false;
-                            animalAgeMonth = false;
-                            animalAgeDay = false;
-                        }
-
-                        if ($("#uploading-animal-form #uploadingAnimalMother").val() !== "") {
-                            animalMother = $("#uploading-animal-form #uploadingAnimalMother").val().trim()
-                        } else {
-                            animalMother = false
-                        }
-
-                        if ($("#uploading-animal-form #uploadingAnimalFather").val() !== "") {
-                            animalFather = $("#uploading-animal-form #uploadingAnimalFather").val().trim()
-                        } else {
-                            animalFather = false
-                        }
 
                         if ($("#uploading-animal-form #uploadingAnimalImg01Data").val() !== "") {
                             animalImg01 = $("#uploading-animal-form #uploadingAnimalImg01Data").val()
@@ -3430,11 +3404,6 @@ class AnlibreedersAnimalMedia {
                         formData.append("animal_name", animalName);
                         formData.append("animal_gender", animalGender);
                         formData.append("animal_color", animalColor);
-                        formData.append("animal_age_year", animalAgeYear);
-                        formData.append("animal_age_month", animalAgeMonth);
-                        formData.append("animal_age_day", animalAgeDay);
-                        formData.append("animal_mother", animalMother);
-                        formData.append("animal_father", animalFather);
                         formData.append("animal_img_01", animalImg01);
                         formData.append("animal_img_02", animalImg02);
                         formData.append("animal_img_03", animalImg03);
@@ -3675,178 +3644,7 @@ class AnlibreedersAnimalMedia {
                 }
 
 
-        // Start Breed Registry PDF
 
-        $("body").on("click", "#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon", function (event) {
-            event.preventDefault();
-            const _this = $(this);
-
-            $("#uploading-animal-form .animal.breedRegistry.img-icon").upload({
-                "action": "/uploading-animal-breed-registry-pdf-upload",
-                "label": "",
-                "multiple": false,
-                "maxSize": maxSizePDF,
-                "theme": "",
-                beforeSend: onBeforeSend
-            }).on("start.upload", onStart)
-                .on("complete.upload", onComplete)
-                .on("filestart.upload", onFileStart)
-                .on("fileprogress.upload", onFileProgress)
-                .on("filecomplete.upload", onFileComplete)
-                .on("fileerror.upload", onFileError)
-                .on("queued.upload", onQueued);
-
-            $("#uploading-animal-form").off("click", ".img-cancel.progress-rm.breedRegistry");
-            $("#uploading-animal-form").on("click", ".img-cancel.progress-rm.breedRegistry", onCancel);
-
-            function onCancel(e) {
-                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(null);
-                $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(null);
-                $("#uploading-animal-form .animal.breedRegistry.img-icon").upload("abort");
-                $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
-
-            }
-
-            function onBeforeSend(formData) {
-                return formData;
-            }
-
-            function onQueued(event, files) {
-            }
-
-            function onStart(event) {
-            }
-
-            function onComplete(event) {
-            }
-
-            function onFileStart(event, file) {
-                $("#uploading-animal-form .animal.breedRegistry.progress").removeClass("d-none");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
-            }
-
-            function onFileProgress(event, file, percent) {
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html(percent + "%");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": percent + "%"})
-            }
-
-            function onFileComplete(event, file, response) {
-                let fileSize = utility.getFormatBytes(file['size']);
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("progress-bar-striped").addClass("bg-success");
-                $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("- " + fileSize['size'] + " " + fileSize['type']);
-
-                if (PDFObject.supportsPDFs) {
-                    PDFObject.embed(JSON.parse(response).data, "#animal-new-breed-registry-cropper", pdfOptions);
-                } else {
-                    console.log("Not supported by this browser.");
-                }
-
-                setTimeout(
-                    function () {
-                        $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
-                        $("#uploading-animal-form .animal.breedRegistry.cropper-img").removeClass("d-none");
-                        $("#uploading-animal-form .animal.breedRegistry.trash-icon").removeClass("d-none");
-                        $("#uploading-animal-form .animal.breedRegistry.img-icon").addClass("d-none");
-                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(JSON.parse(response).filename);
-                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(response);
-                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon").addClass("pointer-events-none");
-                        $("#uploading-animal-form .animal.breedRegistry.trash-back-icon").addClass("d-none");
-                        $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("new");
-
-                        $("#uploading-animal-form").find(".uploading-animal-breed-registry-error span").removeData("i18n");
-                        $("#uploading-animal-form").find(".uploading-animal-breed-registry-error span").text("");
-                        $("#uploading-animal-form").find(".uploading-animal-breed-registry-error").addClass("d-none");
-
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
-                        $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
-                    }, 2000);
-
-            }
-
-            function onFileError(event, file, error) {
-                if (error) {
-                    fileErrorBreedRegistry = {"fileSize": utility.getFormatBytes(file['size']), "error": error}
-
-                    $("#uploading-animal-form .animal.breedRegistry.progress").addClass("d-none");
-                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").removeClass("bg-success").addClass("bg-primary progress-bar-striped");
-                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-percent").html("0%");
-                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar .file-size").html("");
-                    $("#uploading-animal-form .animal.breedRegistry.progress .progress-bar").css({"width": "0"});
-
-                    let $uploadingAnimalForm = $("#uploading-animal-form");
-
-                    if (fileErrorBreedRegistry['error'] === "Request Entity Too Large" || fileErrorBreedRegistry['error'] === "size") {
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").text("");
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").attr("data-i18n", "anlihouse-A210");
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error").removeClass("d-none");
-                        $('body').i18n();
-                    } else if (fileErrorBreedRegistry['error'] === "Unsupported Media Type") {
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").removeData("i18n");
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").text("");
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error span").attr("data-i18n", "anlihouse-A209");
-                        $uploadingAnimalForm.find(".uploading-animal-breed-registry-error").removeClass("d-none");
-                        $('body').i18n();
-                    }
-
-
-                }
-            }
-
-            $("#uploading-animal-form .animal.breedRegistry.img-icon .fs-upload-target").trigger("click");
-
-        });
-
-        $("body").on("click", "#uploading-animal-form .animal.breedRegistry.trash-icon", function (event) {
-            event.preventDefault();
-            const _this = $(this);
-
-            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf").val(null);
-            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val(null);
-            $("#uploading-animal-form .animal.breedRegistry.trash-icon").addClass("d-none");
-            $("#uploading-animal-form .animal.breedRegistry.crop-icon").addClass("d-none");
-            $("#uploading-animal-form .animal.breedRegistry.crop-back-icon").addClass("d-none");
-            $("#uploading-animal-form .animal.breedRegistry.img-icon").removeClass("d-none");
-            $("#uploading-animal-form .animal.breedRegistry.cropper-img").addClass("d-none");
-            $("#uploading-animal-form .animal.breedRegistry.animal-edit-img01-preview").addClass("d-none");
-            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdf, #uploading-animal-form .animal.breedRegistry.img-icon").removeClass("pointer-events-none");
-            $("#uploading-animal-form .animal.breedRegistry.trash-back-icon").removeClass("d-none");
-            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("rm");
-        });
-
-        $("body").on("click", "#uploading-animal-form .animal.breedRegistry.trash-back-icon", function (event) {
-            event.preventDefault();
-            const _this = $(this);
-
-            _this.addClass("d-none");
-
-            let $uploadingAnimalBreedRegistryShow = $("#uploading-animal-form .uploadingAnimalBreedRegistryShow");
-            let $uploadingAnimalBreedRegistryPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalBreedRegistryPdfDataOld").val());
-            let $uploadingAnimalBreedRegistryPdf = $uploadingAnimalBreedRegistryShow.find("#uploadingAnimalBreedRegistryPdf");
-            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfData").val());
-            $("#uploading-animal-form #uploadingAnimalBreedRegistryPdfStatus").val("unchanged");
-
-            $uploadingAnimalBreedRegistryPdf.addClass("pointer-events-none");
-            $uploadingAnimalBreedRegistryPdf.val($uploadingAnimalBreedRegistryPdfData['filename']);
-            $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.img-icon").addClass("d-none");
-            $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.trash-icon").removeClass("d-none");
-
-            if (PDFObject.supportsPDFs) {
-                PDFObject.embed("/static/pdf/animal/" + $uploadingAnimalBreedRegistryPdfData['folder'] + "/" + $uploadingAnimalBreedRegistryPdfData['filename'], "#animal-new-breed-registry-cropper", pdfOptions);
-                $uploadingAnimalBreedRegistryShow.find(".animal.breedRegistry.cropper-img").removeClass("d-none");
-            } else {
-                console.log("Not supported by this browser.");
-            }
-        });
-
-        // End Breed Registry PDF
 
         // Start X Ray PDF
 
@@ -4003,7 +3801,8 @@ class AnlibreedersAnimalMedia {
             let $uploadingAnimalXRayShow = $("#uploading-animal-form .uploadingAnimalXRayShow");
             let $uploadingAnimalXRayPdfData = JSON.parse($("#uploading-animal-form #uploadingAnimalXRayPdfDataOld").val());
             let $uploadingAnimalXRayPdf = $uploadingAnimalXRayShow.find("#uploadingAnimalXRayPdf");
-            $("#uploading-animal-form #uploadingAnimalXRayPdfData").val());
+            $("#uploading-animal-form #uploadingAnimalXRayPdfData").val();
+
             $("#uploading-animal-form #uploadingAnimalXRayPdfStatus").val("unchanged");
 
             $uploadingAnimalXRayPdf.addClass("pointer-events-none");

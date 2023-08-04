@@ -587,9 +587,9 @@
                                 {% endif %}
 
                                 <span class="shadow badge name"><span
-                                        data-i18n="anlihouse-A278"></span> <span>{{ animal['animal']['mother'] }}</span></span>
+                                        data-i18n="anlihouse-A278"></span> <span>{{ animal['animal'] }}</span></span>
                                 <span class="shadow badge name"><span
-                                        data-i18n="anlihouse-A279"></span> <span>{{ animal['animal']['father'] }}</span></span>
+                                        data-i18n="anlihouse-A279"></span> <span>{{ animal['animal'] }}</span></span>
                                 {# <span class="shadow badge default price-currency"><span class="price" style="filter:blur(3px)">12 345</span> <span class="currency">EUR</span></span> #}
                                 <span class="shadow badge default price-currency"><span
                                         class="price">{{ animal['animal']['price'] }}</span> <span
@@ -597,30 +597,30 @@
                                 <span class="shadow badge default">{{ category_name }}</span>
                                 <span class="shadow badge default">{{ subcategory_name }}</span>
                                 <span class="shadow badge default">
-                                    {% if animal['animal']['years'] != 0 %}
-                                        <span>{{ animal['animal']['years'] }}</span>
+                                    {% if animal['animal'] != 0 %}
+                                        <span>{{ animal['animal'] }}</span>
                                         <span data-i18n="anlihouse-A280"></span>,
                                     {% endif %}
-                                    {% if animal['animal']['months'] != 0 %}
-                                        <span>{{ animal['animal']['months'] }}</span> <span
+                                    {% if animal['animal'] != 0 %}
+                                        <span>{{ animal['animal'] }}</span> <span
                                             data-i18n="anlihouse-A281"></span>,
                                     {% endif %}
-                                    {% if animal['animal']['days'] != 0 %}
-                                        <span>{{ animal['animal']['days'] }}</span>
+                                    {% if animal['animal'] != 0 %}
+                                        <span>{{ animal['animal'] }}</span>
                                         <span data-i18n="anlihouse-A282"></span>
                                     {% endif %}
                                 </span>
                                 <span class="shadow badge default">{{ color_name }}</span>
                                 <span class="shadow badge default">{{ gender_name }}</span>
                                 <span class="shadow badge default">
-                                    <span>{{ animal['animal']['height'] }}</span> <span
+                                    <span>{{ animal['animal'] }}</span> <span
                                         data-i18n="anlihouse-A283"></span>
                                 </span>
                                 <span class="shadow badge default">{{ be_used_for }}</span>
 
                                 <span class="country-origin-residence-elem">
                                 {% for country in countries['data'] %}
-                                    {% if country['country_code'] == animal['animal']['country_origin'] %}
+                                    {% if country['country_code'] == animal['animal'] %}
                                         <span class="shadow badge default country-origin-elem d-none">{{ country['country'] }}</span>
                                     {% endif %}
                                     {% if country['country_code'] == animal['animal']['country_residence'] %}
@@ -638,9 +638,6 @@
                                         data-i18n="anlihouse-A284"></span></span>
 
 
-                                {% if animal['pdf']['breed_registry'] != None %}
-                                    <span class="shadow badge default" data-i18n="anlihouse-A287"></span>
-                                {% endif %}
 
                                 {% if animal['pdf']['x_ray'] != None %}
                                     <span class="shadow badge default" data-i18n="anlihouse-A288"></span>

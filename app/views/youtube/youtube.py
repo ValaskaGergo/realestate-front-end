@@ -50,8 +50,6 @@ class YouTube(object):
 
             youtube_video_id = data['youtube_video_id']
             title = data['title']
-            mother = data['mother']
-            father = data['father']
             animal_id = data['animal_id']
 
             youtube = YouTube.get_authenticated_service()
@@ -70,7 +68,7 @@ class YouTube(object):
                 part="snippet,status",
                 body={
                     "snippet": {
-                        "title": mother + " & " + father + " - " + title + " | " + category_name + " (" + subcategory_name + ") For Sale",
+                        "title": title + " | " + category_name + " (" + subcategory_name + ") For Sale",
                         "description": 'Additional Information\n' \
                                        'https://anlirealestate.com/' + slugify(category_name) + "/" + slugify(
                             subcategory_name) + "/" + slugify(title) + "/" + str(animal_id) + '\n\n' \
@@ -123,7 +121,7 @@ class YouTube(object):
                 data = r.json()
 
     @staticmethod
-    def update(animal_id, youtube_video_id, title, mother, father, category_name, subcategory_name,
+    def update(animal_id, youtube_video_id, title,  category_name, subcategory_name,
                youtube_video_status):
 
         youtube = YouTube.get_authenticated_service()
@@ -140,7 +138,7 @@ class YouTube(object):
             body={
                 "id": str(youtube_video_id),
                 "snippet": {
-                    "title": mother + " & " + father + " - " + title + " | " + category_name + " (" + subcategory_name + ") For Sale",
+                    "title":title + " | " + category_name + " (" + subcategory_name + ") For Sale",
                     "description": 'Additional Information\n' \
                                    'https://anlirealestate.com/' + slugify(category_name) + "/" + slugify(
                         subcategory_name) + "/" + slugify(title) + "/" + str(animal_id) + '\n\n' \

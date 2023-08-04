@@ -81,21 +81,6 @@ def inject_filter_form():
             filter_form.where_all.data = query_decode['where_all']
             filter_form.where_name.data = query_decode['where_name']
             filter_form.where_description.data = query_decode['where_description']
-            filter_form.where_family.data = query_decode['where_family']
-            filter_form.where_family_mother.data = query_decode['where_family_mother']
-            filter_form.where_family_mother_mother.data = query_decode['where_family_mother_mother']
-            filter_form.where_family_mother_father.data = query_decode['where_family_mother_father']
-            filter_form.where_family_mother_mother_mother.data = query_decode['where_family_mother_mother_mother']
-            filter_form.where_family_mother_mother_father.data = query_decode['where_family_mother_mother_father']
-            filter_form.where_family_mother_father_mother.data = query_decode['where_family_mother_father_mother']
-            filter_form.where_family_mother_father_father.data = query_decode['where_family_mother_father_father']
-            filter_form.where_family_father.data = query_decode['where_family_father']
-            filter_form.where_family_father_mother.data = query_decode['where_family_father_mother']
-            filter_form.where_family_father_father.data = query_decode['where_family_father_father']
-            filter_form.where_family_father_mother_mother.data = query_decode['where_family_father_mother_mother']
-            filter_form.where_family_father_mother_father.data = query_decode['where_family_father_mother_father']
-            filter_form.where_family_father_father_mother.data = query_decode['where_family_father_father_mother']
-            filter_form.where_family_father_father_father.data = query_decode['where_family_father_father_father']
 
             filter_form.price_min.data = query_decode['price_min']
             filter_form.price_max.data = query_decode['price_max']
@@ -116,11 +101,8 @@ def inject_filter_form():
             filter_form.region_residence.data = query_decode['region_residence']
             filter_form.country_residence.data = query_decode['country_residence']
 
-            filter_form.region_origin.data = query_decode['region_origin']
-            filter_form.country_origin.data = query_decode['country_origin']
 
             filter_form.order_by_price.data = query_decode['order_by_price']
-            filter_form.order_by_age.data = query_decode['order_by_age']
             filter_form.order_by_rating.data = query_decode['order_by_rating']
 
             filter_form.only_one_category_id.data = query_decode['only_one_category_id']
@@ -144,21 +126,6 @@ def inject_filter_form():
             filter_form.where_all.data = "active"
             filter_form.where_name.data = "inactive"
             filter_form.where_description.data = "inactive"
-            filter_form.where_family.data = "inactive"
-            filter_form.where_family_mother.data = "inactive"
-            filter_form.where_family_mother_mother.data = "inactive"
-            filter_form.where_family_mother_father.data = "inactive"
-            filter_form.where_family_mother_mother_mother.data = "inactive"
-            filter_form.where_family_mother_mother_father.data = "inactive"
-            filter_form.where_family_mother_father_mother.data = "inactive"
-            filter_form.where_family_mother_father_father.data = "inactive"
-            filter_form.where_family_father.data = "inactive"
-            filter_form.where_family_father_mother.data = "inactive"
-            filter_form.where_family_father_father.data = "inactive"
-            filter_form.where_family_father_mother_mother.data = "inactive"
-            filter_form.where_family_father_mother_father.data = "inactive"
-            filter_form.where_family_father_father_mother.data = "inactive"
-            filter_form.where_family_father_father_father.data = "inactive"
 
             filter_form.price_min.data = app.config['FILTER_PRICE_MIN']
             filter_form.price_max.data = app.config['FILTER_PRICE_MAX']
@@ -173,17 +140,12 @@ def inject_filter_form():
 
             filter_form.be_used_for_all.data = '[0]'
 
-            filter_form.age_min.data = app.config['FILTER_AGE_MIN']
-            filter_form.age_max.data = app.config['FILTER_AGE_MAX']
 
             filter_form.region_residence.data = 'ALL'
             filter_form.country_residence.data = 'ALL'
 
-            filter_form.region_origin.data = 'ALL'
-            filter_form.country_origin.data = 'ALL'
 
             filter_form.order_by_price.data = "None"
-            filter_form.order_by_age.data = "None"
             filter_form.order_by_rating.data = "desc"
 
             filter_form.encode.data = "None"
@@ -207,21 +169,6 @@ def inject_filter_form():
         filter_form.where_all.data = "active"
         filter_form.where_name.data = "inactive"
         filter_form.where_description.data = "inactive"
-        filter_form.where_family.data = "inactive"
-        filter_form.where_family_mother.data = "inactive"
-        filter_form.where_family_mother_mother.data = "inactive"
-        filter_form.where_family_mother_father.data = "inactive"
-        filter_form.where_family_mother_mother_mother.data = "inactive"
-        filter_form.where_family_mother_mother_father.data = "inactive"
-        filter_form.where_family_mother_father_mother.data = "inactive"
-        filter_form.where_family_mother_father_father.data = "inactive"
-        filter_form.where_family_father.data = "inactive"
-        filter_form.where_family_father_mother.data = "inactive"
-        filter_form.where_family_father_father.data = "inactive"
-        filter_form.where_family_father_mother_mother.data = "inactive"
-        filter_form.where_family_father_mother_father.data = "inactive"
-        filter_form.where_family_father_father_mother.data = "inactive"
-        filter_form.where_family_father_father_father.data = "inactive"
 
         filter_form.price_min.data = app.config['FILTER_PRICE_MIN']
         filter_form.price_max.data = app.config['FILTER_PRICE_MAX']
@@ -236,17 +183,13 @@ def inject_filter_form():
 
         filter_form.be_used_for_all.data = '[0]'
 
-        filter_form.age_min.data = app.config['FILTER_AGE_MIN']
-        filter_form.age_max.data = app.config['FILTER_AGE_MAX']
+
 
         filter_form.region_residence.data = 'ALL'
         filter_form.country_residence.data = 'ALL'
 
-        filter_form.region_origin.data = 'ALL'
-        filter_form.country_origin.data = 'ALL'
 
         filter_form.order_by_price.data = "None"
-        filter_form.order_by_age.data = "None"
         filter_form.order_by_rating.data = "desc"
 
         filter_form.encode.data = "None"

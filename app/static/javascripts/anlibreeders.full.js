@@ -25,8 +25,6 @@ class AnlibreedersFull {
                 const $isPdfYes = $accordionItemDocuments.find(".is-pdf-yes");
                 const $isPdfNo = $accordionItemDocuments.find(".is-pdf-no");
 
-                const breedRegistryFolder = $breedRegistry.attr("data-breed_registry_folder");
-                const breedRegistryFile = $breedRegistry.attr("data-breed_registry_file");
 
                 const xRayFolder = $xRay.attr("data-x_ray_folder");
                 const xRayFile = $xRay.attr("data-x_ray_file");
@@ -56,33 +54,7 @@ class AnlibreedersFull {
                 }
             },
 
-            familyTree: function () {
 
-                function familyCenter() {
-                    setTimeout(
-                        function () {
-
-                            try {
-                                let containerMother = document.querySelector(".tf-mother-mobile-center");
-                                let middleMother = containerMother.children[Math.floor((containerMother.children.length - 1) / 2)];
-                                containerMother.scrollLeft = middleMother.offsetLeft + middleMother.offsetWidth / 2 - containerMother.offsetWidth / 2;
-
-                                let containerFather = document.querySelector(".tf-father-mobile-center");
-                                let middleFather = containerFather.children[Math.floor((containerFather.children.length - 1) / 2)];
-                                containerFather.scrollLeft = middleFather.offsetLeft + middleFather.offsetWidth / 2 - containerFather.offsetWidth / 2;
-                            } catch (err) {
-                            }
-
-                        }, 2000);
-                }
-
-                familyCenter();
-
-                window.addEventListener('resize', function (event) {
-                    familyCenter();
-                }, true);
-
-            },
 
             fullDescription: function () {
                 const $full = $("#full");
@@ -203,19 +175,7 @@ class AnlibreedersFull {
                 }
                 // End Price
 
-                // Start Family
-                let $fullFamilyTfNc = $full.find(".tf-nc");
 
-                $fullFamilyTfNc.each(function () {
-                    if ($(this).attr("data-type") === "") {
-                        $(this).find(".gender-icon").css({"opacity": "0.5"});
-                        $(this).find(".gender-info").css({"opacity": "0.5"});
-                        $(this).find(".name").css({"opacity": "0.5"});
-                        $(this).find(".name").attr("data-i18n", "anlihouse-A304");
-                    }
-                });
-                $('body').i18n();
-                // End Family
 
                 // Start Price Details
                 let $priceDetails = $full.find("#price-details");
@@ -2331,7 +2291,6 @@ class AnlibreedersFull {
             initializ: function () {
                 loadFull.gallery();
                 loadFull.documents();
-                loadFull.familyTree();
                 loadFull.fullDescription();
                 loadFull.fullGallery();
                 loadFull.fullDataFormatting();

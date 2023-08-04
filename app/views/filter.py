@@ -58,22 +58,7 @@ def _get_filter_count():
     where_all = data['where_all']
     where_name = data['where_name']
     where_description = data['where_description']
-    where_family = data['where_family']
 
-    where_family_mother = data['where_family_mother']
-    where_family_mother_mother = data['where_family_mother_mother']
-    where_family_mother_father = data['where_family_mother_father']
-    where_family_mother_mother_mother = data['where_family_mother_mother_mother']
-    where_family_mother_mother_father = data['where_family_mother_mother_father']
-    where_family_mother_father_mother = data['where_family_mother_father_mother']
-    where_family_mother_father_father = data['where_family_mother_father_father']
-    where_family_father = data['where_family_father']
-    where_family_father_mother = data['where_family_father_mother']
-    where_family_father_father = data['where_family_father_father']
-    where_family_father_mother_mother = data['where_family_father_mother_mother']
-    where_family_father_mother_father = data['where_family_father_mother_father']
-    where_family_father_father_mother = data['where_family_father_father_mother']
-    where_family_father_father_father = data['where_family_father_father_father']
 
     price_min = data['price_min']
     price_max = data['price_max']
@@ -88,18 +73,13 @@ def _get_filter_count():
 
     be_used_for_all = data['be_used_for_all']
 
-    age_min = data['age_min']
-    age_max = data['age_max']
-
 
     region_residence = data['region_residence']
     country_residence = data['country_residence']
 
-    region_origin = data['region_origin']
-    country_origin = data['country_origin']
 
     order_by_price = data['order_by_price']
-    order_by_age = data['order_by_age']
+
     order_by_rating = data['order_by_rating']
 
     category_all_list = json.loads(category_all)
@@ -142,22 +122,6 @@ def _get_filter_count():
         "where_all": where_all,
         "where_name": where_name,
         "where_description": where_description,
-        "where_family": where_family,
-
-        "where_family_mother": where_family_mother,
-        "where_family_mother_mother": where_family_mother_mother,
-        "where_family_mother_father": where_family_mother_father,
-        "where_family_mother_mother_mother": where_family_mother_mother_mother,
-        "where_family_mother_mother_father": where_family_mother_mother_father,
-        "where_family_mother_father_mother": where_family_mother_father_mother,
-        "where_family_mother_father_father": where_family_mother_father_father,
-        "where_family_father": where_family_father,
-        "where_family_father_mother": where_family_father_mother,
-        "where_family_father_father": where_family_father_father,
-        "where_family_father_mother_mother": where_family_father_mother_mother,
-        "where_family_father_mother_father": where_family_father_mother_father,
-        "where_family_father_father_mother": where_family_father_father_mother,
-        "where_family_father_father_father": where_family_father_father_father,
 
         "price_min": price_min,
         "price_max": price_max,
@@ -172,18 +136,13 @@ def _get_filter_count():
 
         "be_used_for_all": be_used_for_all,
 
-        "age_min": age_min,
-        "age_max": age_max,
 
 
         "region_residence": region_residence,
         "country_residence": country_residence,
 
-        "region_origin": region_origin,
-        "country_origin": country_origin,
 
         "order_by_price": order_by_price,
-        "order_by_age": order_by_age,
         "order_by_rating": order_by_rating,
 
         "only_one_category_id": only_one_category_id,

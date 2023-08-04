@@ -154,9 +154,8 @@ class AnlibreedersList {
                 let $countryOriginResidenceElem = $box.find(".country-origin-residence-elem");
 
                 $countryOriginResidenceElem.each(function () {
-                    let countryOrigin = $(this).find(".country-origin-elem").text();
                     let countryResidence = $(this).find(".country-residence-elem").text();
-                    $(this).find(".country-origin-residence").html(countryOrigin + " ~ " + countryResidence);
+                    $(this).find(".country-origin-residence").html( countryResidence);
                 });
 
                 // End Country Origin Residence
@@ -166,8 +165,6 @@ class AnlibreedersList {
                 const $filterInfoType = $filterInfoWrap.find(".filter-info-type");
 
                 const $filterOrderByPriceVal = $("#filterOrderByPrice").val();
-                const $filterOrderByAgeVal = $("#filterOrderByAge").val();
-                const $filterOrderByHeightVal = $("#filterOrderByHeight").val();
                 const $filterOrderByRatingVal = $("#filterOrderByRating").val();
 
                 $filterInfoType.removeData("i18n");
@@ -487,29 +484,11 @@ class AnlibreedersList {
                                     }
                                     // End Lang
 
-                                    // Start Age
-                                    let years_elem = "";
-                                    let months_elem = "";
-                                    let days_elem = "";
-                                    if (animal['years'] !== 0) {
-                                        years_elem = '<span>' + animal['years'] + '</span> <span data-i18n="anlihouse-A280"></span>, ';
-                                    }
-                                    if (animal['months'] !== 0) {
-                                        months_elem = '<span>' + animal['months'] + '</span> <span data-i18n="anlihouse-A281"></span>, ';
-                                    }
-                                    if (animal['days'] !== 0) {
-                                        days_elem = '<span>' + animal['days'] + '</span> <span data-i18n="anlihouse-A282"></span>';
-                                    }
-                                    // End Age
+
 
                                     // Start Countries
-                                    let country_origin = "";
                                     let country_residence = "";
                                     for (let country = 0; country < countries.length; country++) {
-                                        if (countries[country]['country_code'] === animal['country_origin']) {
-                                            country_origin = countries[country]['country'];
-                                        }
-
                                         if (countries[country]['country_code'] === animal['country_residence']) {
                                             country_residence = countries[country]['country'];
                                         }
@@ -518,10 +497,6 @@ class AnlibreedersList {
 
                                     // Start PDF
 
-                                    let breed_registry = "";
-                                    if (pdf['breed_registry'] !== null) {
-                                        breed_registry = '<span class="shadow badge default" data-i18n="anlihouse-A287"></span>';
-                                    }
 
                                     let x_ray = "";
                                     if (pdf['x_ray'] !== null) {
@@ -674,8 +649,6 @@ class AnlibreedersList {
                                         '<span class="shadow badge plus-icon"><svg width="16" height="16" viewBox="0 0 752 752" xmlns="http://www.w3.org/2000/svg"><defs><clipPath class="p"><path d="m139.21 139.21h473.58v473.58h-473.58z"/></clipPath></defs><g clip-path="url(.p)"><path d="m318.6 139.21h114.8v179.39h179.39v114.8h-179.39v179.39h-114.8v-179.39h-179.39v-114.8h179.39z" fill-rule="evenodd"/></g></svg></span>' +
                                         '</span>' + // End .plus
                                         '<div class="badge-group inactive">' +
-                                        '<span class="shadow badge name"><span data-i18n="anlihouse-A278"></span> <span>' + animal['mother'] + '</span></span>' +
-                                        '<span class="shadow badge name"><span data-i18n="anlihouse-A279"></span> <span>' + animal['father'] + '</span></span>' +
                                         price_show_elem +
                                         '<span class="shadow badge default">' + category_name + '</span>' +
                                         '<span class="shadow badge default">' + subcategory_name + '</span>' +
@@ -685,11 +658,10 @@ class AnlibreedersList {
                                         '<span class="shadow badge default"><span>' + animal['height'] + '</span> <span data-i18n="anlihouse-A283"></span></span>' +
                                         '<span class="shadow badge default">' + be_used_for + '</span>' +
                                         '<span class="country-origin-residence-elem">' +
-                                        '<span class="shadow badge default country-origin-residence">' + country_origin + ' ~ ' + country_residence + '</span>' +
+                                        '<span class="shadow badge default country-origin-residence">' + ' ~ ' + country_residence + '</span>' +
                                         '</span>' + // End .country-origin-residence-elem
                                         video_01_elem +
                                         '<span class="shadow badge default"><span>' + img_count + '</span> <span data-i18n="anlihouse-A284"></span></span>' +
-                                        breed_registry +
                                         x_ray +
                                         url_01 +
                                         url_02 +

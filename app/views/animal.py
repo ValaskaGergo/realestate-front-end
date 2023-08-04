@@ -92,19 +92,14 @@ def uploading_animal():
 @mod.route('/_uploading-animal', methods=['POST'])
 def _uploading_animal():
     form_data = json.loads(request.get_data())
-
+    app.logger.info(form_data)
+    name = form_data['name']
     user_email = form_data['user_email']
     animal_id = form_data['animal_id']
     category_id = form_data['category_id']
     subcategory_id = form_data['subcategory_id']
     category_id_name = form_data['category_id_name']
     subcategory_id_name = form_data['subcategory_id_name']
-    name = form_data['name']
-    age_year = form_data['age_year']
-    age_month = form_data['age_month']
-    age_day = form_data['age_day']
-    region_origin = form_data['region_origin']
-    country_origin = form_data['country_origin']
     region_residence = form_data['region_residence']
     country_residence = form_data['country_residence']
     is_be_used_for = form_data['is_be_used_for']
@@ -127,20 +122,6 @@ def _uploading_animal():
     color_es = form_data['color_es']
     brief_description = form_data['brief_description']
     description = form_data['description']
-    mother = form_data['mother']
-    mother_mother = form_data['mother_mother']
-    mother_mother_mother = form_data['mother_mother_mother']
-    mother_mother_father = form_data['mother_mother_father']
-    mother_father = form_data['mother_father']
-    mother_father_mother = form_data['mother_father_mother']
-    mother_father_father = form_data['mother_father_father']
-    father = form_data['father']
-    father_mother = form_data['father_mother']
-    father_mother_mother = form_data['father_mother_mother']
-    father_mother_father = form_data['father_mother_father']
-    father_father = form_data['father_father']
-    father_father_mother = form_data['father_father_mother']
-    father_father_father = form_data['father_father_father']
     img_01_data = form_data['img_01_data']
     img_02_data = form_data['img_02_data']
     img_03_data = form_data['img_03_data']
@@ -176,9 +157,6 @@ def _uploading_animal():
     video_01_status = form_data['video_01_status']
     url_01 = form_data['url_01']
     url_02 = form_data['url_02']
-    breed_registry_data = form_data['breed_registry_data']
-    breed_registry_data_old = form_data['breed_registry_data_old']
-    breed_registry_status = form_data['breed_registry_status']
     x_ray_data = form_data['x_ray_data']
     x_ray_data_old = form_data['x_ray_data_old']
     x_ray_status = form_data['x_ray_status']
@@ -200,11 +178,6 @@ def _uploading_animal():
         "category_id": category_id,
         "subcategory_id": subcategory_id,
         "name": name,
-        "age_year": age_year,
-        "age_month": age_month,
-        "age_day": age_day,
-        "region_origin": region_origin,
-        "country_origin": country_origin,
         "region_residence": region_residence,
         "country_residence": country_residence,
         "is_be_used_for": is_be_used_for,
@@ -227,20 +200,6 @@ def _uploading_animal():
         "color_es": color_es,
         "brief_description": brief_description,
         "description": description,
-        "mother": mother,
-        "mother_mother": mother_mother,
-        "mother_mother_mother": mother_mother_mother,
-        "mother_mother_father": mother_mother_father,
-        "mother_father": mother_father,
-        "mother_father_mother": mother_father_mother,
-        "mother_father_father": mother_father_father,
-        "father": father,
-        "father_mother": father_mother,
-        "father_mother_mother": father_mother_mother,
-        "father_mother_father": father_mother_father,
-        "father_father": father_father,
-        "father_father_mother": father_father_mother,
-        "father_father_father": father_father_father,
         "img_01_data": img_01_data,
         "img_02_data": img_02_data,
         "img_03_data": img_03_data,
@@ -274,9 +233,6 @@ def _uploading_animal():
         "video_01_data": video_01_data,
         "url_01": url_01,
         "url_02": url_02,
-        "breed_registry_data": breed_registry_data,
-        "breed_registry_data_old": breed_registry_data_old,
-        "breed_registry_status": breed_registry_status,
         "x_ray_data": x_ray_data,
         "x_ray_data_old": x_ray_data_old,
         "x_ray_status": x_ray_status,
@@ -1025,8 +981,7 @@ def _uploading_animal():
             r = requests.post(url, headers=headers, data=json.dumps(payload), verify=app.config['TLS_VERIFY'])
 
         create_movie(category_name=category_id_name, subcategory_name=subcategory_id_name, animal_name=name,
-                     animal_gender=gender_en, animal_color=color_en, animal_age_year=age_year,
-                     animal_age_month=age_month, animal_age_day=age_day, animal_mother=mother, animal_father=father,
+                     animal_gender=gender_en, animal_color=color_en,
                      animal_img_01=img_01_data, animal_img_02=img_02_data,
                      animal_img_03=img_03_data, animal_img_04=img_04_data, animal_img_05=img_05_data,
                      animal_img_06=img_06_data, animal_img_07=img_07_data, animal_img_08=img_08_data,
@@ -1034,37 +989,6 @@ def _uploading_animal():
                      path=app.config['TMP_VIDEO_DIRECTORY'] + "animal/" + video_01_data['folder'],
                      folder=video_01_data['folder'], is_tmp=True, animal_id=animal_id)
 
-        # Start Breed Registry PDF
-        breed_registry_data_old_json = None
-        try:
-            breed_registry_data_old_json = json.loads(breed_registry_data_old)
-        except:
-            pass
-        if breed_registry_status == "rm":
-            try:
-                shutil.rmtree(app.config['PDF_DIRECTORY'] + "animal/" + breed_registry_data_old_json['folder'])
-            except:
-                pass
-        elif breed_registry_status == "unchanged":
-            pass
-        elif breed_registry_status == "new":
-            breed_registry_data = json.loads(r_data['breed_registry_data'])
-
-            breed_registry_folder = breed_registry_data['folder']
-            breed_registry_filename = breed_registry_data['filename']
-
-            os.makedirs(app.config['PDF_DIRECTORY'] + "animal/" + breed_registry_folder, exist_ok=True)
-            shutil.copy(
-                app.config['TMP_PDF_DIRECTORY'] + "animal/" + breed_registry_folder + "/" + breed_registry_filename,
-                app.config['PDF_DIRECTORY'] + "animal/" + breed_registry_folder + "/" + breed_registry_filename)
-
-            try:
-                shutil.rmtree(app.config['PDF_DIRECTORY'] + "animal/" + breed_registry_data_old_json['folder'])
-            except:
-                pass
-        else:
-            pass
-        # End Breed Registry PDF
 
         # Start X Ray PDF
         x_ray_data_old_json = None
@@ -1151,8 +1075,7 @@ def uploading_animal_img_upload():
             return make_response(jsonify(resp), 200)
 
 
-def create_movie(category_name, subcategory_name, animal_name, animal_gender, animal_color, animal_age_year,
-                 animal_age_month, animal_age_day, animal_mother, animal_father, animal_img_01, animal_img_02,
+def create_movie(category_name, subcategory_name, animal_name, animal_gender, animal_color, animal_img_01, animal_img_02,
                  animal_img_03, animal_img_04, animal_img_05, animal_img_06, animal_img_07, animal_img_08,
                  animal_img_09, animal_img_10, path, folder, is_tmp, animal_id):
     try:
@@ -1262,12 +1185,9 @@ def create_movie(category_name, subcategory_name, animal_name, animal_gender, an
     # Start First Background TXT
     fnt40 = ImageFont.truetype(_static + "/fonts/SairaCondensed-Medium.ttf", 40)
     fnt50 = ImageFont.truetype(_static + "/fonts/SairaCondensed-Medium.ttf", 50)
-    if animal_mother != "false" and animal_father != "false":
-        txt_img = Image.new(mode="RGB", size=(776, 1000), color=(22, 22, 22))
-        txt_set_pos = (1019, 15)
-    else:
-        txt_img = Image.new(mode="RGB", size=(776, 850), color=(22, 22, 22))
-        txt_set_pos = (1019, 132)
+
+    txt_img = Image.new(mode="RGB", size=(776, 850), color=(22, 22, 22))
+    txt_set_pos = (1019, 132)
     txt_img.convert("RGBA")
     txt = ImageDraw.Draw(txt_img)
     txt.text((0, 114), "Name:", font=fnt40, fill=(255, 255, 255, 1))
@@ -1279,32 +1199,7 @@ def create_movie(category_name, subcategory_name, animal_name, animal_gender, an
     txt.text((0, 468), "Colour:", font=fnt40, fill=(255, 255, 255, 1))
     txt.text((34, 518), animal_color, font=fnt50, fill=(255, 255, 255, 1))
     txt.text((0, 586), "Age:", font=fnt40, fill=(255, 255, 255, 1))
-    try:
-        today = datetime.now()
-        date1 = datetime(int(animal_age_year), int(animal_age_month), int(animal_age_day))
-        date2 = today
-        diff = relativedelta.relativedelta(date2, date1)
-        years = diff.years
-        months = diff.months
-        days = diff.days
-    except:
-        years = 0
-        months = 0
-        days = 0
-    if years == 0 and months == 0:
-        txt.text((34, 636), str(days) + " days", font=fnt50,
-                 fill=(255, 255, 255, 1))
-    elif years == 0 and months != 0:
-        txt.text((34, 636), str(months) + " months, " + str(days) + " days", font=fnt50,
-                 fill=(255, 255, 255, 1))
-    else:
-        txt.text((34, 636), str(years) + " years, " + str(months) + " months, " + str(days) + " days", font=fnt50,
-                 fill=(255, 255, 255, 1))
-    if animal_mother != "false" and animal_father != "false":
-        txt.text((0, 704), "Mother:", font=fnt40, fill=(255, 255, 255, 1))
-        txt.text((34, 754), animal_mother, font=fnt50, fill=(255, 255, 255, 1))
-        txt.text((0, 822), "Father:", font=fnt40, fill=(255, 255, 255, 1))
-        txt.text((34, 872), animal_father, font=fnt50, fill=(255, 255, 255, 1))
+
 
     txt_img.save(path + "/cropped/txt-img.png", format='PNG',
                  subsampling=0, quality=75)
@@ -1583,11 +1478,6 @@ def uploading_animal_video_upload():
     animal_name = request.form['animal_name']
     animal_gender = request.form['animal_gender']
     animal_color = request.form['animal_color']
-    animal_age_year = request.form['animal_age_year']
-    animal_age_month = request.form['animal_age_month']
-    animal_age_day = request.form['animal_age_day']
-    animal_mother = request.form['animal_mother']
-    animal_father = request.form['animal_father']
     animal_img_01 = request.form['animal_img_01']
     animal_img_02 = request.form['animal_img_02']
     animal_img_03 = request.form['animal_img_03']
@@ -1652,65 +1542,13 @@ def uploading_animal_video_upload():
 
             #  Start moviepy
             return create_movie(category_name, subcategory_name, animal_name, animal_gender, animal_color,
-                                animal_age_year,
-                                animal_age_month, animal_age_day, animal_mother, animal_father, animal_img_01,
+                                animal_img_01,
                                 animal_img_02,
                                 animal_img_03, animal_img_04, animal_img_05, animal_img_06, animal_img_07,
                                 animal_img_08,
                                 animal_img_09, animal_img_10, path, folder, is_tmp=False,
                                 animal_id=animal_id)
 
-
-@app.route('/uploading-animal-breed-registry-pdf-upload', methods=['POST'])
-def uploading_animal_breed_registry_pdf_upload():
-    if g.logged_in:
-        if 'file' not in request.files:
-            return make_response(jsonify('{"status": "errors", "data": "Not Found"}'), 404)
-
-        file_data = request.files['file']
-
-        if file_data.filename == '':
-            return make_response(jsonify('{"status": "errors", "data": "Not Found"}'), 404)
-
-        if not FilePDF.allowed_file(file_data.filename):
-            return make_response(jsonify('{"status": "errors", "data": "Unsupported Media Type"}'), 415)
-
-        file_length = request.content_length
-
-        if file_length is not None and file_length > app.config['MAX_CONTENT_LENGTH_PDF']:
-            return make_response(jsonify('{"status": "errors", "data": "Request Entity Too Large"}'), 413)
-
-        if uploading_animal_img_upload and FilePDF.allowed_file(file_data.filename):
-            now = datetime.now()
-            timestamp = datetime.timestamp(now)
-
-            tmp = app.config['TMP_PDF_DIRECTORY'] + "animal/"
-            folder = str(uuid.uuid4()) + "-" + str(timestamp)
-            path = tmp + folder
-            os.makedirs(path)
-
-            session['tmp_animal_pdf_breed_registry'] = os.path.join(
-                "/static/pdf/tmp/animal/" + folder, folder + ".pdf")
-            file_data.save(os.path.join(path, folder + ".pdf"))
-
-            with pikepdf.open(os.path.join(path, folder + ".pdf"), allow_overwriting_input=True) as pdf:
-                try:
-                    del pdf.Root.Metadata
-                except:
-                    pass
-                with pdf.open_metadata() as meta:
-                    meta['dc:title'] = "Breed Registry"
-                pdf.save(os.path.join(path, folder + ".pdf"))
-
-            end_time_tmp = now - timedelta(hours=1)
-            for x in os.listdir(tmp):
-                if x != ".gitkeep":
-                    if datetime.fromtimestamp(os.path.getmtime(tmp + "/" + x)) < end_time_tmp:
-                        shutil.rmtree(tmp + "/" + x)
-
-            resp = {"status": "success", "data": session.get('tmp_animal_pdf_breed_registry'), "folder": folder,
-                    "filename": folder + ".pdf"}
-            return make_response(jsonify(resp), 200)
 
 
 @app.route('/uploading-animal-x-ray-pdf-upload', methods=['POST'])
@@ -1857,11 +1695,6 @@ def edit_of_uploaded_animal(animal_id):
             uploading_animal_form.subcategory_id.data = animal['animal']['subcategory_id']
             uploading_animal_form.subcategory_id_name.data = animal['subcategory']['name_en']
             uploading_animal_form.name.data = animal['animal']['name']
-            uploading_animal_form.age_year.data = animal['animal']['age_year']
-            uploading_animal_form.age_month.data = animal['animal']['age_month']
-            uploading_animal_form.age_day.data = animal['animal']['age_day']
-            uploading_animal_form.region_origin.data = animal['animal']['region_origin']
-            uploading_animal_form.country_origin.data = animal['animal']['country_origin']
             uploading_animal_form.region_residence.data = animal['animal']['region_residence']
             uploading_animal_form.country_residence.data = animal['animal']['country_residence']
             be_used_for_hu = animal['animal']['be_used_for_hu'].lstrip()
@@ -1884,20 +1717,6 @@ def edit_of_uploaded_animal(animal_id):
             color_list = animal['animal']['color_' + lang].lstrip()
             uploading_animal_form.brief_description.data = animal['animal']['brief_description']
             uploading_animal_form.description.data = animal['animal']['description']
-            uploading_animal_form.mother.data = animal['animal']['mother']
-            uploading_animal_form.mother_mother.data = animal['animal']['mother_mother']
-            uploading_animal_form.mother_mother_mother.data = animal['animal']['mother_mother_mother']
-            uploading_animal_form.mother_mother_father.data = animal['animal']['mother_mother_father']
-            uploading_animal_form.mother_father.data = animal['animal']['mother_father']
-            uploading_animal_form.mother_father_mother.data = animal['animal']['mother_father_mother']
-            uploading_animal_form.mother_father_father.data = animal['animal']['mother_father_father']
-            uploading_animal_form.father.data = animal['animal']['father']
-            uploading_animal_form.father_mother.data = animal['animal']['father_mother']
-            uploading_animal_form.father_mother_mother.data = animal['animal']['father_mother_mother']
-            uploading_animal_form.father_mother_father.data = animal['animal']['father_mother_father']
-            uploading_animal_form.father_father.data = animal['animal']['father_father']
-            uploading_animal_form.father_father_mother.data = animal['animal']['father_father_mother']
-            uploading_animal_form.father_father_father.data = animal['animal']['father_father_father']
             uploading_animal_form.url_01.data = animal['animal']['url_01']
             uploading_animal_form.url_02.data = animal['animal']['url_02']
 
@@ -1967,10 +1786,6 @@ def edit_of_uploaded_animal(animal_id):
                 uploading_animal_form.video_01_data_old.data = animal['video']['video_01_data']
                 uploading_animal_form.video_01_status.data = "unchanged"
 
-            uploading_animal_form.breed_registry.data = animal['pdf']['breed_registry']
-            uploading_animal_form.breed_registry_data.data = animal['pdf']['breed_registry_data']
-            uploading_animal_form.breed_registry_data_old.data = animal['pdf']['breed_registry_data']
-            uploading_animal_form.breed_registry_status.data = "unchanged"
 
             uploading_animal_form.x_ray.data = animal['pdf']['x_ray']
             uploading_animal_form.x_ray_data.data = animal['pdf']['x_ray_data']
@@ -2056,7 +1871,7 @@ def _del_of_uploaded_animal():
 
             video_01_data_old = data['video_01_data_old']
 
-            breed_registry_data_old = data['breed_registry_data_old']
+
 
             x_ray_data_old = data['x_ray_data_old']
 
@@ -2137,12 +1952,6 @@ def _del_of_uploaded_animal():
                 except FileNotFoundError:
                     pass
 
-            if breed_registry_data_old != "":
-                try:
-                    breed_registry_data = json.loads(breed_registry_data_old)
-                    shutil.rmtree(app.config['PDF_DIRECTORY'] + "animal/" + breed_registry_data['folder'])
-                except FileNotFoundError:
-                    pass
 
             if x_ray_data_old != "":
                 try:
@@ -2190,13 +1999,11 @@ def _inactivate_of_uploaded_animal():
             animal_id = data['animal_id']
             youtube_video_id = data['youtube_video_id']
             title = data['title']
-            mother = data['mother']
-            father = data['father']
             category_name = data['category_name']
             subcategory_name = data['subcategory_name']
             youtube_video_status = data['youtube_video_status']
 
-            YouTube.update(animal_id, youtube_video_id, title, mother, father, category_name, subcategory_name,
+            YouTube.update(animal_id, youtube_video_id, title, category_name, subcategory_name,
                            youtube_video_status)
 
             return make_response(jsonify(data), 200)
@@ -2232,13 +2039,11 @@ def _activate_of_uploaded_animal():
             animal_id = data['animal_id']
             youtube_video_id = data['youtube_video_id']
             title = data['title']
-            mother = data['mother']
-            father = data['father']
             category_name = data['category_name']
             subcategory_name = data['subcategory_name']
             youtube_video_status = data['youtube_video_status']
 
-            YouTube.update(animal_id, youtube_video_id, title, mother, father, category_name, subcategory_name,
+            YouTube.update(animal_id, youtube_video_id, title, category_name, subcategory_name,
                            youtube_video_status)
 
             return make_response(jsonify(data), 200)
